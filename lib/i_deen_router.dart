@@ -10,7 +10,7 @@ class IDeenRouter {
         builder: (context, state) => const Splash(),
       ),
       GoRoute(
-        path: '/',
+        path: '/home',
         builder: (context, state) => const Home(),
       ),
     ],

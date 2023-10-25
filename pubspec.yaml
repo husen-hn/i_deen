@@ -27,5 +27,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Vazirmatn
+      fonts:
+        - asset: fonts/vazirmatn/Vazirmatn-Regular.ttf
+        - asset: fonts/vazirmatn/Vazirmatn-Bold.ttf
+        - asset: fonts/vazirmatn/Vazirmatn-SemiBold.ttf
+        - asset: fonts/vazirmatn/Vazirmatn-VariableFont_wght.ttf
+    - family: Amiri
+      fonts:
+        - asset: fonts/amiri/Amiri-Regular.ttf
+        - asset: fonts/amiri/Amiri-Bold.ttf
+        - asset: fonts/amiri/Amiri-BoldItalic.ttf
+        - asset: fonts/amiri/Amiri-Italic.ttf
   assets:
     - assets/splash.png
