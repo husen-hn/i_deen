@@ -28,12 +28,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: Vazirmatn
+    - family: BTitr
       fonts:
-        - asset: fonts/vazirmatn/Vazirmatn-Regular.ttf
-        - asset: fonts/vazirmatn/Vazirmatn-Bold.ttf
-        - asset: fonts/vazirmatn/Vazirmatn-SemiBold.ttf
-        - asset: fonts/vazirmatn/Vazirmatn-VariableFont_wght.ttf
+        - asset: fonts/btitr/B_Titr_Bold.ttf
+    - family: BZar
+      fonts:
+        - asset: fonts/bzar/B_Zar.ttf
+        - asset: fonts/bzar/B_Zar_Bold.ttf
     - family: Amiri
       fonts:
         - asset: fonts/amiri/Amiri-Regular.ttf
@@ -42,3 +43,8 @@ flutter:
         - asset: fonts/amiri/Amiri-Italic.ttf
   assets:
     - assets/splash.png
+    - assets/icons/bookmark_icon.png
+    - assets/icons/lamp_icon.png
+    - assets/icons/prayer_icon.png
+    - assets/icons/pray_icon.png
+    - assets/icons/quran_icon.png

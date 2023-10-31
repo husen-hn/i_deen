@@ -36,9 +36,9 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     // change system statusBar & navBar color
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Color(0xFFFFFFFF),
+        statusBarColor: Color(0xFFFAFAFA),
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFFFFFFF),
+        systemNavigationBarColor: Color(0xFFFAFAFA),
         systemNavigationBarIconBrightness: Brightness.dark));
 
     return MaterialApp.router(
