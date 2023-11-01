@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(milliseconds: 5000), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       context.go('/home');
     });
   }

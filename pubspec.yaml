@@ -50,6 +50,8 @@ flutter:
     - assets/lang/fa.json
     
     - assets/splash.png
+    - assets/last_read_bg.png
+
     - assets/icons/bookmark_icon.png
     - assets/icons/lamp_icon.png
     - assets/icons/prayer_icon.png
@@ -57,3 +59,4 @@ flutter:
     - assets/icons/quran_icon.png
     - assets/icons/menu.png
     - assets/icons/search.png
+    - assets/icons/last_read.png
