@@ -7,8 +7,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:i_deen/bootstrap.dart';
+import 'package:i_deen/services/helper/cache_helper.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   bootstrap();
 }

@@ -43,6 +43,12 @@ class AppView extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: context.read<AppCubit>().appTheme,
+      supportedLocales: context.read<AppCubit>().l10n,
+      localizationsDelegates: context.read<AppCubit>().l10nDelegates,
+      localeResolutionCallback: (currentLocal, supportedLocales) {
+        return Locale(context.read<AppCubit>().getSavedLanguage());
+      },
       routerConfig: IDeenRouter().router,
     );
   }

@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:i_deen/services/l10n/app_local.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -22,7 +23,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 5000), () {
       context.go('/home');
     });
   }
@@ -46,9 +47,9 @@ class _SplashState extends State<Splash> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'آی دین',
-                  style: TextStyle(
+                Text(
+                  "app_name".tr(context),
+                  style: const TextStyle(
                       fontFamily: 'BTitr',
                       fontSize: 28,
                       fontWeight: FontWeight.w700,
@@ -57,15 +58,15 @@ class _SplashState extends State<Splash> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * .07,
                 ),
-                const Text('اپلیکشنی برای قرآن و نماز و ذکرات',
-                    style: TextStyle(
+                Text("app_introduce".tr(context),
+                    style: const TextStyle(
                         fontFamily: 'BZar',
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF8789A3))),
-                const Text('بهترین شما کسی است که قرآن را بیاموزد و آموزش دهد.',
+                Text("prophet_muhammad_message".tr(context),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'BZar',
                         fontSize: 18,
                         color: Color(0xFF8789A3))),

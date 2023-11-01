@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/home/home_cubit.dart';
+import 'package:i_deen/services/l10n/app_local.dart';
 import 'package:i_deen/ui/bookmark/bookmark.dart';
 import 'package:i_deen/ui/finish/finish.dart';
 import 'package:i_deen/ui/pray/pray.dart';
@@ -32,8 +33,27 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('آی دین'),
+          title: Text('app_name'.tr(context)),
+          shadowColor: Colors.transparent,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: Image.asset(
+                  'assets/icons/menu.png',
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
+          ),
+          actions: [
+            Image.asset(
+              'assets/icons/search.png',
+            )
+          ],
         ),
+        drawer: const Drawer(),
         bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) => BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
@@ -77,13 +97,13 @@ class HomeView extends StatelessWidget {
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) => state.btnNvIndex == 0
-                ? Quran()
+                ? const Quran()
                 : state.btnNvIndex == 1
-                    ? Finish()
+                    ? const Finish()
                     : state.btnNvIndex == 2
-                        ? Prayer()
+                        ? const Prayer()
                         : state.btnNvIndex == 3
-                            ? Pray()
-                            : Bookmark()));
+                            ? const Pray()
+                            : const Bookmark()));
   }
 }
