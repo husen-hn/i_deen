@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/home/home_cubit.dart';
 import 'package:i_deen/services/l10n/app_local.dart';
 import 'package:i_deen/ui/bookmark/bookmark.dart';
@@ -31,6 +32,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String langCode = context.read<AppCubit>().getSavedLanguage();
     return Scaffold(
         appBar: AppBar(
           title: Text('app_name'.tr(context)),
@@ -39,7 +41,9 @@ class HomeView extends StatelessWidget {
             builder: (BuildContext context) {
               return IconButton(
                 icon: Image.asset(
-                  'assets/icons/menu.png',
+                  langCode == 'fa' || langCode == 'ar'
+                      ? 'assets/icons/menu_rtl.png'
+                      : 'assets/icons/menu.png',
                 ),
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
@@ -49,7 +53,9 @@ class HomeView extends StatelessWidget {
           ),
           actions: [
             Image.asset(
-              'assets/icons/search.png',
+              langCode == 'fa' || langCode == 'ar'
+                  ? 'assets/icons/search_rtl.png'
+                  : 'assets/icons/search.png',
             )
           ],
         ),

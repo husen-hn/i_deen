@@ -58,5 +58,7 @@ flutter:
     - assets/icons/pray_icon.png
     - assets/icons/quran_icon.png
     - assets/icons/menu.png
+    - assets/icons/menu_rtl.png
     - assets/icons/search.png
+    - assets/icons/search_rtl.png
     - assets/icons/last_read.png

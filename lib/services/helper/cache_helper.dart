@@ -1,3 +1,10 @@
+//
+//  cache_helper.dart
+//  Created on 2023 02 November.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
