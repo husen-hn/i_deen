@@ -35,7 +35,11 @@ class HomeView extends StatelessWidget {
     String langCode = context.read<AppCubit>().getSavedLanguage();
     return Scaffold(
         appBar: AppBar(
-          title: Text('app_name'.tr(context)),
+          title: Text(
+            'app_name'.tr(context),
+            style: const TextStyle(
+                fontFamily: 'Amiri', fontWeight: FontWeight.bold),
+          ),
           shadowColor: Colors.transparent,
           leading: Builder(
             builder: (BuildContext context) {

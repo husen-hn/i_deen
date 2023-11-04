@@ -6,6 +6,8 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/ui/quran/tabs/ayah.dart';
 import 'package:i_deen/ui/quran/tabs/juz.dart';
 import 'package:i_deen/ui/quran/tabs/page.dart' as PG;
@@ -15,6 +17,17 @@ import 'package:i_deen/services/l10n/app_local.dart';
 
 class Quran extends StatelessWidget {
   const Quran({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider<QuranCubit>(create: (BuildContext context) => QuranCubit())
+    ], child: const QuranView());
+  }
+}
+
+class QuranView extends StatelessWidget {
+  const QuranView({super.key});
 
   @override
   Widget build(BuildContext context) {
