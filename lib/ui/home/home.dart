@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
           title: Text(
             'app_name'.tr(context),
             style: const TextStyle(
-                fontFamily: 'Amiri', fontWeight: FontWeight.bold),
+                fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 24),
           ),
           shadowColor: Colors.transparent,
           leading: Builder(

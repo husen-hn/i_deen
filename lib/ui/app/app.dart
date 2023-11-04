@@ -41,6 +41,11 @@ class AppView extends StatelessWidget {
         systemNavigationBarColor: Color(0xFFFAFAFA),
         systemNavigationBarIconBrightness: Brightness.dark));
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: context.read<AppCubit>().appTheme,
