@@ -26,9 +26,11 @@ class SurahItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: SurahNumber(
-                    number: index + 1,
-                    iconColor: const Color(0xFF994EF8),
-                    textColor: const Color(0xFF240F4F)),
+                  number: index + 1,
+                  iconColor: const Color(0xFF994EF8),
+                  textColor: const Color(0xFF240F4F),
+                  size: 60,
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

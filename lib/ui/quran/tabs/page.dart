@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/widgets/surah_number.dart';
+import 'package:i_deen/widgets/number_btn.dart';
 
 class Page extends StatelessWidget {
   const Page({super.key});
@@ -24,18 +24,7 @@ class Page extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4, crossAxisSpacing: 10, mainAxisSpacing: 10),
             itemBuilder: (context, index) {
-              return ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: SurahNumber(
-                      number: index + 1,
-                      iconColor: Colors.black,
-                      textColor: Colors.black,
-                      size: 40),
-                  label: const Text(''),
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(Color(0xFFDF98FA)),
-                  ));
+              return NumberBtn(number: index + 1);
             });
       },
     );

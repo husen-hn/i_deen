@@ -26,7 +26,7 @@ class SurahNumber extends StatelessWidget {
           style: TextStyle(
               color: textColor,
               fontFamily: 'BTitr',
-              fontSize: size / 4,
+              fontSize: size / 5,
               fontWeight: FontWeight.w500),
         )
       ],
