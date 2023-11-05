@@ -7,12 +7,14 @@ class SurahItem extends StatelessWidget {
   final String title;
   final String type;
   final int versesCount;
+  final bool disableSideBtn;
   const SurahItem(
       {super.key,
       required this.index,
       required this.title,
       required this.type,
-      required this.versesCount});
+      required this.versesCount,
+      this.disableSideBtn = false});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class SurahItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: SurahNumber(
-                  number: index + 1,
+                  number: index,
                   iconColor: const Color(0xFF994EF8),
                   textColor: const Color(0xFF240F4F),
                   size: 60,
@@ -69,12 +71,14 @@ class SurahItem extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.chevron_right,
-                color: Color(0xFF994EF8),
-              ))
+          disableSideBtn
+              ? Container()
+              : IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.chevron_right,
+                    color: Color(0xFF994EF8),
+                  ))
         ],
       ),
     );

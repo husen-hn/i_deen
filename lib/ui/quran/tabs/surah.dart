@@ -20,13 +20,24 @@ class Surah extends StatelessWidget {
         return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             physics: const BouncingScrollPhysics(),
-            itemCount: context.read<QuranCubit>().getSurahNames.length,
+            itemCount: context.read<QuranCubit>().getTotalSurahCount,
             itemBuilder: (context, index) {
               return SurahItem(
-                index: index,
-                title: context.read<QuranCubit>().getSurahNames[index],
-                type: 'مکی',
-                versesCount: 23,
+                index: index + 1,
+                title: context.read<QuranCubit>().getSurahNameArabic(index + 1),
+                type: context
+                        .read<QuranCubit>()
+                        .getTotalMadaniSurahs
+                        .contains(index + 1)
+                    ? 'مدنی'
+                    : context
+                            .read<QuranCubit>()
+                            .getTotalXORMadaniMacciSurahs
+                            .contains(index + 1)
+                        ? 'مکی / مدنی'
+                        : 'مکی',
+                versesCount:
+                    context.read<QuranCubit>().getVerseCount(index + 1),
               );
             },
             separatorBuilder: (context, index) {
