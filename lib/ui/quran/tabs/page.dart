@@ -17,14 +17,43 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, QuranState>(
       builder: (context, state) {
-        return GridView.builder(
+        return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             physics: const BouncingScrollPhysics(),
-            itemCount: context.read<QuranCubit>().getTotalPagesCount,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, crossAxisSpacing: 10, mainAxisSpacing: 10),
+            itemCount: context.read<QuranCubit>().getTotalSurahCount,
             itemBuilder: (context, index) {
-              return NumberBtn(number: index + 1);
+              return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context.read<QuranCubit>().getSurahNameArabic(index + 1),
+                      style: const TextStyle(
+                          color: Color(0xFF240F4F),
+                          fontFamily: 'Amiri',
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    GridView.builder(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: context
+                            .read<QuranCubit>()
+                            .getSurahPages(index + 1)
+                            .length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        itemBuilder: (context, nestedIndex) {
+                          return NumberBtn(
+                              number: context
+                                  .read<QuranCubit>()
+                                  .getSurahPages(index + 1)[nestedIndex]);
+                        })
+                  ]);
             });
       },
     );

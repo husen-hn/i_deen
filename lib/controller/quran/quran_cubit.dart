@@ -9,8 +9,10 @@ class QuranCubit extends Cubit<QuranState> {
   int get getTotalPagesCount => quran.totalPagesCount;
   int get getTotalJuzCount => quran.totalJuzCount;
   int get getTotalSurahCount => quran.totalSurahCount;
-  getVerseCount(int surahNumber) => quran.getVerseCount(surahNumber);
-  getSurahNameArabic(int surahNumber) => quran.getSurahNameArabic(surahNumber);
+  int getVerseCount(int surahNumber) => quran.getVerseCount(surahNumber);
+  String getSurahNameArabic(int surahNumber) =>
+      quran.getSurahNameArabic(surahNumber);
+  List<int> getSurahPages(int surahNumber) => quran.getSurahPages(surahNumber);
   List<int> get getTotalMadaniSurahs => [
         2,
         3,
