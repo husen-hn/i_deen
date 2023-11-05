@@ -31,15 +31,10 @@ class Ayah extends StatelessWidget {
                     Text(
                         context
                                 .read<QuranCubit>()
-                                .getTotalMadaniSurahs
-                                .contains(index + 1)
-                            ? 'مدنی'
-                            : context
-                                    .read<QuranCubit>()
-                                    .getTotalXORMadaniMacciSurahs
-                                    .contains(index + 1)
-                                ? 'مکی / مدنی'
-                                : 'مکی',
+                                .getPlaceOfRevelation(index + 1)
+                                .contains('Makkah')
+                            ? 'مکی'
+                            : 'مدنی',
                         style: const TextStyle(
                             fontFamily: 'BZar',
                             fontSize: 16,

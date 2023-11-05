@@ -27,15 +27,10 @@ class Surah extends StatelessWidget {
                 title: context.read<QuranCubit>().getSurahNameArabic(index + 1),
                 type: context
                         .read<QuranCubit>()
-                        .getTotalMadaniSurahs
-                        .contains(index + 1)
-                    ? 'مدنی'
-                    : context
-                            .read<QuranCubit>()
-                            .getTotalXORMadaniMacciSurahs
-                            .contains(index + 1)
-                        ? 'مکی / مدنی'
-                        : 'مکی',
+                        .getPlaceOfRevelation(index + 1)
+                        .contains('Makkah')
+                    ? 'مکی'
+                    : 'مدنی',
                 versesCount:
                     context.read<QuranCubit>().getVerseCount(index + 1),
               );
