@@ -37,18 +37,30 @@ class QuranView extends StatelessWidget {
         child: Column(
           children: [
             // Top status view
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Image(
-                  image: const AssetImage('assets/last_read_bg.png'),
-                  width: MediaQuery.of(context).size.width * .9,
-                  fit: BoxFit.fitWidth,
-                ),
-                Positioned(
-                    top: 20,
-                    left: MediaQuery.of(context).size.width * .06,
-                    child: Column(
+            Container(
+              width: MediaQuery.of(context).size.width * .9,
+              height: MediaQuery.of(context).size.height * .195,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                gradient: const LinearGradient(
+                    colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF9055FF).withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 10), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -62,20 +74,20 @@ class QuranView extends StatelessWidget {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'BTitr',
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         const Text(
                           'الفاتحة',
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Amiri',
-                              fontSize: 22,
+                              fontSize: 26,
                               fontWeight: FontWeight.w600),
                         ),
                         Row(
@@ -85,7 +97,7 @@ class QuranView extends StatelessWidget {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'BZar',
-                                  fontSize: 14,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
                             const Text(
@@ -99,8 +111,14 @@ class QuranView extends StatelessWidget {
                           ],
                         ),
                       ],
-                    ))
-              ],
+                    ),
+                    Image.asset(
+                      'assets/namaz_logo.png',
+                      width: MediaQuery.of(context).size.width * .3,
+                    ),
+                  ],
+                ),
+              ),
             ),
             // Tabbar view
             Padding(

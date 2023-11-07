@@ -25,6 +25,8 @@ class Surah extends StatelessWidget {
               return SurahItem(
                 index: index + 1,
                 title: context.read<QuranCubit>().getSurahNameArabic(index + 1),
+                englishTitle:
+                    context.read<QuranCubit>().getSurahNameEnglish(index + 1),
                 type: context
                         .read<QuranCubit>()
                         .getPlaceOfRevelation(index + 1)
