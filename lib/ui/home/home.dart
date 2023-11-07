@@ -32,38 +32,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String langCode = context.read<AppCubit>().getSavedLanguage();
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'app_name'.tr(context),
-            style: const TextStyle(
-                fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 24),
-          ),
-          shadowColor: Colors.transparent,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: Image.asset(
-                  langCode == 'fa' || langCode == 'ar'
-                      ? 'assets/icons/menu_rtl.png'
-                      : 'assets/icons/menu.png',
-                ),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
-          actions: [
-            Image.asset(
-              langCode == 'fa' || langCode == 'ar'
-                  ? 'assets/icons/search_rtl.png'
-                  : 'assets/icons/search.png',
-            )
-          ],
-        ),
-        drawer: const Drawer(),
         bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) => BottomNavigationBar(
             type: BottomNavigationBarType.shifting,
