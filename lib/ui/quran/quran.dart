@@ -11,7 +11,7 @@ import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/ui/quran/tabs/ayah.dart';
 import 'package:i_deen/ui/quran/tabs/juz.dart';
-import 'package:i_deen/ui/quran/tabs/page.dart' as PG;
+import 'package:i_deen/ui/quran/tabs/page.dart' as pg;
 import 'package:i_deen/ui/quran/tabs/surah.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
 import 'package:i_deen/widgets/tab_item.dart';
@@ -167,7 +167,7 @@ class QuranView extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * .56,
                 child: const TabBarView(
                     physics: BouncingScrollPhysics(),
-                    children: [Surah(), PG.Page(), Ayah(), Juz()]),
+                    children: [Surah(), pg.Page(), Ayah(), Juz()]),
               )
             ],
           ),

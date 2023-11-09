@@ -7,9 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/home/home_cubit.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
 import 'package:i_deen/ui/bookmark/bookmark.dart';
 import 'package:i_deen/ui/finish/finish.dart';
 import 'package:i_deen/ui/pray/pray.dart';
