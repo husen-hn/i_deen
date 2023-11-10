@@ -16,7 +16,7 @@ class SurahItem extends StatelessWidget {
   final String englishTitle;
   final String type;
   final int versesCount;
-  final List<int> verses;
+  final List<int>? verses;
   final bool disableSideBtn;
 
   const SurahItem(
@@ -26,7 +26,7 @@ class SurahItem extends StatelessWidget {
       required this.englishTitle,
       required this.type,
       required this.versesCount,
-      required this.verses,
+      this.verses,
       this.disableSideBtn = false});
 
   @override

@@ -18,7 +18,7 @@ class Reading extends StatelessWidget {
   final String surahEnglishName;
   final String surahType;
   final int versesCount;
-  final List<int> verses;
+  final List<int>? verses;
 
   const Reading({
     super.key,
@@ -53,7 +53,7 @@ class ReadingView extends StatelessWidget {
   final String surahEnglishName;
   final String surahType;
   final int versesCount;
-  final List<int> verses;
+  final List<int>? verses;
 
   const ReadingView({
     super.key,

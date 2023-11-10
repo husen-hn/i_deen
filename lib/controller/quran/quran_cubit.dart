@@ -23,7 +23,6 @@ class QuranCubit extends Cubit<QuranState> {
     emit(state.copyWith(status: () => QuranStatus.loading));
 
     List<String> verses = [];
-    print('************ ${getVerseCount(surahNumber)}');
     if (verseNumber == null) {
       for (var verseIndex = 0;
           verseIndex < getVerseCount(surahNumber);
