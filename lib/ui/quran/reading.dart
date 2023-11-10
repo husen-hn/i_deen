@@ -94,11 +94,10 @@ class ReadingView extends StatelessWidget {
                     colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF9055FF).withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 10,
-                    offset: const Offset(0, 20), // changes position of shadow
-                  ),
+                      color: const Color(0xFF9055FF).withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 10,
+                      offset: const Offset(0, 20))
                 ],
               ),
               child: Stack(
@@ -163,11 +162,14 @@ class ReadingView extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .07,
                       ),
-                      Image.asset(
-                        'assets/besmelah.png',
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width * .6,
-                      ),
+                      // to not display besmelah in tobe surah
+                      surahNumber == 9
+                          ? Container()
+                          : Image.asset(
+                              'assets/besmelah.png',
+                              color: Colors.white,
+                              width: MediaQuery.of(context).size.width * .6,
+                            ),
                     ],
                   ),
                 ],

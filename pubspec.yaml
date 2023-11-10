@@ -54,6 +54,9 @@ flutter:
         - asset: fonts/amiri/Amiri-Bold.ttf
         - asset: fonts/amiri/Amiri-BoldItalic.ttf
         - asset: fonts/amiri/Amiri-Italic.ttf
+    - family: QuranTaha
+      fonts:
+        - asset: fonts/quran_taha/QuranTaha.ttf
   assets:
     - assets/lang/en.json
     - assets/lang/ar.json

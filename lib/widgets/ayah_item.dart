@@ -77,9 +77,9 @@ class AyahItem extends StatelessWidget {
             arabicText,
             style: const TextStyle(
               color: Color(0xFF240F4F),
-              fontFamily: 'Amiri',
+              fontFamily: 'QuranTaha',
               fontWeight: FontWeight.w700,
-              fontSize: 18,
+              fontSize: 20,
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * .02),
