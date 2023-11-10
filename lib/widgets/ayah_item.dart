@@ -91,6 +91,11 @@ class AyahItem extends StatelessWidget {
                 fontSize: 18,
               )),
           SizedBox(height: MediaQuery.of(context).size.height * .02),
+          const Divider(
+            height: 5,
+            color: Color.fromRGBO(187, 196, 206, 0.35),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * .02),
         ],
       ),
     );

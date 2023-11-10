@@ -18,15 +18,27 @@ class QuranCubit extends Cubit<QuranState> {
   String getPlaceOfRevelation(int surahNumber) =>
       quran.getPlaceOfRevelation(surahNumber);
 
-  getSurahs(surahNumber) {
+  // get verses of a surah for all verses or spacific verses
+  getVerses(int surahNumber, {List<int>? verseNumber}) {
     emit(state.copyWith(status: () => QuranStatus.loading));
-    List<String> surahs = [];
-    for (var verseNumber = 0;
-        verseNumber < getVerseCount(surahNumber);
-        verseNumber++) {
-      surahs.add(quran.getVerse(surahNumber, verseNumber + 1));
-      emit(state.copyWith(
-          status: () => QuranStatus.surahs, surahs: () => surahs));
+
+    List<String> verses = [];
+    print('************ ${getVerseCount(surahNumber)}');
+    if (verseNumber == null) {
+      for (var verseIndex = 0;
+          verseIndex < getVerseCount(surahNumber);
+          verseIndex++) {
+        verses.add(quran.getVerse(surahNumber, verseIndex + 1));
+      }
+    } else {
+      for (var verseIndex = 0; verseIndex < verseNumber.length; verseIndex++) {
+        if (verseIndex < getVerseCount(surahNumber)) {
+          verses.add(quran.getVerse(surahNumber, verseNumber[verseIndex]));
+        }
+      }
     }
+
+    emit(
+        state.copyWith(status: () => QuranStatus.verses, verses: () => verses));
   }
 }

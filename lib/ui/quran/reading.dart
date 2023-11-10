@@ -18,7 +18,7 @@ class Reading extends StatelessWidget {
   final String surahEnglishName;
   final String surahType;
   final int versesCount;
-  final List verses;
+  final List<int> verses;
 
   const Reading({
     super.key,
@@ -53,7 +53,7 @@ class ReadingView extends StatelessWidget {
   final String surahEnglishName;
   final String surahType;
   final int versesCount;
-  final List verses;
+  final List<int> verses;
 
   const ReadingView({
     super.key,
@@ -67,22 +67,21 @@ class ReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<QuranCubit>().getVerses(surahNumber, verseNumber: verses);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          surahName,
-          style: const TextStyle(
-              fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 20),
+        appBar: AppBar(
+          title: Text(
+            surahName,
+            style: const TextStyle(
+                fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 20),
+          ),
+          shadowColor: Colors.transparent,
+          leading: GestureDetector(
+            child: Image.asset('assets/icons/back_rtl.png'),
+            onTap: () => context.pop(),
+          ),
         ),
-        shadowColor: Colors.transparent,
-        leading: GestureDetector(
-          child: Image.asset('assets/icons/back_rtl.png'),
-          onTap: () => context.pop(),
-        ),
-      ),
-      body: BlocBuilder<QuranCubit, QuranState>(builder: (context, state) {
-        context.read<QuranCubit>().getSurahs(surahNumber);
-        return ListView(
+        body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           physics: const BouncingScrollPhysics(),
           children: [
@@ -177,17 +176,24 @@ class ReadingView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            if (state.status == QuranStatus.surahs)
-              for (int i = 0; i < state.surahs!.length; i++) ...[
-                AyahItem(
-                    surahName: surahName,
-                    ayahNumber: i,
-                    arabicText: state.surahs![i],
-                    translation: 'translation')
-              ]
+            BlocBuilder<QuranCubit, QuranState>(builder: (context, state) {
+              if (state.status == QuranStatus.verses) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.verses!.length,
+                    itemBuilder: (context, index) {
+                      return AyahItem(
+                          surahName: surahName,
+                          ayahNumber: index + 1,
+                          arabicText: state.verses![index],
+                          translation: 'translation');
+                    });
+              } else {
+                return Container();
+              }
+            })
           ],
-        );
-      }),
-    );
+        ));
   }
 }

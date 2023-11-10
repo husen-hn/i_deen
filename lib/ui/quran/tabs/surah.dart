@@ -35,6 +35,7 @@ class Surah extends StatelessWidget {
                     : 'مدنی',
                 versesCount:
                     context.read<QuranCubit>().getVerseCount(index + 1),
+                verses: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
               );
             },
             separatorBuilder: (context, index) {

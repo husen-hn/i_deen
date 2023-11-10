@@ -1,20 +1,20 @@
 part of 'quran_cubit.dart';
 
-enum QuranStatus { initial, loading, surahs }
+enum QuranStatus { initial, loading, verses }
 
 class QuranState {
-  const QuranState({this.status = QuranStatus.initial, this.surahs});
+  const QuranState({this.status = QuranStatus.initial, this.verses});
 
   final QuranStatus status;
-  final List<String>? surahs;
+  final List<String>? verses;
 
   QuranState copyWith({
     QuranStatus Function()? status,
-    List<String> Function()? surahs,
+    List<String> Function()? verses,
   }) {
     return QuranState(
       status: status != null ? status() : this.status,
-      surahs: surahs != null ? surahs() : this.surahs,
+      verses: verses != null ? verses() : this.verses,
     );
   }
 }

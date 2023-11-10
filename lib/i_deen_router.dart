@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/ui/home/home.dart';
 import 'package:i_deen/ui/quran/reading.dart';
@@ -17,15 +20,17 @@ class IDeenRouter {
             GoRoute(
               name: 'reading',
               path:
-                  'reading/:surahNumber/:surahName/:surahEnglishName/:surahType/:versesCount',
+                  'reading/:surahNumber/:surahName/:surahEnglishName/:surahType/:versesCount/:verses',
               builder: (context, state) => Reading(
-                surahNumber: int.parse(state.pathParameters['surahNumber']!),
-                surahName: state.pathParameters['surahName']!,
-                surahEnglishName: state.pathParameters['surahEnglishName']!,
-                surahType: state.pathParameters['surahType']!,
-                versesCount: int.parse(state.pathParameters['versesCount']!),
-                verses: [1, 2, 3, 4],
-              ),
+                  surahNumber: int.parse(state.pathParameters['surahNumber']!),
+                  surahName: state.pathParameters['surahName']!,
+                  surahEnglishName: state.pathParameters['surahEnglishName']!,
+                  surahType: state.pathParameters['surahType']!,
+                  versesCount: int.parse(state.pathParameters['versesCount']!),
+                  verses: json
+                      .decode(state.pathParameters['verses']!)
+                      .cast<int>()
+                      .toList()),
             ),
           ]),
     ],

@@ -1,3 +1,10 @@
+//
+//  reading.dart
+//  Created on 2023 10 November.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/services/l10n/app_local.dart';
@@ -9,6 +16,7 @@ class SurahItem extends StatelessWidget {
   final String englishTitle;
   final String type;
   final int versesCount;
+  final List<int> verses;
   final bool disableSideBtn;
 
   const SurahItem(
@@ -18,6 +26,7 @@ class SurahItem extends StatelessWidget {
       required this.englishTitle,
       required this.type,
       required this.versesCount,
+      required this.verses,
       this.disableSideBtn = false});
 
   @override
@@ -26,11 +35,12 @@ class SurahItem extends StatelessWidget {
       onTap: () => context.pushNamed(
         'reading',
         pathParameters: {
-          'surahNumber': (index + 1).toString(),
+          'surahNumber': (index).toString(),
           'surahName': title,
           'surahEnglishName': englishTitle,
           'surahType': type,
-          'versesCount': versesCount.toString()
+          'versesCount': versesCount.toString(),
+          'verses': verses.toString()
         },
       ),
       child: Padding(
