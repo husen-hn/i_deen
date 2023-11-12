@@ -1,5 +1,5 @@
 //
-//  reading.dart
+//  verses_reading.dart
 //  Created on 2023 05 November.
 //  Copyright © IDeen Flutter application,
 //  Developed by 2023 Hossein HassanNejad.
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
+import 'package:i_deen/services/helper/l10n/app_local.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
 
 class VersesReading extends StatelessWidget {
@@ -32,12 +32,13 @@ class VersesReading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('XXXXX ${verses}');
     return MultiBlocProvider(
         providers: [
           BlocProvider<QuranCubit>(
               create: (BuildContext context) => QuranCubit())
         ],
-        child: ReadingView(
+        child: VersesReadingView(
             surahNumber: surahNumber,
             surahName: surahName,
             surahEnglishName: surahEnglishName,
@@ -47,7 +48,7 @@ class VersesReading extends StatelessWidget {
   }
 }
 
-class ReadingView extends StatelessWidget {
+class VersesReadingView extends StatelessWidget {
   final int surahNumber;
   final String surahName;
   final String surahEnglishName;
@@ -55,7 +56,7 @@ class ReadingView extends StatelessWidget {
   final int versesCount;
   final List<int>? verses;
 
-  const ReadingView({
+  const VersesReadingView({
     super.key,
     required this.surahNumber,
     required this.surahName,

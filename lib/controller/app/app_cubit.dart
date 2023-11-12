@@ -9,7 +9,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:i_deen/services/helper/cache_helper.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
+import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 part 'app_state.dart';
 

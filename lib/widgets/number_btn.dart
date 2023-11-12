@@ -1,3 +1,10 @@
+//
+//  number_btn.dart
+//  Created on 2023 12 November.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
 import 'package:flutter/material.dart';
 import 'package:i_deen/widgets/surah_number.dart';
 

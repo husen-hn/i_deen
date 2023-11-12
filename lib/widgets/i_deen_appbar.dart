@@ -1,5 +1,12 @@
+//
+//  i_deen_appbar.dart
+//  Created on 2023 12 November.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
 import 'package:flutter/material.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
+import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 class IDeenAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;

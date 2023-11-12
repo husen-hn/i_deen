@@ -1,3 +1,10 @@
+//
+//  prayer_cubit.dart
+//  Created on 2023 12 November.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 

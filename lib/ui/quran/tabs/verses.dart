@@ -1,5 +1,5 @@
 //
-//  ayah.dart
+//  verses.dart
 //  Created on 2023 02 November.
 //  Copyright © IDeen Flutter application,
 //  Developed by 2023 Hossein HassanNejad.
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
+import 'package:i_deen/services/helper/l10n/app_local.dart';
 import 'package:i_deen/widgets/number_btn.dart';
 
 class Verses extends StatelessWidget {
@@ -77,7 +77,7 @@ class Verses extends StatelessWidget {
                       itemBuilder: (context, nestedIndex) {
                         return InkWell(
                             onTap: () => context.pushNamed(
-                                  'reading',
+                                  'verses-reading',
                                   pathParameters: {
                                     'surahNumber': (index + 1).toString(),
                                     'surahName': context

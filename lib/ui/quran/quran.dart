@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/ui/quran/tabs/ayah.dart';
 import 'package:i_deen/ui/quran/tabs/juz.dart';
 import 'package:i_deen/ui/quran/tabs/page.dart' as pg;
 import 'package:i_deen/ui/quran/tabs/surah.dart';
+import 'package:i_deen/ui/quran/tabs/verses.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
 import 'package:i_deen/widgets/tab_item.dart';
-import 'package:i_deen/services/l10n/app_local.dart';
+import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 class Quran extends StatelessWidget {
   const Quran({super.key});
@@ -167,7 +167,7 @@ class QuranView extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * .56,
                 child: const TabBarView(
                     physics: BouncingScrollPhysics(),
-                    children: [Surah(), pg.Page(), Ayah(), Juz()]),
+                    children: [Surah(), pg.Page(), Verses(), Juz()]),
               )
             ],
           ),
