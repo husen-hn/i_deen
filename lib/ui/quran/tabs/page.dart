@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/widgets/number_btn.dart';
 
@@ -48,10 +49,17 @@ class Page extends StatelessWidget {
                                 crossAxisSpacing: 10,
                                 mainAxisSpacing: 10),
                         itemBuilder: (context, nestedIndex) {
-                          return NumberBtn(
-                              number: context
-                                  .read<QuranCubit>()
-                                  .getSurahPages(index + 1)[nestedIndex]);
+                          return InkWell(
+                            onTap: () => context
+                                .pushNamed('page-reading', pathParameters: {
+                              'surahNumber': (index + 1).toString(),
+                              'surahVerseNumber': nestedIndex.toString()
+                            }),
+                            child: NumberBtn(
+                                number: context
+                                    .read<QuranCubit>()
+                                    .getSurahPages(index + 1)[nestedIndex]),
+                          );
                         })
                   ]);
             });

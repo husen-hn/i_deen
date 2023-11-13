@@ -9,6 +9,7 @@ import 'dart:convert';
 
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/ui/home/home.dart';
+import 'package:i_deen/ui/quran/page_reading.dart';
 import 'package:i_deen/ui/quran/verses_reading.dart';
 import 'package:i_deen/ui/slpash/splash.dart';
 
@@ -26,7 +27,7 @@ class IDeenRouter {
             GoRoute(
               name: 'verses-reading',
               path:
-                  'reading/:surahNumber/:surahName/:surahEnglishName/:surahType/:versesCount/:verses',
+                  'verses-reading/:surahNumber/:surahName/:surahEnglishName/:surahType/:versesCount/:verses',
               builder: (context, state) => VersesReading(
                   surahNumber: int.parse(state.pathParameters['surahNumber']!),
                   surahName: state.pathParameters['surahName']!,
@@ -40,6 +41,15 @@ class IDeenRouter {
                           .cast<int>()
                           .toList()),
             ),
+            GoRoute(
+                name: 'page-reading',
+                path: 'page-reading/:surahNumber/:surahVerseNumber',
+                builder: (context, state) => PageReading(
+                      surahNumber:
+                          int.parse(state.pathParameters['surahNumber']!),
+                      surahVerseNumber:
+                          int.parse(state.pathParameters['surahVerseNumber']!),
+                    )),
           ]),
     ],
   );

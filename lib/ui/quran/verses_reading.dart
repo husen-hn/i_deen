@@ -32,7 +32,6 @@ class VersesReading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('XXXXX ${verses}');
     return MultiBlocProvider(
         providers: [
           BlocProvider<QuranCubit>(
