@@ -62,8 +62,8 @@ flutter:
     - assets/lang/ar.json
     - assets/lang/fa.json
     
-    - assets/splash.png
     - assets/namaz_logo.png
+    - assets/namaz-logo-name.png
     - assets/besmelah.png
 
     - assets/icons/bookmark_icon.png
@@ -82,3 +82,7 @@ flutter:
     - assets/icons/share.png
     - assets/icons/play.png
     - assets/icons/save.png
+    - assets/icons/star.png
+    - assets/icons/cloud1.png
+    - assets/icons/cloud2.png
+    - assets/icons/cloud3.png

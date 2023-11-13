@@ -50,9 +50,9 @@ class _SplashState extends State<Splash> {
                 Text(
                   "app_name".tr(context),
                   style: const TextStyle(
-                      fontFamily: 'BTitr',
-                      fontSize: 28,
-                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Amiri',
+                      fontWeight: FontWeight.w900,
+                      fontSize: 34,
                       color: Color(0xFF672CBC)),
                 ),
                 SizedBox(
@@ -64,6 +64,7 @@ class _SplashState extends State<Splash> {
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF8789A3))),
+                const SizedBox(height: 10),
                 Text("prophet_muhammad_message".tr(context),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
@@ -73,9 +74,99 @@ class _SplashState extends State<Splash> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * .1,
                 ),
-                Image(
-                  image: const AssetImage('assets/splash.png'),
+                Container(
                   width: MediaQuery.of(context).size.width * .8,
+                  height: MediaQuery.of(context).size.height * .6,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    gradient: const LinearGradient(
+                        colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
+                    boxShadow: [
+                      BoxShadow(
+                          color: const Color(0xFF9055FF).withOpacity(0.2),
+                          spreadRadius: 5,
+                          blurRadius: 20,
+                          offset: const Offset(0, 10))
+                    ],
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                          top: 10, child: Image.asset('assets/icons/star.png')),
+                      Positioned(
+                          top: 20,
+                          left: 50,
+                          child: Image.asset('assets/icons/star.png')),
+                      Positioned(
+                          top: 40,
+                          right: 30,
+                          child: Image.asset('assets/icons/star.png')),
+                      Positioned(
+                          top: 80,
+                          right: 60,
+                          child: Image.asset('assets/icons/star.png')),
+                      Positioned(
+                          top: 15,
+                          left: 35,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                            width: 10,
+                          )),
+                      Positioned(
+                          top: 45,
+                          left: 65,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                            width: 10,
+                          )),
+                      Positioned(
+                          top: 35,
+                          right: 65,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                            width: 10,
+                          )),
+                      Positioned(
+                          top: 55,
+                          right: 110,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                            width: 10,
+                          )),
+                      Positioned(
+                          top: 55,
+                          left: 110,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                          )),
+                      Positioned(
+                          top: 80,
+                          left: 10,
+                          child: Image.asset(
+                            'assets/icons/star.png',
+                          )),
+                      Positioned(
+                          left: 0,
+                          top: 90,
+                          child: Image.asset('assets/icons/cloud1.png')),
+                      Positioned(
+                          left: 100,
+                          top: 60,
+                          child: Image.asset('assets/icons/cloud2.png')),
+                      Positioned(
+                          right: 0,
+                          top: 110,
+                          child: Image.asset('assets/icons/cloud3.png')),
+                      Positioned(
+                        bottom: 40,
+                        child: Image.asset(
+                          'assets/namaz-logo-name.png',
+                          width: MediaQuery.of(context).size.width * .4,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * .05,
