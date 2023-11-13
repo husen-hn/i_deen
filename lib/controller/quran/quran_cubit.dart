@@ -65,4 +65,28 @@ class QuranCubit extends Cubit<QuranState> {
 
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
   }
+
+  getJuzVerses(int juzNumber) {
+    emit(state.copyWith(status: () => QuranStatus.loading));
+    List<Map<String, dynamic>> data = [];
+
+    Map<int, List<int>> juzData = quran.getSurahAndVersesFromJuz(juzNumber);
+
+    for (var surahNumber in juzData.keys) {
+      String surahArabicName = getSurahNameArabic(surahNumber);
+
+      int start = juzData[surahNumber]!.first;
+      int end = juzData[surahNumber]!.last;
+
+      List<Map<int, String>> surahVerses = [];
+
+      for (var verseNumber = start; verseNumber <= end; verseNumber++) {
+        surahVerses
+            .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
+      }
+      data.add({'surahArabicName': surahArabicName, 'verses': surahVerses});
+    }
+
+    emit(state.copyWith(status: () => QuranStatus.juz, pageData: () => data));
+  }
 }

@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/widgets/number_btn.dart';
 
@@ -24,7 +25,10 @@ class Juz extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4, crossAxisSpacing: 10, mainAxisSpacing: 10),
             itemBuilder: (context, index) {
-              return NumberBtn(number: index + 1);
+              return InkWell(
+                  onTap: () => context.pushNamed('juz-reading',
+                      pathParameters: {'juzNumber': (index + 1).toString()}),
+                  child: NumberBtn(number: index + 1));
             });
       },
     );

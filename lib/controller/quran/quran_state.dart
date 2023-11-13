@@ -1,6 +1,6 @@
 part of 'quran_cubit.dart';
 
-enum QuranStatus { initial, loading, verses, page }
+enum QuranStatus { initial, loading, verses, page, juz }
 
 class QuranState {
   const QuranState(
