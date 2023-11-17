@@ -68,6 +68,7 @@ class VersesReadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<QuranCubit>().getVerses(surahNumber, verseNumber: verses);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -183,15 +184,18 @@ class VersesReadingView extends StatelessWidget {
                 return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.verses!.length,
+                    itemCount: state.verses!['verses'].length,
                     itemBuilder: (context, index) {
                       return AyahItem(
                           surahName: surahName,
+                          surahNumber: surahNumber,
                           // display index for verses number on full surah, and display verses number on limited surah
                           ayahNumber:
                               verses == null ? index + 1 : verses![index],
-                          arabicText: state.verses![index],
-                          translation: 'translation');
+                          arabicText: state.verses!['verses'][index],
+                          translation: 'translation',
+                          isSaved: state.verses!["saved"].contains(
+                              '$surahNumber-${verses == null ? index + 1 : verses![index]}'));
                     });
               } else {
                 return Container();

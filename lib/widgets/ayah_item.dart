@@ -6,19 +6,26 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_deen/controller/quran/quran_cubit.dart';
 
 class AyahItem extends StatelessWidget {
   final String surahName;
+  final int surahNumber;
   final int ayahNumber;
   final String arabicText;
   final String translation;
+  final bool isSaved;
 
-  const AyahItem(
-      {super.key,
-      required this.surahName,
-      required this.ayahNumber,
-      required this.arabicText,
-      required this.translation});
+  const AyahItem({
+    super.key,
+    required this.surahName,
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.arabicText,
+    required this.translation,
+    required this.isSaved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +68,28 @@ class AyahItem extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset('assets/icons/share.png'),
-                        Image.asset('assets/icons/play.png'),
-                        Image.asset('assets/icons/save.png'),
+                        // Image.asset('assets/icons/share.png'),
+                        // Image.asset('assets/icons/play.png'),
+                        InkWell(
+                            onTap: () {
+                              if (isSaved) {
+                                context
+                                    .read<QuranCubit>()
+                                    .removeVerse(surahNumber, ayahNumber);
+                              } else {
+                                context
+                                    .read<QuranCubit>()
+                                    .saveVerse(surahNumber, ayahNumber);
+                              }
+
+                              // // get all saved verses again
+                              context.read<QuranCubit>().getVerses(surahNumber);
+                            },
+                            child: isSaved
+                                ? Image.asset('assets/icons/saved.png',
+                                    color: const Color(0xFF863ED5))
+                                : Image.asset('assets/icons/save.png',
+                                    color: const Color(0xFF863ED5)))
                       ],
                     ),
                   )
