@@ -50,20 +50,23 @@ class JuzReadingView extends StatelessWidget {
             return ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 physics: const BouncingScrollPhysics(),
-                itemCount: state.pageData!.length,
+                itemCount: state.pageData!['data'].length,
                 itemBuilder: (context, index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // if verse number is 1, display surah name
-                      state.pageData![index]['verses'].first.keys.first == 1
+                      state.pageData!['data'][index]['verses'].first.keys
+                                  .first ==
+                              1
                           ? Padding(
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 30),
                               child: _surahName(
                                   context,
-                                  state.pageData![index]['surahArabicName'],
+                                  state.pageData!['data'][index]
+                                      ['surahArabicName'],
                                   juzNumber),
                             )
                           : Container(),
@@ -71,23 +74,31 @@ class JuzReadingView extends StatelessWidget {
                       ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.pageData![index]['verses'].length,
+                          itemCount:
+                              state.pageData!['data'][index]['verses'].length,
                           itemBuilder: (context, nestedIndex) {
                             return AyahItem(
-                                surahName: state.pageData![index]
+                                surahName: state.pageData!['data'][index]
                                     ['surahArabicName'],
+                                surahNumber: state.pageData!['data'][index]
+                                    ['surahNumber'],
                                 // display index for verses number on full surah, and display verses number on limited surah
                                 ayahNumber: state
-                                    .pageData![index]['verses'][nestedIndex]
+                                    .pageData!['data'][index]['verses']
+                                        [nestedIndex]
                                     .keys
                                     .first,
-                                arabicText: state.pageData![index]['verses']
-                                        [nestedIndex][
+                                arabicText: state.pageData!['data'][index]
+                                        ['verses'][nestedIndex][
                                     state
-                                        .pageData![index]['verses'][nestedIndex]
+                                        .pageData!['data'][index]['verses']
+                                            [nestedIndex]
                                         .keys
                                         .first],
-                                translation: 'translation');
+                                translation: 'translation',
+                                isSaved: state.pageData!["saved"].contains(
+                                    '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
+                                pageName: 'juz');
                           })
                     ],
                   );

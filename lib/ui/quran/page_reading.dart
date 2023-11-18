@@ -60,20 +60,23 @@ class PageReadingView extends StatelessWidget {
             return ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 physics: const BouncingScrollPhysics(),
-                itemCount: state.pageData!.length,
+                itemCount: state.pageData!['data'].length,
                 itemBuilder: (context, index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // if verse number is 1, display surah name
-                      state.pageData![index]['verses'].first.keys.first == 1
+                      state.pageData!['data'][index]['verses'].first.keys
+                                  .first ==
+                              1
                           ? Padding(
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 30),
                               child: _surahName(
                                   context,
-                                  state.pageData![index]['surahArabicName'],
+                                  state.pageData!['data'][index]
+                                      ['surahArabicName'],
                                   surahNumber),
                             )
                           : Container(),
@@ -81,23 +84,31 @@ class PageReadingView extends StatelessWidget {
                       ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.pageData![index]['verses'].length,
+                          itemCount:
+                              state.pageData!['data'][index]['verses'].length,
                           itemBuilder: (context, nestedIndex) {
                             return AyahItem(
-                                surahName: state.pageData![index]
-                                    ['surahArabicName'],
-                                // display index for verses number on full surah, and display verses number on limited surah
-                                ayahNumber: state
-                                    .pageData![index]['verses'][nestedIndex]
-                                    .keys
-                                    .first,
-                                arabicText: state.pageData![index]['verses']
-                                        [nestedIndex][
-                                    state
-                                        .pageData![index]['verses'][nestedIndex]
-                                        .keys
-                                        .first],
-                                translation: 'translation');
+                              surahName: state.pageData!['data'][index]
+                                  ['surahArabicName'],
+                              surahNumber: surahNumber,
+                              // display index for verses number on full surah, and display verses number on limited surah
+                              ayahNumber: state
+                                  .pageData!['data'][index]['verses']
+                                      [nestedIndex]
+                                  .keys
+                                  .first,
+                              arabicText: state.pageData!['data'][index]
+                                      ['verses'][nestedIndex][
+                                  state
+                                      .pageData!['data'][index]['verses']
+                                          [nestedIndex]
+                                      .keys
+                                      .first],
+                              translation: 'translation',
+                              isSaved: state.pageData!["saved"].contains(
+                                  '$surahNumber-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
+                              pageName: 'page',
+                            );
                           })
                     ],
                   );

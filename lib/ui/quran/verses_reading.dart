@@ -187,15 +187,16 @@ class VersesReadingView extends StatelessWidget {
                     itemCount: state.verses!['verses'].length,
                     itemBuilder: (context, index) {
                       return AyahItem(
-                          surahName: surahName,
-                          surahNumber: surahNumber,
-                          // display index for verses number on full surah, and display verses number on limited surah
-                          ayahNumber:
-                              verses == null ? index + 1 : verses![index],
-                          arabicText: state.verses!['verses'][index],
-                          translation: 'translation',
-                          isSaved: state.verses!["saved"].contains(
-                              '$surahNumber-${verses == null ? index + 1 : verses![index]}'));
+                        surahName: surahName,
+                        surahNumber: surahNumber,
+                        // display index for verses number on full surah, and display verses number on limited surah
+                        ayahNumber: verses == null ? index + 1 : verses![index],
+                        arabicText: state.verses!['verses'][index],
+                        translation: 'translation',
+                        isSaved: state.verses!["saved"].contains(
+                            '$surahNumber-${verses == null ? index + 1 : verses![index]}'),
+                        pageName: 'verses',
+                      );
                     });
               } else {
                 return Container();

@@ -99,8 +99,11 @@ class QuranCubit extends Cubit<QuranState> {
         surahVerses
             .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
       }
-      data['data']
-          .add({'surahArabicName': surahArabicName, 'verses': surahVerses});
+      data['data'].add({
+        'surahArabicName': surahArabicName,
+        'surahNumber': surahNumber,
+        'verses': surahVerses
+      });
     }
 
     data["saved"].addAll(CacheHelper.getSavedVerses());

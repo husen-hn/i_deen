@@ -16,6 +16,7 @@ class AyahItem extends StatelessWidget {
   final String arabicText;
   final String translation;
   final bool isSaved;
+  final String pageName;
 
   const AyahItem({
     super.key,
@@ -25,6 +26,7 @@ class AyahItem extends StatelessWidget {
     required this.arabicText,
     required this.translation,
     required this.isSaved,
+    required this.pageName,
   });
 
   @override
@@ -82,8 +84,20 @@ class AyahItem extends StatelessWidget {
                                     .saveVerse(surahNumber, ayahNumber);
                               }
 
-                              // // get all saved verses again
-                              context.read<QuranCubit>().getVerses(surahNumber);
+                              // get all saved verses again
+                              if (pageName == 'verses') {
+                                context
+                                    .read<QuranCubit>()
+                                    .getVerses(surahNumber);
+                              } else if (pageName == 'page') {
+                                context
+                                    .read<QuranCubit>()
+                                    .getPageVerses(surahNumber);
+                              } else if (pageName == 'juz') {
+                                context
+                                    .read<QuranCubit>()
+                                    .getJuzVerses(surahNumber);
+                              }
                             },
                             child: isSaved
                                 ? Image.asset('assets/icons/saved.png',
