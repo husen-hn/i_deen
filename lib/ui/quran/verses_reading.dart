@@ -187,7 +187,6 @@ class VersesReadingView extends StatelessWidget {
                     itemCount: state.verses!['verses'].length,
                     itemBuilder: (context, index) {
                       return AyahItem(
-                        surahName: surahName,
                         surahNumber: surahNumber,
                         // display index for verses number on full surah, and display verses number on limited surah
                         ayahNumber: verses == null ? index + 1 : verses![index],
@@ -195,7 +194,20 @@ class VersesReadingView extends StatelessWidget {
                         translation: 'translation',
                         isSaved: state.verses!["saved"].contains(
                             '$surahNumber-${verses == null ? index + 1 : verses![index]}'),
-                        pageName: 'verses',
+                        onSaveTap: () {
+                          if (state.verses!["saved"].contains(
+                              '$surahNumber-${verses == null ? index + 1 : verses![index]}')) {
+                            context.read<QuranCubit>().removeVerse(surahNumber,
+                                verses == null ? index + 1 : verses![index]);
+                          } else {
+                            context.read<QuranCubit>().saveVerse(surahNumber,
+                                verses == null ? index + 1 : verses![index]);
+                          }
+
+                          // get all saved verses again
+
+                          context.read<QuranCubit>().getVerses(surahNumber);
+                        },
                       );
                     });
               } else {

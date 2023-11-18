@@ -54,17 +54,17 @@ class HomeView extends StatelessWidget {
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 2)),
                   label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset('assets/icons/pray_icon.png',
-                      color: context
-                          .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 3)),
-                  label: ''),
+              // BottomNavigationBarItem(
+              //     icon: Image.asset('assets/icons/pray_icon.png',
+              //         color: context
+              //             .read<HomeCubit>()
+              //             .activeBtnNavColor(state.btnNvIndex, 3)),
+              //     label: ''),
               BottomNavigationBarItem(
                   icon: Image.asset('assets/icons/bookmark_icon.png',
                       color: context
                           .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 4)),
+                          .activeBtnNavColor(state.btnNvIndex, 3)),
                   label: ''),
             ],
             onTap: (int index) {
@@ -79,8 +79,8 @@ class HomeView extends StatelessWidget {
                     ? const Finish()
                     : state.btnNvIndex == 2
                         ? const Prayer()
-                        : state.btnNvIndex == 3
-                            ? const Pray()
-                            : const Bookmark()));
+                        // : state.btnNvIndex == 3
+                        //     ? const Pray()
+                        : const Bookmark()));
   }
 }

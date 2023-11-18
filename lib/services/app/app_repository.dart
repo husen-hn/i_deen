@@ -5,8 +5,6 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-import 'package:i_deen/services/helper/status_error_handler_schema.dart';
-
 abstract class IAppRepository {
   // StatusErrorHandlerSchema statusErrorHandler(Response? response);
 }

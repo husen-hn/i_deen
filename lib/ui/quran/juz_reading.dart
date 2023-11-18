@@ -78,27 +78,52 @@ class JuzReadingView extends StatelessWidget {
                               state.pageData!['data'][index]['verses'].length,
                           itemBuilder: (context, nestedIndex) {
                             return AyahItem(
-                                surahName: state.pageData!['data'][index]
-                                    ['surahArabicName'],
-                                surahNumber: state.pageData!['data'][index]
-                                    ['surahNumber'],
-                                // display index for verses number on full surah, and display verses number on limited surah
-                                ayahNumber: state
-                                    .pageData!['data'][index]['verses']
-                                        [nestedIndex]
-                                    .keys
-                                    .first,
-                                arabicText: state.pageData!['data'][index]
-                                        ['verses'][nestedIndex][
-                                    state
-                                        .pageData!['data'][index]['verses']
-                                            [nestedIndex]
-                                        .keys
-                                        .first],
-                                translation: 'translation',
-                                isSaved: state.pageData!["saved"].contains(
-                                    '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
-                                pageName: 'juz');
+                              surahNumber: state.pageData!['data'][index]
+                                  ['surahNumber'],
+                              // display index for verses number on full surah, and display verses number on limited surah
+                              ayahNumber: state
+                                  .pageData!['data'][index]['verses']
+                                      [nestedIndex]
+                                  .keys
+                                  .first,
+                              arabicText: state.pageData!['data'][index]
+                                      ['verses'][nestedIndex][
+                                  state
+                                      .pageData!['data'][index]['verses']
+                                          [nestedIndex]
+                                      .keys
+                                      .first],
+                              translation: 'translation',
+                              isSaved: state.pageData!["saved"].contains(
+                                  '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
+                              onSaveTap: () {
+                                if (state.pageData!["saved"].contains(
+                                    '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}')) {
+                                  context.read<QuranCubit>().removeVerse(
+                                      state.pageData!['data'][index]
+                                          ['surahNumber'],
+                                      state
+                                          .pageData!['data'][index]['verses']
+                                              [nestedIndex]
+                                          .keys
+                                          .first);
+                                } else {
+                                  context.read<QuranCubit>().saveVerse(
+                                      state.pageData!['data'][index]
+                                          ['surahNumber'],
+                                      state
+                                          .pageData!['data'][index]['verses']
+                                              [nestedIndex]
+                                          .keys
+                                          .first);
+                                }
+
+                                // get all saved verses again
+                                context
+                                    .read<QuranCubit>()
+                                    .getJuzVerses(juzNumber);
+                              },
+                            );
                           })
                     ],
                   );

@@ -88,8 +88,6 @@ class PageReadingView extends StatelessWidget {
                               state.pageData!['data'][index]['verses'].length,
                           itemBuilder: (context, nestedIndex) {
                             return AyahItem(
-                              surahName: state.pageData!['data'][index]
-                                  ['surahArabicName'],
                               surahNumber: surahNumber,
                               // display index for verses number on full surah, and display verses number on limited surah
                               ayahNumber: state
@@ -107,7 +105,33 @@ class PageReadingView extends StatelessWidget {
                               translation: 'translation',
                               isSaved: state.pageData!["saved"].contains(
                                   '$surahNumber-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
-                              pageName: 'page',
+                              onSaveTap: () {
+                                if (state.pageData!["saved"].contains(
+                                    '$surahNumber-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}')) {
+                                  context.read<QuranCubit>().removeVerse(
+                                        surahNumber,
+                                        state
+                                            .pageData!['data'][index]['verses']
+                                                [nestedIndex]
+                                            .keys
+                                            .first,
+                                      );
+                                } else {
+                                  context.read<QuranCubit>().saveVerse(
+                                        surahNumber,
+                                        state
+                                            .pageData!['data'][index]['verses']
+                                                [nestedIndex]
+                                            .keys
+                                            .first,
+                                      );
+                                }
+
+                                // get all saved verses again
+                                context
+                                    .read<QuranCubit>()
+                                    .getPageVerses(surahNumber);
+                              },
                             );
                           })
                     ],

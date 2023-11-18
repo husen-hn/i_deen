@@ -6,27 +6,25 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/quran/quran_cubit.dart';
 
 class AyahItem extends StatelessWidget {
-  final String surahName;
+  final String? surahName;
   final int surahNumber;
   final int ayahNumber;
   final String arabicText;
   final String translation;
   final bool isSaved;
-  final String pageName;
+  final Function() onSaveTap;
 
   const AyahItem({
     super.key,
-    required this.surahName,
+    this.surahName,
     required this.surahNumber,
     required this.ayahNumber,
     required this.arabicText,
     required this.translation,
     required this.isSaved,
-    required this.pageName,
+    required this.onSaveTap,
   });
 
   @override
@@ -49,21 +47,34 @@ class AyahItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF863ED5),
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                    ),
-                    child: Center(
-                        child: Text(
-                      ayahNumber.toString(),
-                      style: const TextStyle(
-                          fontFamily: 'BTitr',
-                          fontSize: 14,
-                          color: Colors.white),
-                    )),
+                  Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF863ED5),
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Center(
+                            child: Text(
+                          ayahNumber.toString(),
+                          style: const TextStyle(
+                              fontFamily: 'BTitr',
+                              fontSize: 14,
+                              color: Colors.white),
+                        )),
+                      ),
+                      const SizedBox(width: 10),
+                      surahName == null
+                          ? Container()
+                          : Text(surahName!,
+                              style: const TextStyle(
+                                  color: Color(0xFF863ED5),
+                                  fontFamily: 'Amiri',
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 20))
+                    ],
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .2,
@@ -73,32 +84,7 @@ class AyahItem extends StatelessWidget {
                         // Image.asset('assets/icons/share.png'),
                         // Image.asset('assets/icons/play.png'),
                         InkWell(
-                            onTap: () {
-                              if (isSaved) {
-                                context
-                                    .read<QuranCubit>()
-                                    .removeVerse(surahNumber, ayahNumber);
-                              } else {
-                                context
-                                    .read<QuranCubit>()
-                                    .saveVerse(surahNumber, ayahNumber);
-                              }
-
-                              // get all saved verses again
-                              if (pageName == 'verses') {
-                                context
-                                    .read<QuranCubit>()
-                                    .getVerses(surahNumber);
-                              } else if (pageName == 'page') {
-                                context
-                                    .read<QuranCubit>()
-                                    .getPageVerses(surahNumber);
-                              } else if (pageName == 'juz') {
-                                context
-                                    .read<QuranCubit>()
-                                    .getJuzVerses(surahNumber);
-                              }
-                            },
+                            onTap: onSaveTap,
                             child: isSaved
                                 ? Image.asset('assets/icons/saved.png',
                                     color: const Color(0xFF863ED5))
