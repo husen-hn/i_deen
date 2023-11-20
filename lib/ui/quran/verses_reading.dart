@@ -208,6 +208,12 @@ class VersesReadingView extends StatelessWidget {
 
                           context.read<QuranCubit>().getVerses(surahNumber);
                         },
+                        onVisible: () {
+                          context.read<QuranCubit>().saveLastSeen(
+                              surahNumber,
+                              verses == null ? index + 1 : verses![index],
+                              const Duration(seconds: 4));
+                        },
                       );
                     });
               } else {

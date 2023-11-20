@@ -104,6 +104,7 @@ class BookmarkView extends StatelessWidget {
                         // get all saved verses again
                         context.read<BookmarkCubit>().getAllSavedVerses();
                       },
+                      onVisible: () {},
                     );
                   }),
             ],

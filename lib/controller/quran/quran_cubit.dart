@@ -1,3 +1,12 @@
+//
+//  quran_cubit.dart
+//  Created on 2023 31 October.
+//  Copyright © IDeen Flutter application,
+//  Developed by 2023 Hossein HassanNejad.
+//
+
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:i_deen/services/helper/cache_helper.dart';
 import 'package:quran/quran.dart' as quran;
@@ -117,5 +126,36 @@ class QuranCubit extends Cubit<QuranState> {
 
   Future<void> removeVerse(int surahNumber, int verseNumber) async {
     await CacheHelper.removeVerse(surahNumber, verseNumber);
+  }
+
+  getLastSeen() {
+    emit(state.copyWith(status: () => QuranStatus.lastSeendLoading));
+    String? lastSeenData = CacheHelper.getLastSeen;
+    Map<String, dynamic> data;
+    if (lastSeenData != null) {
+      int surahNumber = int.parse(json.decode(lastSeenData).split('-').first);
+      int verseNumber = int.parse(json.decode(lastSeenData).split('-').last);
+
+      data = {
+        'surahName': quran.getSurahNameArabic(surahNumber),
+        'verseNumber': verseNumber
+      };
+    } else {
+      data = {'surahName': 'الفاتحة', 'verseNumber': 1};
+    }
+
+    emit(state.copyWith(
+        status: () => QuranStatus.lastSeen, lastSeen: () => data));
+  }
+
+  int lastSurahNum = 1;
+  int lastVerseNum = 1;
+  void saveLastSeen(int surahNumber, int verseNumber, Duration duration) {
+    lastSurahNum = surahNumber;
+    lastVerseNum = verseNumber;
+
+    Future.delayed(duration).then((value) async {
+      await CacheHelper.saveLastSeen(lastSurahNum, lastVerseNum);
+    });
   }
 }

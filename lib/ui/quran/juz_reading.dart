@@ -123,6 +123,7 @@ class JuzReadingView extends StatelessWidget {
                                     .read<QuranCubit>()
                                     .getJuzVerses(juzNumber);
                               },
+                              onVisible: () {},
                             );
                           })
                     ],

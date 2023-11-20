@@ -34,6 +34,7 @@ class QuranView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String langCode = context.read<AppCubit>().getSavedLanguage();
+    context.read<QuranCubit>().getLastSeen();
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
       drawer: const Drawer(),
@@ -66,57 +67,67 @@ class QuranView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                      BlocBuilder<QuranCubit, QuranState>(
+                        builder: (context, state) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Image(
-                                image: AssetImage('assets/icons/last_read.png'),
-                                width: 30,
+                              Row(
+                                children: [
+                                  const Image(
+                                    image: AssetImage(
+                                        'assets/icons/last_read.png'),
+                                    width: 30,
+                                  ),
+                                  Text(
+                                    'last_status'.tr(context),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'BTitr',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'last_status'.tr(context),
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'BTitr',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
+                              const SizedBox(
+                                height: 20,
                               ),
+                              state.status == QuranStatus.lastSeen
+                                  ? Text(
+                                      state.lastSeen!['surahName'],
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Amiri',
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.w600),
+                                    )
+                                  : Container(),
+                              state.status == QuranStatus.lastSeen
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                          'ayah'.tr(context),
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'BZar',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Text(
+                                          state.lastSeen!['verseNumber']
+                                              .toString(),
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'BZar',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500),
+                                        )
+                                      ],
+                                    )
+                                  : Container(),
                             ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            'الفاتحة',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Amiri',
-                                fontSize: 26,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'ayah'.tr(context),
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'BZar',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              const Text(
-                                '24',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'BZar',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                        ],
+                          );
+                        },
                       ),
                       Image.asset(
                         'assets/namaz_logo.png',

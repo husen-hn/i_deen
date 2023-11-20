@@ -132,6 +132,7 @@ class PageReadingView extends StatelessWidget {
                                     .read<QuranCubit>()
                                     .getPageVerses(surahNumber);
                               },
+                              onVisible: () {},
                             );
                           })
                     ],
