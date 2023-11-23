@@ -29,7 +29,10 @@ class FinishView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String langCode = context.read<AppCubit>().getSavedLanguage();
-    context.read<FinishCubit>().getPageData(1);
+
+    context
+        .read<FinishCubit>()
+        .getPageData(context.read<FinishCubit>().getLastPageNumber);
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
       drawer: const Drawer(),
@@ -37,8 +40,9 @@ class FinishView extends StatelessWidget {
         return state.status == FinishStatus.page
             ? SafeArea(
                 child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                    controller: context.read<FinishCubit>().scrollController,
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 70, left: 20, right: 20),
                     physics: const BouncingScrollPhysics(),
                     itemCount: state.pageData!['data'].length,
                     itemBuilder: (context, index) {
@@ -54,64 +58,105 @@ class FinishView extends StatelessWidget {
                                   padding: const EdgeInsets.only(
                                       top: 10, bottom: 30),
                                   child: _surahName(
-                                      context,
-                                      state.pageData!['data'][index]
-                                          ['surahArabicName'],
-                                      // surahNumber
-                                      1),
+                                    context,
+                                    state.pageData!['data'][index]
+                                        ['surahArabicName'],
+                                    state.pageData!['data'][index]
+                                        ['surahNumber'],
+                                  ),
                                 )
                               : Container(),
                           RichText(
                               textAlign: TextAlign.justify,
                               textDirection: TextDirection.rtl,
-                              softWrap: true,
                               text: TextSpan(
-                                  style: const TextStyle(
-                                      fontFamily: 'Amiri',
-                                      fontSize: 22,
-                                      color: Colors.black,
-                                      height: 3),
-                                  children:
-                                      state.pageData!['data'][index]['verses']
-                                          .map<InlineSpan>((verse) => TextSpan(
-                                                text: verse[verse.keys.first] +
-                                                    ' ${quran.getVerseEndSymbol(verse.keys.first)} ',
-                                              ))
-                                          .toList()))
+                                  children: state.pageData!['data'][index]
+                                          ['verses']
+                                      .map<InlineSpan>((verse) => TextSpan(
+                                            style: const TextStyle(
+                                                fontFamily: 'AmiriQuran',
+                                                fontSize: 26,
+                                                color: Colors.black,
+                                                height: 3),
+                                            children: [
+                                              TextSpan(
+                                                  text: verse[
+                                                          verse.keys.first] +
+                                                      '\t${quran.getVerseEndSymbol(verse.keys.first)}\t'),
+                                            ],
+                                          ))
+                                      .toList()))
                         ],
                       );
                     }),
               )
             : Container();
       }),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-              backgroundColor: const Color(0xFF672CBC),
-              child:
-                  Image.asset('assets/icons/back_rtl.png', color: Colors.white),
-              onPressed: () {}),
-          const SizedBox(width: 10),
-          const FloatingActionButton.extended(
-              backgroundColor: Color(0xFF672CBC),
-              onPressed: null,
-              label: Text(
-                'صفحه ۱',
-                style: TextStyle(fontFamily: 'Amiri', fontSize: 18),
-              )),
-          const SizedBox(width: 10),
-          FloatingActionButton(
-              backgroundColor: const Color(0xFF672CBC),
-              child:
-                  Image.asset('assets/icons/back_ltr.png', color: Colors.white),
-              onPressed: () {}),
-        ],
+      floatingActionButton: BlocBuilder<FinishCubit, FinishState>(
+        builder: (context, state) {
+          return state.status == FinishStatus.page
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FloatingActionButton(
+                        backgroundColor: const Color(0xFF672CBC),
+                        child: Image.asset('assets/icons/back_rtl.png',
+                            color: Colors.white),
+                        onPressed: () {
+                          //scroll up on page change
+                          _animateToIndex(0, context);
+
+                          int previousPage =
+                              context.read<FinishCubit>().getLastPageNumber - 1;
+
+                          // first page controller
+                          if (previousPage < 1) {
+                            previousPage =
+                                context.read<FinishCubit>().totalPagesCount;
+                          }
+
+                          context.read<FinishCubit>().setLastPage(previousPage);
+                          context.read<FinishCubit>().getPageData(previousPage);
+                        }),
+                    const SizedBox(width: 10),
+                    FloatingActionButton.extended(
+                        backgroundColor: const Color(0xFF672CBC),
+                        onPressed: null,
+                        label: Text(
+                          "صفحه ${state.pageData!['page']}",
+                          style: const TextStyle(
+                              fontFamily: 'BTitr', fontSize: 16),
+                        )),
+                    const SizedBox(width: 10),
+                    FloatingActionButton(
+                        backgroundColor: const Color(0xFF672CBC),
+                        child: Image.asset('assets/icons/back_ltr.png',
+                            color: Colors.white),
+                        onPressed: () {
+                          //scroll up on page change
+                          _animateToIndex(0, context);
+
+                          int nextPage =
+                              context.read<FinishCubit>().getLastPageNumber + 1;
+
+                          // last page controller
+                          if (nextPage >
+                              context.read<FinishCubit>().totalPagesCount) {
+                            nextPage = 1;
+                          }
+
+                          context.read<FinishCubit>().setLastPage(nextPage);
+                          context.read<FinishCubit>().getPageData(nextPage);
+                        }),
+                  ],
+                )
+              : Container();
+        },
       ),
     );
   }
 
-  _surahName(BuildContext context, String surahName, int surahNumber) =>
+  Widget _surahName(BuildContext context, String surahName, int surahNumber) =>
       Container(
         width: MediaQuery.of(context).size.width * .5,
         height: surahNumber == 9
@@ -160,4 +205,12 @@ class FinishView extends StatelessWidget {
           ),
         ),
       );
+
+  void _animateToIndex(double index, BuildContext context) {
+    context.read<FinishCubit>().scrollController.animateTo(
+          index,
+          duration: const Duration(milliseconds: 1),
+          curve: Curves.fastOutSlowIn,
+        );
+  }
 }

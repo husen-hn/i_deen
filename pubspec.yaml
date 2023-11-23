@@ -58,6 +58,9 @@ flutter:
     - family: QuranTaha
       fonts:
         - asset: fonts/quran_taha/QuranTaha.ttf
+    - family: AmiriQuran
+      fonts:
+        - asset: fonts/amiri-quran/AmiriQuran-Regular.ttf
   assets:
     - assets/lang/en.json
     - assets/lang/ar.json

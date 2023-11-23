@@ -6,6 +6,8 @@
 //
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:i_deen/services/helper/cache_helper.dart';
 import 'package:quran/quran.dart' as quran;
 
 part 'finish_state.dart';
@@ -13,13 +15,17 @@ part 'finish_state.dart';
 class FinishCubit extends Cubit<FinishState> {
   FinishCubit() : super(const FinishState().copyWith());
 
+  ScrollController scrollController = ScrollController();
+
+  get totalPagesCount => quran.totalPagesCount;
+
   String getSurahNameArabic(int surahNumber) =>
       quran.getSurahNameArabic(surahNumber);
 
   getPageData(int pageNumber) {
     emit(state.copyWith(status: () => FinishStatus.loading));
 
-    Map<String, dynamic> data = {'data': <Map<String, dynamic>>[]};
+    Map<String, dynamic> data = {'data': <Map<String, dynamic>>[], 'page': int};
 
     List<Map<String, dynamic>> pageData =
         quran.getPageData(pageNumber) as List<Map<String, dynamic>>;
@@ -36,10 +42,18 @@ class FinishCubit extends Cubit<FinishState> {
         surahVerses
             .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
       }
-      data['data']
-          .add({'surahArabicName': surahArabicName, 'verses': surahVerses});
+      data['data'].add({
+        'surahNumber': surahNumber,
+        'surahArabicName': surahArabicName,
+        'verses': surahVerses
+      });
     }
+    data['page'] = pageNumber;
 
     emit(state.copyWith(status: () => FinishStatus.page, pageData: () => data));
   }
+
+  int get getLastPageNumber => CacheHelper.getLastPage();
+
+  setLastPage(int pageNumber) => CacheHelper.saveLastPage(pageNumber);
 }

@@ -18,6 +18,7 @@ class CacheHelper {
   static const String _langCachedCode = "langCode";
   static const String _verseCachedCode = "verseCode";
   static const String _lastSeenCachedCode = "lastSeenCode";
+  static const String _lastPageCachedCode = "lastPageCode";
 
   static String getCachedLanguage() {
     final code = prefs.getString(_langCachedCode);
@@ -81,5 +82,14 @@ class CacheHelper {
   static Future<void> saveLastSeen(int surahNumber, int verseNumber) async {
     await prefs.setString(
         _lastSeenCachedCode, jsonEncode('$surahNumber-$verseNumber'));
+  }
+
+  static int getLastPage() {
+    final int lastPage = prefs.getInt(_lastPageCachedCode) ?? 1;
+    return lastPage;
+  }
+
+  static Future<void> saveLastPage(int pageNumber) async {
+    await prefs.setInt(_lastPageCachedCode, pageNumber);
   }
 }
