@@ -83,30 +83,61 @@ class BookmarkView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.verses!.length,
-                  itemBuilder: (context, index) {
-                    return AyahItem(
-                      surahName: state.verses![index]['surahArabicName'],
-                      surahNumber: state.verses![index]['surahNumber'],
-                      // display index for verses number on full surah, and display verses number on limited surah
-                      ayahNumber: state.verses![index]['verseNumber'],
-                      arabicText: state.verses![index]['verse'],
-                      translation: 'translation',
-                      isSaved: true,
-                      onSaveTap: () {
-                        context.read<BookmarkCubit>().removeVerse(
-                            state.verses![index]['surahNumber'],
-                            state.verses![index]['verseNumber']);
-
-                        // get all saved verses again
-                        context.read<BookmarkCubit>().getAllSavedVerses();
-                      },
-                      onVisible: () {},
-                    );
-                  }),
+              state.verses!.isEmpty
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .2,
+                        ),
+                        Text(
+                          'empty'.tr(context),
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontFamily: 'BTitr',
+                              color: Colors.grey[600]),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                                style: const TextStyle(
+                                    fontFamily: 'BZar',
+                                    fontSize: 20,
+                                    color: Colors.grey),
+                                children: [
+                                  TextSpan(text: 'for_save'.tr(context)),
+                                  WidgetSpan(
+                                      child: Image.asset(
+                                          'assets/icons/bookmark_icon.png')),
+                                  TextSpan(text: 'for_tuch'.tr(context)),
+                                ]))
+                      ],
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.verses!.length,
+                      itemBuilder: (context, index) {
+                        return AyahItem(
+                          surahName: state.verses![index]['surahArabicName'],
+                          surahNumber: state.verses![index]['surahNumber'],
+                          // display index for verses number on full surah, and display verses number on limited surah
+                          ayahNumber: state.verses![index]['verseNumber'],
+                          arabicText: state.verses![index]['verse'],
+                          translation: 'translation',
+                          isSaved: true,
+                          onSaveTap: () {
+                            context.read<BookmarkCubit>().removeVerse(
+                                state.verses![index]['surahNumber'],
+                                state.verses![index]['verseNumber']);
+                            // get all saved verses again
+                            context.read<BookmarkCubit>().getAllSavedVerses();
+                          },
+                          onVisible: () {},
+                        );
+                      }),
             ],
           );
         } else {
