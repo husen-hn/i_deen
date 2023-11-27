@@ -113,21 +113,23 @@ class AyahItem extends StatelessWidget {
             // text section
             Text(
               arabicText,
+              textAlign: TextAlign.justify,
               style: const TextStyle(
-                color: Color(0xFF240F4F),
-                fontFamily: 'QuranTaha',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
+                  color: Color(0xFF240F4F),
+                  fontFamily: 'QuranTaha',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24,
+                  height: 2),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * .02),
             Text(translation,
+                textAlign: TextAlign.justify,
                 style: const TextStyle(
-                  color: Color(0xFF240F4F),
-                  fontFamily: 'BZar',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 18,
-                )),
+                    color: Color(0xFF240F4F),
+                    fontFamily: 'BZar',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    height: 2)),
             SizedBox(height: MediaQuery.of(context).size.height * .02),
             const Divider(
               height: 5,
