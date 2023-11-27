@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/home/home_cubit.dart';
 import 'package:i_deen/ui/bookmark/bookmark.dart';
 import 'package:i_deen/ui/finish/finish.dart';
@@ -74,7 +75,9 @@ class HomeView extends StatelessWidget {
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) => state.btnNvIndex == 0
-                ? const Quran()
+                ? Quran(
+                    appRepository: context.read<AppCubit>().appRepository,
+                  )
                 : state.btnNvIndex == 1
                     ? const Finish()
                     : state.btnNvIndex == 2

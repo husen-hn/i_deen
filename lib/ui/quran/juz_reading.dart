@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
 
@@ -19,7 +20,9 @@ class JuzReading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<QuranCubit>(create: (BuildContext context) => QuranCubit())
+      BlocProvider<QuranCubit>(
+          create: (BuildContext context) =>
+              QuranCubit(appRepository: context.read<AppCubit>().appRepository))
     ], child: JuzReadingView(juzNumber: juzNumber));
   }
 }

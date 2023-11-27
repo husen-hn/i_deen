@@ -8,13 +8,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/services/helper/cache_helper.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit()
+  AppRepository appRepository;
+
+  AppCubit({required this.appRepository})
       : super(const AppState()
             .copyWith(status: () => AppStatus.langCode, langCode: () => 'fa'));
 

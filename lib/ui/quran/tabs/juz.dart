@@ -9,10 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
+import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/widgets/number_btn.dart';
 
 class Juz extends StatelessWidget {
-  const Juz({super.key});
+  final AppRepository appRepository;
+  const Juz({super.key, required this.appRepository});
 
   @override
   Widget build(BuildContext context) {

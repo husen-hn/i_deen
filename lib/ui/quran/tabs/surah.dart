@@ -23,6 +23,7 @@ class Surah extends StatelessWidget {
             itemCount: context.read<QuranCubit>().getTotalSurahCount,
             itemBuilder: (context, index) {
               return SurahItem(
+                appRepository: context.read<QuranCubit>().appRepository,
                 index: index + 1,
                 title: context.read<QuranCubit>().getSurahNameArabic(index + 1),
                 englishTitle:

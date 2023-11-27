@@ -5,30 +5,19 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:i_deen/services/app/app.dart';
+import 'package:i_deen/services/helper/tr_data_success_schema.dart';
+import 'package:i_deen/services/helper/translation.dart';
+
 abstract class IAppRepository {
-  // StatusErrorHandlerSchema statusErrorHandler(Response? response);
+  Future<TrDataSuccessSchema> getTrData(Translation tr);
 }
 
 class AppRepository implements IAppRepository {
   AppRepository();
 
-  // @override
-  // StatusErrorHandlerSchema statusErrorHandler(Response? response) {
-  //   switch (response?.statusCode) {
-  //     case 500:
-  //       return StatusErrorHandlerSchema(
-  //           message: "Server Error pls retry later");
-  //     case 400:
-  //       return StatusErrorHandlerSchema(message: 'Bad Request!');
-  //     case 401:
-  //       return StatusErrorHandlerSchema(message: 'Unauthorized!');
-  //     case 403:
-  //       return StatusErrorHandlerSchema(
-  //           message: 'Error occurred pls check internet and retry.');
-  //     case 404:
-  //       return StatusErrorHandlerSchema(message: 'Not Found!');
-  //     default:
-  //       return StatusErrorHandlerSchema(message: 'Error occurred!');
-  //   }
-  // }
+  @override
+  Future<TrDataSuccessSchema> getTrData(Translation tr) async {
+    return await App().getTrData(tr);
+  }
 }

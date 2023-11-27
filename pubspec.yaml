@@ -62,6 +62,8 @@ flutter:
       fonts:
         - asset: fonts/amiri-quran/AmiriQuran-Regular.ttf
   assets:
+    - tr/fa/makarem/source.json
+
     - assets/lang/en.json
     - assets/lang/ar.json
     - assets/lang/fa.json

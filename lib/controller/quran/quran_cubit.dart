@@ -8,13 +8,18 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/services/helper/cache_helper.dart';
+import 'package:i_deen/services/helper/tr_data_success_schema.dart';
+import 'package:i_deen/services/helper/translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 part 'quran_state.dart';
 
 class QuranCubit extends Cubit<QuranState> {
-  QuranCubit() : super(const QuranState().copyWith());
+  AppRepository appRepository;
+  QuranCubit({required this.appRepository})
+      : super(const QuranState().copyWith());
 
   int get getTotalPagesCount => quran.totalPagesCount;
   int get getTotalJuzCount => quran.totalJuzCount;
@@ -29,15 +34,23 @@ class QuranCubit extends Cubit<QuranState> {
       quran.getPlaceOfRevelation(surahNumber);
 
   // get verses of a surah for all verses or spacific verses
-  getVerses(int surahNumber, {List<int>? verseNumber}) {
+  getVerses(int surahNumber, {List<int>? verseNumber}) async {
     emit(state.copyWith(status: () => QuranStatus.loading));
 
-    Map<String, dynamic> verses = {"verses": <String>[], "saved": <String>[]};
+    List<Verse> trVerses = await getTrData(surahNumber);
+
+    Map<String, dynamic> verses = {
+      "verses": <String>[],
+      "translations": <String>[],
+      "saved": <String>[]
+    };
+
     if (verseNumber == null) {
       for (var verseIndex = 0;
           verseIndex < getVerseCount(surahNumber);
           verseIndex++) {
         verses["verses"].add(quran.getVerse(surahNumber, verseIndex + 1));
+        verses["translations"].add(trVerses[verseIndex].translation);
       }
 
       verses["saved"].addAll(CacheHelper.getSavedVerses());
@@ -47,7 +60,9 @@ class QuranCubit extends Cubit<QuranState> {
           verses["verses"]
               .add(quran.getVerse(surahNumber, verseNumber[verseIndex]));
         }
+        verses["translations"].add(trVerses[verseIndex].translation);
       }
+
       verses["saved"].addAll(CacheHelper.getSavedVerses());
     }
 
@@ -55,7 +70,7 @@ class QuranCubit extends Cubit<QuranState> {
         state.copyWith(status: () => QuranStatus.verses, verses: () => verses));
   }
 
-  getPageVerses(int pageNumber) {
+  getPageVerses(int pageNumber) async {
     emit(state.copyWith(status: () => QuranStatus.loading));
 
     Map<String, dynamic> data = {
@@ -70,16 +85,23 @@ class QuranCubit extends Cubit<QuranState> {
       int surahNumber = pageData[i]['surah'];
       String surahArabicName = getSurahNameArabic(surahNumber);
 
+      List<Verse> trVerses = await getTrData(surahNumber);
+
       int start = pageData[i]['start'];
       int end = pageData[i]['end'];
 
       List<Map<int, String>> surahVerses = [];
+      List<Map<int, String>> translations = [];
       for (var verseNumber = start; verseNumber <= end; verseNumber++) {
         surahVerses
             .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
+        translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
       }
-      data['data']
-          .add({'surahArabicName': surahArabicName, 'verses': surahVerses});
+      data['data'].add({
+        'surahArabicName': surahArabicName,
+        'verses': surahVerses,
+        'translation': translations
+      });
     }
 
     data["saved"].addAll(CacheHelper.getSavedVerses());
@@ -157,5 +179,12 @@ class QuranCubit extends Cubit<QuranState> {
     Future.delayed(duration).then((value) async {
       await CacheHelper.saveLastSeen(lastSurahNum, lastVerseNum);
     });
+  }
+
+  Future<List<Verse>> getTrData(int surahNumber) async {
+    TrDataSuccessSchema data =
+        await appRepository.getTrData(Translation.makarem);
+
+    return data.list[surahNumber - 1].verses;
   }
 }

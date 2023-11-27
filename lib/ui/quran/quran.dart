@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
+import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/ui/quran/tabs/juz.dart';
 import 'package:i_deen/ui/quran/tabs/page.dart' as pg;
 import 'package:i_deen/ui/quran/tabs/surah.dart';
@@ -18,12 +19,15 @@ import 'package:i_deen/widgets/tab_item.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 class Quran extends StatelessWidget {
-  const Quran({super.key});
+  final AppRepository appRepository;
+  const Quran({required this.appRepository, super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<QuranCubit>(create: (BuildContext context) => QuranCubit())
+      BlocProvider<QuranCubit>(
+          create: (BuildContext context) =>
+              QuranCubit(appRepository: appRepository))
     ], child: const QuranView());
   }
 }
@@ -35,6 +39,7 @@ class QuranView extends StatelessWidget {
   Widget build(BuildContext context) {
     String langCode = context.read<AppCubit>().getSavedLanguage();
     context.read<QuranCubit>().getLastSeen();
+
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
       drawer: const Drawer(),
@@ -176,9 +181,20 @@ class QuranView extends StatelessWidget {
               // Tabbar contents
               SizedBox(
                 height: MediaQuery.of(context).size.height * .56,
-                child: const TabBarView(
-                    physics: BouncingScrollPhysics(),
-                    children: [Surah(), pg.Page(), Verses(), Juz()]),
+                child: TabBarView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      const Surah(),
+                      pg.Page(
+                          appRepository:
+                              context.read<QuranCubit>().appRepository),
+                      Verses(
+                          appRepository:
+                              context.read<QuranCubit>().appRepository),
+                      Juz(
+                          appRepository:
+                              context.read<QuranCubit>().appRepository)
+                    ]),
               )
             ],
           ),

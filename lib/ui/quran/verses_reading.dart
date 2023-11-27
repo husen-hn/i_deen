@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
@@ -35,7 +36,8 @@ class VersesReading extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<QuranCubit>(
-              create: (BuildContext context) => QuranCubit())
+              create: (BuildContext context) => QuranCubit(
+                  appRepository: context.read<AppCubit>().appRepository))
         ],
         child: VersesReadingView(
             surahNumber: surahNumber,
@@ -191,7 +193,7 @@ class VersesReadingView extends StatelessWidget {
                         // display index for verses number on full surah, and display verses number on limited surah
                         ayahNumber: verses == null ? index + 1 : verses![index],
                         arabicText: state.verses!['verses'][index],
-                        translation: 'translation',
+                        translation: state.verses!['translations'][index],
                         isSaved: state.verses!["saved"].contains(
                             '$surahNumber-${verses == null ? index + 1 : verses![index]}'),
                         onSaveTap: () {

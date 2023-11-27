@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/quran/quran_cubit.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
 
@@ -23,7 +24,8 @@ class PageReading extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<QuranCubit>(
-              create: (BuildContext context) => QuranCubit())
+              create: (BuildContext context) => QuranCubit(
+                  appRepository: context.read<AppCubit>().appRepository))
         ],
         child: PageReadingView(
             surahNumber: surahNumber, surahVerseNumber: surahVerseNumber));
@@ -102,7 +104,13 @@ class PageReadingView extends StatelessWidget {
                                           [nestedIndex]
                                       .keys
                                       .first],
-                              translation: 'translation',
+                              translation: state.pageData!['data'][index]
+                                      ['translation'][nestedIndex][
+                                  state
+                                      .pageData!['data'][index]['verses']
+                                          [nestedIndex]
+                                      .keys
+                                      .first],
                               isSaved: state.pageData!["saved"].contains(
                                   '$surahNumber-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
                               onSaveTap: () {
