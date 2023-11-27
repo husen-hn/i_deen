@@ -2,7 +2,7 @@
     package="com.husen.i_deen.i_deen">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-            android:label="Furqan"
+            android:label="Serat"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
             <activity

@@ -36,13 +36,13 @@ class IDeenAppbar extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
-      actions: [
-        Image.asset(
-          langCode == 'fa' || langCode == 'ar'
-              ? 'assets/icons/search_rtl.png'
-              : 'assets/icons/search.png',
-        )
-      ],
+      // actions: [
+      // Image.asset(
+      //   langCode == 'fa' || langCode == 'ar'
+      //       ? 'assets/icons/search_rtl.png'
+      //       : 'assets/icons/search.png',
+      // )
+      // ],
     );
   }
 
