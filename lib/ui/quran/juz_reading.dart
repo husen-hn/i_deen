@@ -96,7 +96,13 @@ class JuzReadingView extends StatelessWidget {
                                           [nestedIndex]
                                       .keys
                                       .first],
-                              translation: 'translation',
+                              translation: state.pageData!['data'][index]
+                                      ['translation'][nestedIndex][
+                                  state
+                                      .pageData!['data'][index]['verses']
+                                          [nestedIndex]
+                                      .keys
+                                      .first],
                               isSaved: state.pageData!["saved"].contains(
                                   '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
                               onSaveTap: () {

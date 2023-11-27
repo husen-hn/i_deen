@@ -109,7 +109,7 @@ class QuranCubit extends Cubit<QuranState> {
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
   }
 
-  getJuzVerses(int juzNumber) {
+  getJuzVerses(int juzNumber) async {
     emit(state.copyWith(status: () => QuranStatus.loading));
     Map<String, dynamic> data = {
       'data': <Map<String, dynamic>>[],
@@ -121,19 +121,24 @@ class QuranCubit extends Cubit<QuranState> {
     for (var surahNumber in juzData.keys) {
       String surahArabicName = getSurahNameArabic(surahNumber);
 
+      List<Verse> trVerses = await getTrData(surahNumber);
+
       int start = juzData[surahNumber]!.first;
       int end = juzData[surahNumber]!.last;
 
       List<Map<int, String>> surahVerses = [];
+      List<Map<int, String>> translations = [];
 
       for (var verseNumber = start; verseNumber <= end; verseNumber++) {
         surahVerses
             .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
+        translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
       }
       data['data'].add({
         'surahArabicName': surahArabicName,
         'surahNumber': surahNumber,
-        'verses': surahVerses
+        'verses': surahVerses,
+        'translation': translations
       });
     }
 
