@@ -75,15 +75,15 @@ class HomeView extends StatelessWidget {
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) => state.btnNvIndex == 0
-                ? Quran(
-                    appRepository: context.read<AppCubit>().appRepository,
-                  )
+                ? Quran(appRepository: context.read<AppCubit>().appRepository)
                 : state.btnNvIndex == 1
                     ? const Finish()
                     : state.btnNvIndex == 2
                         ? const Prayer()
                         // : state.btnNvIndex == 3
                         //     ? const Pray()
-                        : const Bookmark()));
+                        : Bookmark(
+                            appRepository:
+                                context.read<AppCubit>().appRepository)));
   }
 }

@@ -9,18 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/bookmark/bookmark_cubit.dart';
+import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
 
 class Bookmark extends StatelessWidget {
-  const Bookmark({super.key});
+  final AppRepository appRepository;
+  const Bookmark({required this.appRepository, super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider<BookmarkCubit>(
-          create: ((BuildContext context) => BookmarkCubit()))
+          create: ((BuildContext context) =>
+              BookmarkCubit(appRepository: appRepository)))
     ], child: const BookmarkView());
   }
 }
@@ -126,7 +129,7 @@ class BookmarkView extends StatelessWidget {
                           // display index for verses number on full surah, and display verses number on limited surah
                           ayahNumber: state.verses![index]['verseNumber'],
                           arabicText: state.verses![index]['verse'],
-                          translation: 'translation',
+                          translation: state.verses![index]['translation'],
                           isSaved: true,
                           onSaveTap: () {
                             context.read<BookmarkCubit>().removeVerse(
