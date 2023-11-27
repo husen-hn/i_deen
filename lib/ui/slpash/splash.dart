@@ -1,7 +1,7 @@
 //
 //  splash.dart
 //  Created on 2023 31 October.
-//  Copyright © IDeen Flutter application,
+//  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
 
@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       context.go('/home');
     });
   }

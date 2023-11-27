@@ -1,7 +1,7 @@
 //
 //  finish.dart
 //  Created on 2023 31 October.
-//  Copyright © IDeen Flutter application,
+//  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
 

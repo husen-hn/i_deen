@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.husen.i_deen.i_deen"
+        applicationId "com.husen.serat"
         minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

@@ -1,7 +1,7 @@
 //
 //  app.dart
 //  Created on 2023 26 November.
-//  Copyright © husen-hn Github,
+//  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
 

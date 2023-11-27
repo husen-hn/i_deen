@@ -1,7 +1,7 @@
 //
 //  bookmark_cubit.dart
 //  Created on 2023 18 November.
-//  Copyright © IDeen Flutter application,
+//  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
 

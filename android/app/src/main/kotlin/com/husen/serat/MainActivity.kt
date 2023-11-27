@@ -1,4 +1,4 @@
-package com.husen.i_deen.i_deen
+package com.husen.serat
 
 import io.flutter.embedding.android.FlutterActivity
 

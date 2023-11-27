@@ -1,7 +1,7 @@
 //
 //  i_deen_appbar.dart
 //  Created on 2023 12 November.
-//  Copyright © IDeen Flutter application,
+//  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
 
