@@ -15,6 +15,7 @@ import 'package:i_deen/ui/quran/tabs/page.dart' as pg;
 import 'package:i_deen/ui/quran/tabs/surah.dart';
 import 'package:i_deen/ui/quran/tabs/verses.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
+import 'package:i_deen/widgets/serat_drawer.dart';
 import 'package:i_deen/widgets/tab_item.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 
@@ -42,7 +43,7 @@ class QuranView extends StatelessWidget {
 
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
-      drawer: const Drawer(),
+      drawer: SeratDrawer(),
       body: DefaultTabController(
         length: 5,
         child: Center(

@@ -8,6 +8,8 @@
 import 'dart:convert';
 
 import 'package:go_router/go_router.dart';
+import 'package:i_deen/ui/drawer/about_us.dart';
+import 'package:i_deen/ui/drawer/copy_right.dart';
 import 'package:i_deen/ui/home/home.dart';
 import 'package:i_deen/ui/quran/juz_reading.dart';
 import 'package:i_deen/ui/quran/page_reading.dart';
@@ -57,6 +59,14 @@ class IDeenRouter {
                 builder: (context, state) => JuzReading(
                     juzNumber: int.parse(state.pathParameters['juzNumber']!))),
           ]),
+      GoRoute(
+          name: 'about-us',
+          path: '/about-us',
+          builder: (context, state) => const AboutUs()),
+      GoRoute(
+          name: 'copy-right',
+          path: '/copy-right',
+          builder: (context, state) => const CopyRight()),
     ],
   );
 }

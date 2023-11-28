@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/finish/finish_cubit.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
+import 'package:i_deen/widgets/serat_drawer.dart';
 import 'package:quran/quran.dart' as quran;
 
 class Finish extends StatelessWidget {
@@ -35,7 +36,7 @@ class FinishView extends StatelessWidget {
         .getPageData(context.read<FinishCubit>().getLastPageNumber);
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
-      drawer: const Drawer(),
+      drawer: SeratDrawer(),
       body: BlocBuilder<FinishCubit, FinishState>(builder: (context, state) {
         return state.status == FinishStatus.page
             ? SafeArea(

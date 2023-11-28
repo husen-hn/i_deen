@@ -13,6 +13,7 @@ import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
 import 'package:i_deen/widgets/ayah_item.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
+import 'package:i_deen/widgets/serat_drawer.dart';
 
 class Bookmark extends StatelessWidget {
   final AppRepository appRepository;
@@ -38,6 +39,7 @@ class BookmarkView extends StatelessWidget {
 
     return Scaffold(
       appBar: IDeenAppbar(langCode: langCode),
+      drawer: SeratDrawer(),
       body:
           BlocBuilder<BookmarkCubit, BookmarkState>(builder: (context, state) {
         if (state.status == BookmarkStatus.verses) {

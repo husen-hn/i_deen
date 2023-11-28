@@ -23,7 +23,7 @@ dependencies:
   flutter_inappwebview: ^5.8.0
   shimmer: ^3.0.0
   visibility_detector: ^0.4.0+2
-  
+  url_launcher: ^6.2.1
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -52,9 +52,6 @@ flutter:
     - family: Amiri
       fonts:
         - asset: fonts/amiri/Amiri-Regular.ttf
-        - asset: fonts/amiri/Amiri-Bold.ttf
-        - asset: fonts/amiri/Amiri-BoldItalic.ttf
-        - asset: fonts/amiri/Amiri-Italic.ttf
     - family: QuranTaha
       fonts:
         - asset: fonts/quran_taha/QuranTaha.ttf
@@ -71,6 +68,8 @@ flutter:
     - assets/namaz_logo.png
     - assets/namaz-logo-name.png
     - assets/besmelah.png
+    - assets/app_logo.png
+    - assets/namaz_logo_ag.png
 
     - assets/icons/bookmark_icon.png
     - assets/icons/lamp_icon.png
