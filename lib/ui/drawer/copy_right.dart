@@ -115,7 +115,7 @@ class CopyRight extends StatelessWidget {
   }
 
   Future<void> _launchUrl(url) async {
-    if (!await launchUrl(url)) {
+    if (!await launchUrl(Uri.parse(url))) {
       throw Exception('Could not launch $url');
     }
   }
