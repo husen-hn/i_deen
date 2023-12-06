@@ -16,7 +16,7 @@ class AyahItem extends StatelessWidget {
   final String translation;
   final bool isSaved;
   final Function() onSaveTap;
-  final Function() onVisible;
+  final Function()? onVisible;
 
   const AyahItem({
     super.key,
@@ -27,7 +27,7 @@ class AyahItem extends StatelessWidget {
     required this.translation,
     required this.isSaved,
     required this.onSaveTap,
-    required this.onVisible,
+    this.onVisible,
   });
 
   @override
@@ -37,7 +37,7 @@ class AyahItem extends StatelessWidget {
       onVisibilityChanged: (visibilityInfo) {
         double visiblePercentage = visibilityInfo.visibleFraction * 100;
         if (visiblePercentage == 100) {
-          onVisible();
+          onVisible!();
         }
       },
       child: Padding(
