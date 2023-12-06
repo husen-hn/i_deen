@@ -6,8 +6,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SeratDrawer extends StatelessWidget {

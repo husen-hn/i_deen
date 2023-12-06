@@ -7,8 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

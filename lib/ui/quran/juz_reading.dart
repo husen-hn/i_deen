@@ -7,10 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
-import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/widgets/ayah_item.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/widgets/ayah_item.dart';
 
 class JuzReading extends StatelessWidget {
   final int juzNumber;

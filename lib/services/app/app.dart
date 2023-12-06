@@ -8,8 +8,8 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:i_deen/services/helper/tr_data_success_schema.dart';
-import 'package:i_deen/services/helper/translation.dart';
+import 'package:serat/services/helper/tr_data_success_schema.dart';
+import 'package:serat/services/helper/translation.dart';
 
 class App {
   Future<TrDataSuccessSchema> getTrData(Translation tr) async {

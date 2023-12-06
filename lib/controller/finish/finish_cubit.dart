@@ -7,7 +7,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:i_deen/services/helper/cache_helper.dart';
+import 'package:serat/services/helper/cache_helper.dart';
 import 'package:quran/quran.dart' as quran;
 
 part 'finish_state.dart';

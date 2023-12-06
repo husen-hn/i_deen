@@ -6,10 +6,10 @@
 //
 
 import 'package:bloc/bloc.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/services/helper/cache_helper.dart';
-import 'package:i_deen/services/helper/tr_data_success_schema.dart';
-import 'package:i_deen/services/helper/translation.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/cache_helper.dart';
+import 'package:serat/services/helper/tr_data_success_schema.dart';
+import 'package:serat/services/helper/translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 part 'bookmark_state.dart';

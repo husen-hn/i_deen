@@ -7,14 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
-import 'package:i_deen/controller/bookmark/bookmark_cubit.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
-import 'package:i_deen/ui/bookmark/bookmark_shimmer.dart';
-import 'package:i_deen/widgets/i_deen_appbar.dart';
-import 'package:i_deen/widgets/serat_drawer.dart';
-import 'package:i_deen/widgets/verse_item_expansion.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/controller/bookmark/bookmark_cubit.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/ui/bookmark/bookmark_shimmer.dart';
+import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_drawer.dart';
+import 'package:serat/widgets/verse_item_expansion.dart';
 
 class Bookmark extends StatelessWidget {
   final AppRepository appRepository;

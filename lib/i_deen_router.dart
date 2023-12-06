@@ -7,15 +7,13 @@
 
 import 'dart:convert';
 
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/ui/bookmark/bookmark_reading.dart';
-import 'package:i_deen/ui/drawer/about_us.dart';
-import 'package:i_deen/ui/drawer/copy_right.dart';
-import 'package:i_deen/ui/home/home.dart';
-import 'package:i_deen/ui/quran/juz_reading.dart';
-import 'package:i_deen/ui/quran/page_reading.dart';
-import 'package:i_deen/ui/quran/verses_reading.dart';
-import 'package:i_deen/ui/slpash/splash.dart';
+import 'package:serat/ui/drawer/about_us.dart';
+import 'package:serat/ui/drawer/copy_right.dart';
+import 'package:serat/ui/home/home.dart';
+import 'package:serat/ui/quran/juz_reading.dart';
+import 'package:serat/ui/quran/page_reading.dart';
+import 'package:serat/ui/quran/verses_reading.dart';
+import 'package:serat/ui/slpash/splash.dart';
 
 class IDeenRouter {
   final router = GoRouter(

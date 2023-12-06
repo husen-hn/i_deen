@@ -6,10 +6,9 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
-import 'package:i_deen/widgets/surah_number.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/widgets/surah_number.dart';
 
 class SurahItem extends StatelessWidget {
   final AppRepository appRepository;

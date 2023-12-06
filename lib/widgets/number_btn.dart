@@ -6,7 +6,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:i_deen/widgets/surah_number.dart';
+import 'package:serat/widgets/surah_number.dart';
 
 class NumberBtn extends StatelessWidget {
   final int number;

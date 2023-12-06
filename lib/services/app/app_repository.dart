@@ -5,9 +5,9 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-import 'package:i_deen/services/app/app.dart';
-import 'package:i_deen/services/helper/tr_data_success_schema.dart';
-import 'package:i_deen/services/helper/translation.dart';
+import 'package:serat/services/app/app.dart';
+import 'package:serat/services/helper/tr_data_success_schema.dart';
+import 'package:serat/services/helper/translation.dart';
 
 abstract class IAppRepository {
   Future<TrDataSuccessSchema> getTrData(Translation tr);

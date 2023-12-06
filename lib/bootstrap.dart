@@ -10,9 +10,9 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/services/observer.dart';
-import 'package:i_deen/ui/app/app.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/observer.dart';
+import 'package:serat/ui/app/app.dart';
 
 Future<void> bootstrap() async {
   ///

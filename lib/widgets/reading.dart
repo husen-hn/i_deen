@@ -6,10 +6,10 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:i_deen/services/helper/serat_font.dart';
-import 'package:i_deen/services/helper/serat_icon.dart';
-import 'package:i_deen/services/helper/verses_schema.dart';
-import 'package:i_deen/widgets/ayah_item.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
+import 'package:serat/services/helper/verses_schema.dart';
+import 'package:serat/widgets/ayah_item.dart';
 
 class Reading extends StatelessWidget {
   final List<VersesSchema> verses;

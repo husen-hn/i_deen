@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/widgets/surah_item.dart';
+import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/widgets/surah_item.dart';
 
 class Surah extends StatelessWidget {
   const Surah({super.key});

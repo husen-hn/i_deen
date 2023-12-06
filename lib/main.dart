@@ -6,8 +6,8 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:i_deen/bootstrap.dart';
-import 'package:i_deen/services/helper/cache_helper.dart';
+import 'package:serat/bootstrap.dart';
+import 'package:serat/services/helper/cache_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

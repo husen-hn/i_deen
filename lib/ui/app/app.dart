@@ -8,9 +8,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
-import 'package:i_deen/i_deen_router.dart';
-import 'package:i_deen/services/app/app_repository.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/i_deen_router.dart';
+import 'package:serat/services/app/app_repository.dart';
 
 class App extends StatelessWidget {
   final AppRepository appRepository;

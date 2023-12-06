@@ -7,10 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/widgets/number_btn.dart';
+import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/widgets/number_btn.dart';
 
 class Page extends StatelessWidget {
   final AppRepository appRepository;

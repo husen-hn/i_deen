@@ -7,11 +7,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
-import 'package:i_deen/controller/finish/finish_cubit.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
-import 'package:i_deen/widgets/i_deen_appbar.dart';
-import 'package:i_deen/widgets/serat_drawer.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/controller/finish/finish_cubit.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_drawer.dart';
 import 'package:quran/quran.dart' as quran;
 
 class Finish extends StatelessWidget {

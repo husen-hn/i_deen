@@ -7,17 +7,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_deen/controller/app/app_cubit.dart';
-import 'package:i_deen/controller/quran/quran_cubit.dart';
-import 'package:i_deen/services/app/app_repository.dart';
-import 'package:i_deen/ui/quran/tabs/juz.dart';
-import 'package:i_deen/ui/quran/tabs/page.dart' as pg;
-import 'package:i_deen/ui/quran/tabs/surah.dart';
-import 'package:i_deen/ui/quran/tabs/verses.dart';
-import 'package:i_deen/widgets/i_deen_appbar.dart';
-import 'package:i_deen/widgets/serat_drawer.dart';
-import 'package:i_deen/widgets/tab_item.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/ui/quran/tabs/juz.dart';
+import 'package:serat/ui/quran/tabs/page.dart' as pg;
+import 'package:serat/ui/quran/tabs/surah.dart';
+import 'package:serat/ui/quran/tabs/verses.dart';
+import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_drawer.dart';
+import 'package:serat/widgets/tab_item.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
 
 class Quran extends StatelessWidget {
   final AppRepository appRepository;

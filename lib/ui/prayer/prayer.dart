@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:i_deen/controller/prayer/prayer_cubit.dart';
-import 'package:i_deen/ui/prayer/prayer_shimmer.dart';
+import 'package:serat/controller/prayer/prayer_cubit.dart';
+import 'package:serat/ui/prayer/prayer_shimmer.dart';
 
 class Prayer extends StatelessWidget {
   const Prayer({super.key});

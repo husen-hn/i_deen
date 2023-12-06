@@ -6,11 +6,10 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:i_deen/services/helper/serat_font.dart';
-import 'package:i_deen/services/helper/serat_icon.dart';
-import 'package:i_deen/services/helper/verses_schema.dart';
-import 'package:i_deen/widgets/reading.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
+import 'package:serat/services/helper/verses_schema.dart';
+import 'package:serat/widgets/reading.dart';
 
 class BookmarkReading extends StatelessWidget {
   final String pageSurahName;
