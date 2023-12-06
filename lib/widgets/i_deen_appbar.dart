@@ -6,18 +6,18 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:i_deen/services/helper/l10n/app_local.dart';
 
 class IDeenAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;
-  const IDeenAppbar({super.key, required this.langCode})
+  final String title;
+  const IDeenAppbar({super.key, required this.langCode, required this.title})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
   AppBar build(BuildContext context) {
     return AppBar(
       title: Text(
-        'app_name'.tr(context),
+        title,
         style: const TextStyle(
             fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 24),
       ),

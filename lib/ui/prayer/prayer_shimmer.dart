@@ -1,5 +1,5 @@
 //
-//  prayer_cshimmer.dart
+//  prayer_shimmer.dart
 //  Created on 2023 12 November.
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
@@ -13,107 +13,109 @@ class PrayerShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      enabled: true,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: 60,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 20),
-              width: double.infinity,
-              height: 130,
-              color: Colors.white,
-            ),
-            // article
-            Container(
-              margin: const EdgeInsets.only(top: 40, left: 10, right: 10),
-              width: double.infinity,
-              height: 200,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+    return Scaffold(
+      body: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        enabled: true,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 60,
                 color: Colors.white,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            // article
-            Container(
-              margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              width: double.infinity,
-              height: 200,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                width: double.infinity,
+                height: 130,
                 color: Colors.white,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
-              width: double.infinity,
-              height: 5,
-              color: Colors.white,
-            ),
-          ],
+              // article
+              Container(
+                margin: const EdgeInsets.only(top: 40, left: 10, right: 10),
+                width: double.infinity,
+                height: 200,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              // article
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                width: double.infinity,
+                height: 200,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                width: double.infinity,
+                height: 5,
+                color: Colors.white,
+              ),
+            ],
+          ),
         ),
       ),
     );

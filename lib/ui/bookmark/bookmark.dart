@@ -11,9 +11,10 @@ import 'package:i_deen/controller/app/app_cubit.dart';
 import 'package:i_deen/controller/bookmark/bookmark_cubit.dart';
 import 'package:i_deen/services/app/app_repository.dart';
 import 'package:i_deen/services/helper/l10n/app_local.dart';
-import 'package:i_deen/widgets/ayah_item.dart';
+import 'package:i_deen/ui/bookmark/bookmark_shimmer.dart';
 import 'package:i_deen/widgets/i_deen_appbar.dart';
 import 'package:i_deen/widgets/serat_drawer.dart';
+import 'package:i_deen/widgets/verse_item_expansion.dart';
 
 class Bookmark extends StatelessWidget {
   final AppRepository appRepository;
@@ -38,7 +39,7 @@ class BookmarkView extends StatelessWidget {
     context.read<BookmarkCubit>().getAllSavedVerses();
 
     return Scaffold(
-      appBar: IDeenAppbar(langCode: langCode),
+      appBar: IDeenAppbar(langCode: langCode, title: 'saveds'.tr(context)),
       drawer: SeratDrawer(),
       body:
           BlocBuilder<BookmarkCubit, BookmarkState>(builder: (context, state) {
@@ -47,47 +48,6 @@ class BookmarkView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             physics: const BouncingScrollPhysics(),
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width * .5,
-                height: MediaQuery.of(context).size.height * .1,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  gradient: const LinearGradient(
-                      colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color(0xFF9055FF).withOpacity(0.2),
-                        spreadRadius: 3,
-                        blurRadius: 10,
-                        offset: const Offset(0, 20))
-                  ],
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('assets/icons/ayah.png',
-                              color: Colors.white),
-                          Text(
-                            'saveds'.tr(context),
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Amiri',
-                                fontWeight: FontWeight.w800,
-                                fontSize: 30),
-                          ),
-                          Image.asset('assets/icons/ayah.png',
-                              color: Colors.white)
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
               state.verses!.isEmpty
                   ? Column(
                       children: [
@@ -123,9 +83,10 @@ class BookmarkView extends StatelessWidget {
                   : ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
+                      reverse: true,
                       itemCount: state.verses!.length,
                       itemBuilder: (context, index) {
-                        return AyahItem(
+                        return VerseItemExpansion(
                           surahName: state.verses![index]['surahArabicName'],
                           surahNumber: state.verses![index]['surahNumber'],
                           // display index for verses number on full surah, and display verses number on limited surah
@@ -140,13 +101,13 @@ class BookmarkView extends StatelessWidget {
                             // get all saved verses again
                             context.read<BookmarkCubit>().getAllSavedVerses();
                           },
-                          onVisible: () {},
+                          onVerseTap: () {},
                         );
                       }),
             ],
           );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: BookmarkShimmer());
         }
       }),
     );

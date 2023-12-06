@@ -42,7 +42,7 @@ class QuranView extends StatelessWidget {
     context.read<QuranCubit>().getLastSeen();
 
     return Scaffold(
-      appBar: IDeenAppbar(langCode: langCode),
+      appBar: IDeenAppbar(langCode: langCode, title: 'app_name'.tr(context)),
       drawer: SeratDrawer(),
       body: DefaultTabController(
         length: 5,
