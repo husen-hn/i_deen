@@ -13,7 +13,6 @@ import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/verses_schema.dart';
 import 'package:serat/ui/bookmark/bookmark_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
@@ -25,16 +24,21 @@ class Bookmark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider<BookmarkCubit>(
-          create: ((BuildContext context) =>
-              BookmarkCubit(appRepository: appRepository)))
-    ], child: const BookmarkView());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<BookmarkCubit>(
+              create: ((BuildContext context) =>
+                  BookmarkCubit(appRepository: appRepository)))
+        ],
+        child: BookmarkView(
+          appRepository: appRepository,
+        ));
   }
 }
 
 class BookmarkView extends StatelessWidget {
-  const BookmarkView({super.key});
+  final AppRepository appRepository;
+  const BookmarkView({required this.appRepository, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,34 +94,26 @@ class BookmarkView extends StatelessWidget {
                       itemCount: state.verses!.length,
                       itemBuilder: (context, index) {
                         return VerseItemExpansion(
-                          surahName: state.verses![index]['surahArabicName'],
-                          surahNumber: state.verses![index]['surahNumber'],
+                          surahName: state.verses![index].surahArabicName,
+                          surahNumber: state.verses![index].surahNumber,
                           // display index for verses number on full surah, and display verses number on limited surah
-                          ayahNumber: state.verses![index]['verseNumber'],
-                          arabicText: state.verses![index]['verse'],
-                          translation: state.verses![index]['translation'],
+                          ayahNumber: state.verses![index].verseNumber,
+                          arabicText: state.verses![index].verseArabicText,
+                          translation: state.verses![index].translation,
                           isSaved: true,
                           onSaveTap: () {
                             context.read<BookmarkCubit>().removeVerse(
-                                state.verses![index]['surahNumber'],
-                                state.verses![index]['verseNumber']);
+                                state.verses![index].surahNumber,
+                                state.verses![index].verseNumber);
                             // get all saved verses again
                             context.read<BookmarkCubit>().getAllSavedVerses();
                           },
                           onVerseTap: () {
-                            // context
-                            //   ..pushRoute(BookmarkReading(
-                            //       pageSurahName: 'pageSurahName',
-                            //       verses: [
-                            //         VersesSchema(
-                            //             surahName: 'surahName',
-                            //             surahNumber: 1,
-                            //             verseNumber: 1,
-                            //             arabicText: 'arabicText',
-                            //             trText: 'trText',
-                            //             isSaved: true)
-                            //       ],
-                            //       onTapSave: (i, a) {}));
+                            context.router.push(BookmarkReadingRoute(
+                              appRepository: appRepository,
+                              surahNumber: state.verses![index].surahNumber,
+                              verseNumber: state.verses![index].verseNumber,
+                            ));
                           },
                         );
                       }),

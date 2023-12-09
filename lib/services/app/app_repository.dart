@@ -6,18 +6,26 @@
 //
 
 import 'package:serat/services/app/app.dart';
-import 'package:serat/services/helper/tr_data_success_schema.dart';
-import 'package:serat/services/helper/translation.dart';
+import 'package:serat/services/helper/reading_page_schema.dart';
+import 'package:serat/services/helper/saved_verses_schema.dart';
 
 abstract class IAppRepository {
-  Future<TrDataSuccessSchema> getTrData(Translation tr);
+  Future<ReadingPageSchema> getPageData(int page);
+  Future<List<SavedVerseSchema>> getSavedData();
 }
 
 class AppRepository implements IAppRepository {
   AppRepository();
 
+  final App _app = App();
+
   @override
-  Future<TrDataSuccessSchema> getTrData(Translation tr) async {
-    return await App().getTrData(tr);
+  Future<ReadingPageSchema> getPageData(int page) async {
+    return await _app.getPageData(page);
+  }
+
+  @override
+  Future<List<SavedVerseSchema>> getSavedData() async {
+    return await _app.getSavedData();
   }
 }

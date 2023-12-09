@@ -7,7 +7,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:serat/services/helper/verses_schema.dart';
+import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/ui/bookmark/bookmark_reading.dart';
 import 'package:serat/ui/drawer/about_us.dart';
 import 'package:serat/ui/drawer/copy_right.dart';

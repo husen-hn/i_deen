@@ -27,9 +27,9 @@ abstract class _$SeratRouter extends RootStackRouter {
         routeData: routeData,
         child: BookmarkReading(
           key: args.key,
-          pageSurahName: args.pageSurahName,
-          verses: args.verses,
-          onTapSave: args.onTapSave,
+          appRepository: args.appRepository,
+          surahNumber: args.surahNumber,
+          verseNumber: args.verseNumber,
         ),
       );
     },
@@ -109,20 +109,17 @@ class AboutUsRoute extends PageRouteInfo<void> {
 class BookmarkReadingRoute extends PageRouteInfo<BookmarkReadingRouteArgs> {
   BookmarkReadingRoute({
     Key? key,
-    required String pageSurahName,
-    required List<VersesSchema> verses,
-    required dynamic Function(
-      int,
-      int,
-    ) onTapSave,
+    required AppRepository appRepository,
+    required int surahNumber,
+    required int verseNumber,
     List<PageRouteInfo>? children,
   }) : super(
           BookmarkReadingRoute.name,
           args: BookmarkReadingRouteArgs(
             key: key,
-            pageSurahName: pageSurahName,
-            verses: verses,
-            onTapSave: onTapSave,
+            appRepository: appRepository,
+            surahNumber: surahNumber,
+            verseNumber: verseNumber,
           ),
           initialChildren: children,
         );
@@ -136,25 +133,22 @@ class BookmarkReadingRoute extends PageRouteInfo<BookmarkReadingRouteArgs> {
 class BookmarkReadingRouteArgs {
   const BookmarkReadingRouteArgs({
     this.key,
-    required this.pageSurahName,
-    required this.verses,
-    required this.onTapSave,
+    required this.appRepository,
+    required this.surahNumber,
+    required this.verseNumber,
   });
 
   final Key? key;
 
-  final String pageSurahName;
+  final AppRepository appRepository;
 
-  final List<VersesSchema> verses;
+  final int surahNumber;
 
-  final dynamic Function(
-    int,
-    int,
-  ) onTapSave;
+  final int verseNumber;
 
   @override
   String toString() {
-    return 'BookmarkReadingRouteArgs{key: $key, pageSurahName: $pageSurahName, verses: $verses, onTapSave: $onTapSave}';
+    return 'BookmarkReadingRouteArgs{key: $key, appRepository: $appRepository, surahNumber: $surahNumber, verseNumber: $verseNumber}';
   }
 }
 
