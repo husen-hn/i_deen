@@ -5,12 +5,14 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/services/helper/verses_schema.dart';
 import 'package:serat/widgets/reading.dart';
 
+@RoutePage(name: 'BookmarkReadingRoute')
 class BookmarkReading extends StatelessWidget {
   final String pageSurahName;
   final List<VersesSchema> verses;
@@ -36,7 +38,7 @@ class BookmarkReading extends StatelessWidget {
         shadowColor: Colors.transparent,
         leading: GestureDetector(
           child: Image.asset(SeratIcon.backRTL.name),
-          onTap: () => context.pop(),
+          onTap: () => context.router.pop(),
         ),
       ),
       body: Reading(verses: verses, onTapSave: onTapSave),

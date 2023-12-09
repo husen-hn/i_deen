@@ -1,5 +1,5 @@
 //
-//  i_deen_appbar.dart
+//  serat_appbar.dart
 //  Created on 2023 12 November.
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
@@ -7,10 +7,10 @@
 
 import 'package:flutter/material.dart';
 
-class IDeenAppbar extends StatelessWidget implements PreferredSizeWidget {
+class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;
   final String title;
-  const IDeenAppbar({super.key, required this.langCode, required this.title})
+  const SeratAppbar({super.key, required this.langCode, required this.title})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override

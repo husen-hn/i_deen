@@ -5,7 +5,9 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,9 +32,7 @@ class SeratDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              context.pushNamed(
-                'about-us',
-              );
+              context.router.push(const AboutUsRoute());
             },
           ),
           ListTile(
@@ -43,9 +43,7 @@ class SeratDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              context.pushNamed(
-                'copy-right',
-              );
+              context.router.push(const CopyRightRoute());
             },
           ),
           Expanded(

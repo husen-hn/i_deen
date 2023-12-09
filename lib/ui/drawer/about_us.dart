@@ -4,10 +4,12 @@
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
 //
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+@RoutePage(name: 'AboutUsRoute')
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
 
@@ -23,7 +25,7 @@ class AboutUs extends StatelessWidget {
         shadowColor: Colors.transparent,
         leading: GestureDetector(
           child: Image.asset('assets/icons/back_rtl.png'),
-          onTap: () => context.pop(),
+          onTap: () => context.router.pop(),
         ),
       ),
       body: Center(

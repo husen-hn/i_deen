@@ -5,13 +5,15 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/widgets/ayah_item.dart';
+import 'package:serat/widgets/verse_item.dart';
 
+@RoutePage(name: 'VersesReadingRoute')
 class VersesReading extends StatelessWidget {
   final int surahNumber;
   final String surahName;
@@ -80,7 +82,7 @@ class VersesReadingView extends StatelessWidget {
           shadowColor: Colors.transparent,
           leading: GestureDetector(
             child: Image.asset('assets/icons/back_rtl.png'),
-            onTap: () => context.pop(),
+            onTap: () => context.router.pop(),
           ),
         ),
         body: ListView(
@@ -187,7 +189,7 @@ class VersesReadingView extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: state.verses!['verses'].length,
                     itemBuilder: (context, index) {
-                      return AyahItem(
+                      return VerseItem(
                         surahNumber: surahNumber,
                         // display index for verses number on full surah, and display verses number on limited surah
                         ayahNumber: verses == null ? index + 1 : verses![index],

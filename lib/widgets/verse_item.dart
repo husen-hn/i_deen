@@ -1,5 +1,5 @@
 //
-//  ayah_item.dart
+//  verse_item.dart
 //  Created on 2023 06 November.
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class AyahItem extends StatelessWidget {
+class VerseItem extends StatelessWidget {
   final String? surahName;
   final int surahNumber;
   final int ayahNumber;
@@ -18,7 +18,7 @@ class AyahItem extends StatelessWidget {
   final Function() onSaveTap;
   final Function()? onVisible;
 
-  const AyahItem({
+  const VerseItem({
     super.key,
     this.surahName,
     required this.surahNumber,

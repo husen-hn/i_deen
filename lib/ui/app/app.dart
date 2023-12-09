@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
-import 'package:serat/i_deen_router.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 
 class App extends StatelessWidget {
@@ -56,7 +56,8 @@ class AppView extends StatelessWidget {
       localeResolutionCallback: (currentLocal, supportedLocales) {
         return Locale(context.read<AppCubit>().getSavedLanguage());
       },
-      routerConfig: IDeenRouter().router,
+      // routerConfig: IDeenRouter().router,
+      routerConfig: SeratRouter().config(),
     );
   }
 }

@@ -5,9 +5,11 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/widgets/number_btn.dart';
 
@@ -51,11 +53,9 @@ class Page extends StatelessWidget {
                                 mainAxisSpacing: 10),
                         itemBuilder: (context, nestedIndex) {
                           return InkWell(
-                            onTap: () => context
-                                .pushNamed('page-reading', pathParameters: {
-                              'surahNumber': (index + 1).toString(),
-                              'surahVerseNumber': nestedIndex.toString()
-                            }),
+                            onTap: () => context.router.push(PageReadingRoute(
+                                surahNumber: index + 1,
+                                surahVerseNumber: nestedIndex)),
                             child: NumberBtn(
                                 number: context
                                     .read<QuranCubit>()

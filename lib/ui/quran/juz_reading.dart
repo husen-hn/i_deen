@@ -5,12 +5,14 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
-import 'package:serat/widgets/ayah_item.dart';
+import 'package:serat/widgets/verse_item.dart';
 
+@RoutePage(name: 'JuzReadingRoute')
 class JuzReading extends StatelessWidget {
   final int juzNumber;
 
@@ -44,7 +46,7 @@ class JuzReadingView extends StatelessWidget {
           shadowColor: Colors.transparent,
           leading: GestureDetector(
             child: Image.asset('assets/icons/back_rtl.png'),
-            onTap: () => context.pop(),
+            onTap: () => context.router.pop(),
           ),
         ),
         body: BlocBuilder<QuranCubit, QuranState>(builder: (context, state) {
@@ -79,7 +81,7 @@ class JuzReadingView extends StatelessWidget {
                           itemCount:
                               state.pageData!['data'][index]['verses'].length,
                           itemBuilder: (context, nestedIndex) {
-                            return AyahItem(
+                            return VerseItem(
                               surahNumber: state.pageData!['data'][index]
                                   ['surahNumber'],
                               // display index for verses number on full surah, and display verses number on limited surah

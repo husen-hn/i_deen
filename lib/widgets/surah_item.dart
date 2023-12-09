@@ -5,7 +5,9 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/widgets/surah_number.dart';
@@ -34,17 +36,13 @@ class SurahItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(
-        'verses-reading',
-        pathParameters: {
-          'surahNumber': (index).toString(),
-          'surahName': title,
-          'surahEnglishName': englishTitle,
-          'surahType': type,
-          'versesCount': versesCount.toString(),
-          'verses': verses.toString()
-        },
-      ),
+      onTap: () => context.router.push(VersesReadingRoute(
+          surahNumber: index,
+          surahName: title,
+          surahEnglishName: englishTitle,
+          surahType: type,
+          versesCount: versesCount,
+          verses: verses)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(

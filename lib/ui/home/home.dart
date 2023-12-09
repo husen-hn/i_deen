@@ -5,6 +5,7 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
@@ -14,6 +15,7 @@ import 'package:serat/ui/finish/finish.dart';
 import 'package:serat/ui/prayer/prayer.dart';
 import 'package:serat/ui/quran/quran.dart';
 
+@RoutePage(name: 'HomeRoute')
 class Home extends StatelessWidget {
   const Home({super.key});
 

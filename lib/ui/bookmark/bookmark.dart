@@ -5,14 +5,17 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/verses_schema.dart';
 import 'package:serat/ui/bookmark/bookmark_shimmer.dart';
-import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:serat/widgets/verse_item_expansion.dart';
 
@@ -39,7 +42,7 @@ class BookmarkView extends StatelessWidget {
     context.read<BookmarkCubit>().getAllSavedVerses();
 
     return Scaffold(
-      appBar: IDeenAppbar(langCode: langCode, title: 'saveds'.tr(context)),
+      appBar: SeratAppbar(langCode: langCode, title: 'saveds'.tr(context)),
       drawer: SeratDrawer(),
       body:
           BlocBuilder<BookmarkCubit, BookmarkState>(builder: (context, state) {
@@ -101,7 +104,21 @@ class BookmarkView extends StatelessWidget {
                             // get all saved verses again
                             context.read<BookmarkCubit>().getAllSavedVerses();
                           },
-                          onVerseTap: () {},
+                          onVerseTap: () {
+                            // context
+                            //   ..pushRoute(BookmarkReading(
+                            //       pageSurahName: 'pageSurahName',
+                            //       verses: [
+                            //         VersesSchema(
+                            //             surahName: 'surahName',
+                            //             surahNumber: 1,
+                            //             verseNumber: 1,
+                            //             arabicText: 'arabicText',
+                            //             trText: 'trText',
+                            //             isSaved: true)
+                            //       ],
+                            //       onTapSave: (i, a) {}));
+                          },
                         );
                       }),
             ],

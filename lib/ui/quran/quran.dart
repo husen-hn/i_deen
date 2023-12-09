@@ -14,7 +14,7 @@ import 'package:serat/ui/quran/tabs/juz.dart';
 import 'package:serat/ui/quran/tabs/page.dart' as pg;
 import 'package:serat/ui/quran/tabs/surah.dart';
 import 'package:serat/ui/quran/tabs/verses.dart';
-import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:serat/widgets/tab_item.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
@@ -42,7 +42,7 @@ class QuranView extends StatelessWidget {
     context.read<QuranCubit>().getLastSeen();
 
     return Scaffold(
-      appBar: IDeenAppbar(langCode: langCode, title: 'app_name'.tr(context)),
+      appBar: SeratAppbar(langCode: langCode, title: 'app_name'.tr(context)),
       drawer: SeratDrawer(),
       body: DefaultTabController(
         length: 5,

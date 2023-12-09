@@ -5,9 +5,11 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/widgets/number_btn.dart';
@@ -77,29 +79,24 @@ class Verses extends StatelessWidget {
                               mainAxisSpacing: 10),
                       itemBuilder: (context, nestedIndex) {
                         return InkWell(
-                            onTap: () => context.pushNamed(
-                                  'verses-reading',
-                                  pathParameters: {
-                                    'surahNumber': (index + 1).toString(),
-                                    'surahName': context
+                            onTap: () => context.router.push(VersesReadingRoute(
+                                surahNumber: index + 1,
+                                surahName: context
+                                    .read<QuranCubit>()
+                                    .getSurahNameArabic(index + 1),
+                                surahEnglishName: context
+                                    .read<QuranCubit>()
+                                    .getSurahNameEnglish(index + 1),
+                                surahType: context
                                         .read<QuranCubit>()
-                                        .getSurahNameArabic(index + 1),
-                                    'surahEnglishName': context
-                                        .read<QuranCubit>()
-                                        .getSurahNameEnglish(index + 1),
-                                    'surahType': context
-                                            .read<QuranCubit>()
-                                            .getPlaceOfRevelation(index + 1)
-                                            .contains('Makkah')
-                                        ? 'مکی'
-                                        : 'مدنی',
-                                    'versesCount': context
-                                        .read<QuranCubit>()
-                                        .getVerseCount(index + 1)
-                                        .toString(),
-                                    'verses': [nestedIndex + 1].toString()
-                                  },
-                                ),
+                                        .getPlaceOfRevelation(index + 1)
+                                        .contains('Makkah')
+                                    ? 'مکی'
+                                    : 'مدنی',
+                                versesCount: context
+                                    .read<QuranCubit>()
+                                    .getVerseCount(index + 1),
+                                verses: [nestedIndex + 1])),
                             child: NumberBtn(number: nestedIndex + 1));
                       })
                 ],

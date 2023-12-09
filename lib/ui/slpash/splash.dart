@@ -5,10 +5,13 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 
+@RoutePage(name: 'SplashRoute')
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -22,8 +25,8 @@ class _SplashState extends State<Splash> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      context.go('/home');
+    Future.delayed(const Duration(milliseconds: 20), () {
+      context.router.push(const HomeRoute());
     });
   }
 

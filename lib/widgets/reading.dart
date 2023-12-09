@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/services/helper/verses_schema.dart';
-import 'package:serat/widgets/ayah_item.dart';
+import 'package:serat/widgets/verse_item.dart';
 
 class Reading extends StatelessWidget {
   final List<VersesSchema> verses;
@@ -32,7 +32,7 @@ class Reading extends StatelessWidget {
                       child: _surahName(MediaQuery.of(context).size,
                           verses[index].surahName, verses[index].surahNumber),
                     )
-                  : AyahItem(
+                  : VerseItem(
                       surahNumber: verses[index].surahNumber,
                       // display index for verses number on full surah, and display verses number on limited surah
                       ayahNumber: verses[index].verseNumber,

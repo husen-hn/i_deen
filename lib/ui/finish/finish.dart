@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/finish/finish_cubit.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/widgets/i_deen_appbar.dart';
+import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:quran/quran.dart' as quran;
 
@@ -36,7 +36,7 @@ class FinishView extends StatelessWidget {
         .read<FinishCubit>()
         .getPageData(context.read<FinishCubit>().getLastPageNumber);
     return Scaffold(
-      appBar: IDeenAppbar(langCode: langCode, title: 'finish'.tr(context)),
+      appBar: SeratAppbar(langCode: langCode, title: 'finish'.tr(context)),
       drawer: SeratDrawer(),
       body: BlocBuilder<FinishCubit, FinishState>(builder: (context, state) {
         return state.status == FinishStatus.page
