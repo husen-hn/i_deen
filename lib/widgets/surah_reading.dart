@@ -1,5 +1,5 @@
 //
-//  reading.dart
+//  surah_reading.dart
 //  Created on 2023 06 December.
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
@@ -10,13 +10,14 @@ import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/widgets/surah_starter.dart';
 import 'package:serat/widgets/verse_item.dart';
 
-class Reading extends StatelessWidget {
+class SurahReading extends StatelessWidget {
   final int surahNumber;
   final String surahName;
   final List<VerseData> verses;
-  final Function(int surahNumber, int verseNumber) onTapSave;
 
-  const Reading(
+  final Function(int surahNumber, int verseNumber, bool isSaved) onTapSave;
+
+  const SurahReading(
       {super.key,
       required this.surahNumber,
       required this.surahName,
@@ -51,8 +52,8 @@ class Reading extends StatelessWidget {
                           arabicText: verses[index].arabicText,
                           translation: verses[index].trText,
                           isSaved: verses[index].isSaved,
-                          onSaveTap: () =>
-                              onTapSave(surahNumber, verses[index].verseNumber),
+                          onSaveTap: () => onTapSave(surahNumber,
+                              verses[index].verseNumber, verses[index].isSaved),
                         )
                       ],
                     )
@@ -63,8 +64,8 @@ class Reading extends StatelessWidget {
                       arabicText: verses[index].arabicText,
                       translation: verses[index].trText,
                       isSaved: verses[index].isSaved,
-                      onSaveTap: () =>
-                          onTapSave(surahNumber, verses[index].verseNumber),
+                      onSaveTap: () => onTapSave(surahNumber,
+                          verses[index].verseNumber, verses[index].isSaved),
                     );
         });
   }

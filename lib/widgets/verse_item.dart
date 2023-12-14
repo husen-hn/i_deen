@@ -130,6 +130,7 @@ class VerseItem extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
                     height: 2)),
+
             SizedBox(height: MediaQuery.of(context).size.height * .02),
             const Divider(
               height: 5,

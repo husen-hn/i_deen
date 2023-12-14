@@ -7,9 +7,13 @@
 
 class ReadingPageSchema {
   int pageNumber;
+  double? scrollPosition;
   final List<SurahData> surahs;
 
-  ReadingPageSchema({required this.pageNumber, required this.surahs});
+  ReadingPageSchema(
+      {required this.pageNumber,
+      required this.scrollPosition,
+      required this.surahs});
 }
 
 class SurahData {

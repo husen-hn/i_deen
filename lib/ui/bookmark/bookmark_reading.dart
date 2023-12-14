@@ -13,7 +13,8 @@ import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
-import 'package:serat/widgets/reading.dart';
+import 'package:serat/widgets/page_reading.dart';
+import 'package:serat/widgets/page_reading_shimmer.dart';
 
 @RoutePage(name: 'BookmarkReadingRoute')
 class BookmarkReading extends StatelessWidget {
@@ -51,7 +52,8 @@ class BookmarkReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<BookmarkCubit>().getSavedPageData(surahNumber, verseNumber);
+    context.read<BookmarkCubit>().getSavedPageData(
+        surahNumber, verseNumber, MediaQuery.of(context).size);
 
     return BlocBuilder<BookmarkCubit, BookmarkState>(
         builder: (context, state) => state.status == BookmarkStatus.page
@@ -66,24 +68,28 @@ class BookmarkReadingView extends StatelessWidget {
                   ),
                   shadowColor: Colors.transparent,
                   leading: GestureDetector(
-                    child: Image.asset(SeratIcon.backRTL.name),
-                    onTap: () => context.router.pop(),
-                  ),
+                      child: Image.asset(SeratIcon.backRTL.name),
+                      onTap: () {
+                        context.router.pop();
+                      }),
                 ),
                 // surah's listview
-                body: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.pageData?.surahs.length,
-                    itemBuilder: (context, index) {
-                      // Reading is a listview of surah's verses
-                      return Reading(
-                          surahNumber:
-                              state.pageData!.surahs[index].surahNumber,
-                          surahName: state.pageData!.surahs[index].surahName,
-                          verses: state.pageData!.surahs[index].verses,
-                          onTapSave: (int surahNumber, int verseNumber) {});
-                    }))
-            : Container());
+                body: PageReading(
+                  pageData: state.pageData!,
+                  onTapSave: ((surahNumber, verseNumber, isSaved) {
+                    isSaved
+                        ? context
+                            .read<BookmarkCubit>()
+                            .removeVerse(surahNumber, verseNumber)
+                        : context
+                            .read<BookmarkCubit>()
+                            .saveVerse(surahNumber, verseNumber);
+
+                    // get all saved verses again
+                    context.read<BookmarkCubit>().getSavedPageData(
+                        surahNumber, verseNumber, MediaQuery.of(context).size);
+                  }),
+                ))
+            : const PageReadingShimmer());
   }
 }

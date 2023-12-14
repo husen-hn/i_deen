@@ -16,13 +16,18 @@ import 'package:serat/services/helper/translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 class App {
-  Future<ReadingPageSchema> getPageData(int page) async {
-    ReadingPageSchema data =
-        ReadingPageSchema(pageNumber: page, surahs: <SurahData>[]);
+  Future<ReadingPageSchema> getPageData(
+      int page, List<int> itemToScroll, Size size) async {
+    ReadingPageSchema data = ReadingPageSchema(
+        pageNumber: page, scrollPosition: null, surahs: <SurahData>[]);
 
     // [{surah: 112, start: 1, end: 5}, {surah: 113, start: 1, end: 4}]
     List<Map<String, dynamic>> pageData =
         quran.getPageData(page) as List<Map<String, dynamic>>;
+
+    // count previous items height to find saved item position
+    double savedItemPositionCounter = 0.0;
+    double? savedItemPosition;
 
     // get surahs
     for (var i = 0; i < pageData.length; i++) {
@@ -31,15 +36,35 @@ class App {
       int end = pageData[i]['end'];
 
       List<Verse> trData = await _getTrData(Translation.makarem, surahNumber);
+      List<SavedVerseSchema> savedVerses = await getSavedData();
 
       List<VerseData> verses = [];
+
+      // count previous SurahStarter height in first
+      //TODO: make it better
+      if (start == 1) {
+        surahNumber == 9
+            ? savedItemPositionCounter += size.height * .1
+            : savedItemPositionCounter += size.height * .2;
+      }
+
       // get surah's verses
       for (var verseNumber = start; verseNumber <= end; verseNumber++) {
+        String arabicText = quran.getVerse(surahNumber, verseNumber);
+        String trText = trData[verseNumber - 1].translation ?? '';
+
+        if (itemToScroll.first == surahNumber &&
+            itemToScroll.last == verseNumber) {
+          savedItemPosition = savedItemPositionCounter;
+        } else {
+          savedItemPositionCounter +=
+              _countHeightByText(arabicText, trText, size);
+        }
         verses.add(VerseData(
             verseNumber: verseNumber,
-            arabicText: quran.getVerse(surahNumber, verseNumber),
-            trText: trData[verseNumber - 1].translation ?? '',
-            isSaved: true));
+            arabicText: arabicText,
+            trText: trText,
+            isSaved: _isVerseSaved(savedVerses, surahNumber, verseNumber)));
       }
 
       data.surahs.add(SurahData(
@@ -47,6 +72,8 @@ class App {
           surahNumber: surahNumber,
           verses: verses));
     }
+
+    data.scrollPosition = savedItemPosition;
 
     return data;
   }
@@ -73,6 +100,32 @@ class App {
     return data;
   }
 
+  //TODO: make it better
+  double _countHeightByText(String arabicText, String trText, Size size) {
+    // print('******arabicText****71***${arabicText}');
+    // print('*******trText*****81**${trText.length}');
+    // print('*******Size*******${size.width}');
+
+    // // in default each item height is 200
+    double defHeight = 40 + ((size.height * .02) * 4);
+    double arabicTextLinesChar = (size.width / 100) * 17.4;
+    double trTextLinesChar = (size.width / 100) * 20.25;
+
+    double arabicTextLines = arabicText.length / arabicTextLinesChar;
+    double trTextLines = trText.length / trTextLinesChar;
+
+    for (var i = 0; i < arabicTextLines; i++) {
+      // each arabic line height is 45.0
+      defHeight += 60.0;
+    }
+    for (var i = 0; i < trTextLines; i++) {
+      // each tr line height is 37.0
+      defHeight += 45.0;
+    }
+
+    return defHeight;
+  }
+
   Future<List<Verse>> _getTrData(Translation tr, int surahNumber) async {
     String response = tr == Translation.makarem
         ? await _readLocalJson(Translation.makarem.name!)
@@ -86,4 +139,18 @@ class App {
 
   Future<String> _readLocalJson(String path) async =>
       await rootBundle.loadString(path);
+
+  bool _isVerseSaved(
+      List<SavedVerseSchema> savedVerses, int surahNumber, int verseNumber) {
+    bool isSaved = false;
+
+    for (var i = 0; i < savedVerses.length; i++) {
+      if (savedVerses[i].surahNumber == surahNumber &&
+          savedVerses[i].verseNumber == verseNumber) {
+        isSaved = true;
+      }
+    }
+
+    return isSaved;
+  }
 }
