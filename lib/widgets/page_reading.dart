@@ -28,7 +28,7 @@ class PageReading extends StatelessWidget {
         (_) => _scrollDown(pageData.scrollPosition ?? 0.0));
 
     return ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
         physics: const BouncingScrollPhysics(),
         controller: _controller,
         itemCount: pageData.surahs.length,

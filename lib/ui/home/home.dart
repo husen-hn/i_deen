@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/home/home_cubit.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/ui/bookmark/bookmark.dart';
 import 'package:serat/ui/finish/finish.dart';
 import 'package:serat/ui/prayer/prayer.dart';
@@ -39,31 +40,33 @@ class HomeView extends StatelessWidget {
             currentIndex: state.btnNvIndex,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Image.asset('assets/icons/quran_icon.png',
+                  icon: Image.asset(SeratIcon.appIcon.name,
+                      width: 40,
+                      height: 40,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 0)),
                   label: ''),
               BottomNavigationBarItem(
-                  icon: Image.asset('assets/icons/lamp_icon.png',
+                  icon: Image.asset(SeratIcon.prayerIcon.name,
+                      width: 40,
+                      height: 40,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 1)),
                   label: ''),
               BottomNavigationBarItem(
-                  icon: Image.asset('assets/icons/prayer_icon.png',
+                  icon: Image.asset(SeratIcon.lamp.name,
+                      width: 40,
+                      height: 40,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 2)),
                   label: ''),
-              // BottomNavigationBarItem(
-              //     icon: Image.asset('assets/icons/pray_icon.png',
-              //         color: context
-              //             .read<HomeCubit>()
-              //             .activeBtnNavColor(state.btnNvIndex, 3)),
-              //     label: ''),
               BottomNavigationBarItem(
                   icon: Image.asset('assets/icons/bookmark_icon.png',
+                      width: 30,
+                      height: 30,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 3)),
@@ -81,8 +84,6 @@ class HomeView extends StatelessWidget {
                     ? const Finish()
                     : state.btnNvIndex == 2
                         ? const Prayer()
-                        // : state.btnNvIndex == 3
-                        //     ? const Pray()
                         : Bookmark(
                             appRepository:
                                 context.read<AppCubit>().appRepository)));

@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/serat_asset.dart';
 import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 
 class LastSeenStatus extends StatelessWidget {
   final String surahName;
@@ -51,9 +51,13 @@ class LastSeenStatus extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        const Image(
-                          image: AssetImage('assets/icons/last_read.png'),
-                          width: 25,
+                        Image(
+                          image: AssetImage(SeratIcon.lastRead.name),
+                          color: Colors.white,
+                          width: 20,
+                        ),
+                        const SizedBox(
+                          width: 5,
                         ),
                         Text(
                           'last_status'.tr(context),
@@ -104,7 +108,7 @@ class LastSeenStatus extends StatelessWidget {
                     ),
                   ],
                 ),
-                Image.asset(SeratAsset.appIcon.name,
+                Image.asset(SeratIcon.appIcon.name,
                     width: MediaQuery.of(context).size.width * .4,
                     height: 70,
                     opacity: const AlwaysStoppedAnimation(.9)),

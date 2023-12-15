@@ -56,7 +56,6 @@ class AppView extends StatelessWidget {
       localeResolutionCallback: (currentLocal, supportedLocales) {
         return Locale(context.read<AppCubit>().getSavedLanguage());
       },
-      // routerConfig: IDeenRouter().router,
       routerConfig: SeratRouter().config(),
     );
   }

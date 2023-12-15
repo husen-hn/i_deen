@@ -6,7 +6,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:serat/services/helper/serat_asset.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 
 class SurahNumber extends StatelessWidget {
   final int number;
@@ -28,7 +28,7 @@ class SurahNumber extends StatelessWidget {
         SizedBox(
             width: size,
             height: size,
-            child: Image.asset(SeratAsset.ayah.name, color: iconColor)),
+            child: Image.asset(SeratIcon.verse.name, color: iconColor)),
         Text(
           number.toString(),
           style: TextStyle(

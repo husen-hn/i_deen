@@ -8,8 +8,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:serat/serat_router.dart';
-import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/serat_asset.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SeratDrawer extends StatelessWidget {
@@ -28,7 +27,7 @@ class SeratDrawer extends StatelessWidget {
               gradient: LinearGradient(
                   colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
             ),
-            child: Image.asset(SeratAsset.appIcon.name),
+            child: Image.asset(SeratIcon.appIcon.name),
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),
@@ -62,7 +61,7 @@ class SeratDrawer extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
                   width: 100,
-                  child: Image.asset(SeratAsset.namazLogoAg.name))),
+                  child: Image.asset(SeratIcon.namazLogoAg.name))),
         ],
       ),
     );

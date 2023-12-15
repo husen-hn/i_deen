@@ -55,14 +55,16 @@ abstract class _$SeratRouter extends RootStackRouter {
         ),
       );
     },
-    PageReadingRoute.name: (routeData) {
-      final args = routeData.argsAs<PageReadingRouteArgs>();
+    QuranReadingRoute.name: (routeData) {
+      final args = routeData.argsAs<QuranReadingRouteArgs>(
+          orElse: () => const QuranReadingRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: PageReading(
+        child: QuranReading(
           key: args.key,
+          pageNumber: args.pageNumber,
           surahNumber: args.surahNumber,
-          surahVerseNumber: args.surahVerseNumber,
+          verseNumber: args.verseNumber,
         ),
       );
     },
@@ -219,45 +221,50 @@ class JuzReadingRouteArgs {
 }
 
 /// generated route for
-/// [PageReading]
-class PageReadingRoute extends PageRouteInfo<PageReadingRouteArgs> {
-  PageReadingRoute({
+/// [QuranReading]
+class QuranReadingRoute extends PageRouteInfo<QuranReadingRouteArgs> {
+  QuranReadingRoute({
     Key? key,
-    required int surahNumber,
-    required int surahVerseNumber,
+    int? pageNumber,
+    int? surahNumber,
+    int? verseNumber,
     List<PageRouteInfo>? children,
   }) : super(
-          PageReadingRoute.name,
-          args: PageReadingRouteArgs(
+          QuranReadingRoute.name,
+          args: QuranReadingRouteArgs(
             key: key,
+            pageNumber: pageNumber,
             surahNumber: surahNumber,
-            surahVerseNumber: surahVerseNumber,
+            verseNumber: verseNumber,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'PageReadingRoute';
+  static const String name = 'QuranReadingRoute';
 
-  static const PageInfo<PageReadingRouteArgs> page =
-      PageInfo<PageReadingRouteArgs>(name);
+  static const PageInfo<QuranReadingRouteArgs> page =
+      PageInfo<QuranReadingRouteArgs>(name);
 }
 
-class PageReadingRouteArgs {
-  const PageReadingRouteArgs({
+class QuranReadingRouteArgs {
+  const QuranReadingRouteArgs({
     this.key,
-    required this.surahNumber,
-    required this.surahVerseNumber,
+    this.pageNumber,
+    this.surahNumber,
+    this.verseNumber,
   });
 
   final Key? key;
 
-  final int surahNumber;
+  final int? pageNumber;
 
-  final int surahVerseNumber;
+  final int? surahNumber;
+
+  final int? verseNumber;
 
   @override
   String toString() {
-    return 'PageReadingRouteArgs{key: $key, surahNumber: $surahNumber, surahVerseNumber: $surahVerseNumber}';
+    return 'QuranReadingRouteArgs{key: $key, pageNumber: $pageNumber, surahNumber: $surahNumber, verseNumber: $verseNumber}';
   }
 }
 
