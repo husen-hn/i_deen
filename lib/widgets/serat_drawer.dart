@@ -9,6 +9,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_asset.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SeratDrawer extends StatelessWidget {
@@ -20,9 +21,14 @@ class SeratDrawer extends StatelessWidget {
   Drawer build(BuildContext context) {
     return Drawer(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
-            child: Image.asset('assets/app_logo.png'),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
+            ),
+            child: Image.asset(SeratAsset.appIcon.name),
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),
@@ -52,12 +58,11 @@ class SeratDrawer extends StatelessWidget {
           )),
           InkWell(
               onTap: () => _launchUrl(),
-              child: SizedBox(
-                  width: 200, child: Image.asset('assets/namaz_logo_ag.png'))),
-          Container(
-              padding: const EdgeInsets.only(bottom: 15.0, top: 5.0),
-              child: Text('sponsor'.tr(context),
-                  style: const TextStyle(fontSize: 14, fontFamily: 'BZar'))),
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+                  width: 100,
+                  child: Image.asset(SeratAsset.namazLogoAg.name))),
         ],
       ),
     );

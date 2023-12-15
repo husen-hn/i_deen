@@ -56,7 +56,7 @@ class SurahItem extends StatelessWidget {
                     number: index,
                     iconColor: const Color(0xFF994EF8),
                     textColor: const Color(0xFF240F4F),
-                    size: 60,
+                    size: 30,
                   ),
                 ),
                 Column(

@@ -21,48 +21,63 @@ class SurahStarter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size.width * .5,
-      height: surahNumber == 9 ? size.height * .1 : size.height * .2,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        gradient: const LinearGradient(
-            colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
-        boxShadow: [
-          BoxShadow(
-              color: const Color(0xFF9055FF).withOpacity(0.2),
-              spreadRadius: 3,
-              blurRadius: 10,
-              offset: const Offset(0, 20))
-        ],
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              Image.asset(SeratIcon.verse.name, color: Colors.white),
-              Text(
-                surahName,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: SeratFont.amiri.name,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 30),
-              ),
-              Image.asset(SeratIcon.verse.name, color: Colors.white)
-            ]),
-            // to not display besmelah in tobe surah
-            surahNumber == 9
-                ? Container()
-                : Image.asset(
-                    SeratIcon.nameOfGod.name,
-                    color: Colors.white,
-                    width: size.width * .6,
-                  ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          height: size.height * .08,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            gradient: const LinearGradient(
+                colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
+            boxShadow: [
+              BoxShadow(
+                  color: const Color(0xFF9055FF).withOpacity(0.2),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: const Offset(0, 20))
+            ],
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        SeratIcon.verse.name,
+                        color: Colors.white,
+                        width: 30,
+                        height: 30,
+                      ),
+                      Text(
+                        surahName,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: SeratFont.amiri.name,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 30),
+                      ),
+                      Image.asset(
+                        SeratIcon.verse.name,
+                        color: Colors.white,
+                        width: 30,
+                        height: 30,
+                      )
+                    ]),
+              ],
+            ),
+          ),
         ),
-      ),
+        // to not display besmelah in tobe surah
+        surahNumber == 9
+            ? Container()
+            : Padding(
+                padding: const EdgeInsets.only(top: 30, left: 35, right: 35),
+                child: Image.asset(SeratIcon.nameOfGod.name,
+                    color: Colors.black, height: 50))
+      ],
     );
   }
 }

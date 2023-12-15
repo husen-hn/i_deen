@@ -18,7 +18,7 @@ class NumberBtn extends StatelessWidget {
       required this.number,
       this.iconColor,
       this.textColor,
-      this.size = 60});
+      this.size = 30});
 
   @override
   Widget build(BuildContext context) {

@@ -14,6 +14,8 @@ import 'package:serat/ui/quran/tabs/juz.dart';
 import 'package:serat/ui/quran/tabs/page.dart' as pg;
 import 'package:serat/ui/quran/tabs/surah.dart';
 import 'package:serat/ui/quran/tabs/verses.dart';
+import 'package:serat/widgets/last_seen_status.dart';
+import 'package:serat/widgets/last_seen_status_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:serat/widgets/tab_item.dart';
@@ -50,99 +52,14 @@ class QuranView extends StatelessWidget {
           child: Column(
             children: [
               // Top status view
-              Container(
-                width: MediaQuery.of(context).size.width * .9,
-                height: MediaQuery.of(context).size.height * .195,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  gradient: const LinearGradient(
-                      colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF9055FF).withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: const Offset(0, 10), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      BlocBuilder<QuranCubit, QuranState>(
-                        builder: (context, state) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Image(
-                                    image: AssetImage(
-                                        'assets/icons/last_read.png'),
-                                    width: 30,
-                                  ),
-                                  Text(
-                                    'last_status'.tr(context),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'BTitr',
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              state.status == QuranStatus.lastSeen
-                                  ? Text(
-                                      state.lastSeen!['surahName'],
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Amiri',
-                                          fontSize: 26,
-                                          fontWeight: FontWeight.w600),
-                                    )
-                                  : Container(),
-                              state.status == QuranStatus.lastSeen
-                                  ? Row(
-                                      children: [
-                                        Text(
-                                          'ayah'.tr(context),
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'BZar',
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          state.lastSeen!['verseNumber']
-                                              .toString(),
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'BZar',
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        )
-                                      ],
-                                    )
-                                  : Container(),
-                            ],
-                          );
-                        },
-                      ),
-                      Image.asset(
-                        'assets/namaz_logo.png',
-                        width: MediaQuery.of(context).size.width * .3,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              BlocBuilder<QuranCubit, QuranState>(
+                  builder: (context, state) =>
+                      state.status == QuranStatus.lastSeen
+                          ? LastSeenStatus(
+                              surahName: state.lastSeen!['surahName'],
+                              verseNumber:
+                                  state.lastSeen!['verseNumber'].toString())
+                          : const LastSeenStatusShimmer()),
               // Tabbar view
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -181,7 +98,7 @@ class QuranView extends StatelessWidget {
               ),
               // Tabbar contents
               SizedBox(
-                height: MediaQuery.of(context).size.height * .56,
+                height: MediaQuery.of(context).size.height * .667,
                 child: TabBarView(
                     physics: const BouncingScrollPhysics(),
                     children: [

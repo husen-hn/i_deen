@@ -13,6 +13,7 @@ import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:quran/quran.dart' as quran;
+import 'package:serat/widgets/surah_starter.dart';
 
 class Finish extends StatelessWidget {
   const Finish({super.key});
@@ -59,14 +60,12 @@ class FinishView extends StatelessWidget {
                               ? Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, bottom: 30),
-                                  child: _surahName(
-                                    context,
-                                    state.pageData!['data'][index]
-                                        ['surahArabicName'],
-                                    state.pageData!['data'][index]
-                                        ['surahNumber'],
-                                  ),
-                                )
+                                  child: SurahStarter(
+                                      size: MediaQuery.of(context).size,
+                                      surahName: state.pageData!['data'][index]
+                                          ['surahArabicName'],
+                                      surahNumber: state.pageData!['data']
+                                          [index]['surahNumber']))
                               : Container(),
                           RichText(
                               textAlign: TextAlign.justify,
