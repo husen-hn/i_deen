@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:quran/quran.dart' as quran;
 
 part 'app_state.dart';
 
@@ -53,4 +54,13 @@ class AppCubit extends Cubit<AppState> {
   Future<void> changeLanguage(String languageCode) async {
     await CacheHelper.cacheLanguage(languageCode);
   }
+
+  void scrollTo(ScrollController controller, double position, Curve curve) {
+    controller.animateTo(position,
+        duration: const Duration(seconds: 1), curve: curve);
+  }
+
+  get totalPagesCount => quran.totalPagesCount;
+  getPageNumber(surahNumber, verseNumber) =>
+      quran.getPageNumber(surahNumber, verseNumber);
 }

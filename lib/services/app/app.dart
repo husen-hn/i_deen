@@ -17,7 +17,7 @@ import 'package:quran/quran.dart' as quran;
 
 class App {
   Future<ReadingPageSchema> getPageData(
-      int page, List<int> itemToScroll, Size size) async {
+      {required int page, List<int?>? itemToScroll, required Size size}) async {
     ReadingPageSchema data = ReadingPageSchema(
         pageNumber: page, scrollPosition: null, surahs: <SurahData>[]);
 
@@ -40,12 +40,15 @@ class App {
 
       List<VerseData> verses = [];
 
-      // count previous SurahStarter height in first
-      //TODO: make it better
-      if (start == 1) {
-        surahNumber == 9
-            ? savedItemPositionCounter += size.height * .1
-            : savedItemPositionCounter += size.height * .2;
+      // if itemToScroll is null, we dont need to scroll
+      if (itemToScroll != null) {
+        // count previous SurahStarter height in first
+        //TODO: make it better
+        if (start == 1) {
+          surahNumber == 9
+              ? savedItemPositionCounter += size.height * .1
+              : savedItemPositionCounter += size.height * .2;
+        }
       }
 
       // get surah's verses
@@ -53,12 +56,15 @@ class App {
         String arabicText = quran.getVerse(surahNumber, verseNumber);
         String trText = trData[verseNumber - 1].translation ?? '';
 
-        if (itemToScroll.first == surahNumber &&
-            itemToScroll.last == verseNumber) {
-          savedItemPosition = savedItemPositionCounter;
-        } else {
-          savedItemPositionCounter +=
-              _countHeightByText(arabicText, trText, size);
+        // if itemToScroll is null, we dont need to scroll
+        if (itemToScroll != null) {
+          if (itemToScroll.first == surahNumber &&
+              itemToScroll.last == verseNumber) {
+            savedItemPosition = savedItemPositionCounter;
+          } else {
+            savedItemPositionCounter +=
+                _countHeightByText(arabicText, trText, size);
+          }
         }
         verses.add(VerseData(
             verseNumber: verseNumber,

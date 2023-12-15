@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
-import 'package:quran/quran.dart' as quran;
 import 'package:serat/services/helper/saved_verses_schema.dart';
 
 part 'bookmark_state.dart';
@@ -38,14 +37,15 @@ class BookmarkCubit extends Cubit<BookmarkState> {
     await CacheHelper.saveVerse(surahNumber, verseNumber);
   }
 
-  // get data of page is saved
-  getSavedPageData(int surahNumber, int verseNumber, Size size) async {
+  getPageData(
+      {required int pageNumber,
+      int? surahNumber,
+      int? verseNumber,
+      required Size size}) async {
     emit(state.copyWith(status: () => BookmarkStatus.loading));
 
-    int page = quran.getPageNumber(surahNumber, verseNumber);
-
-    ReadingPageSchema data =
-        await appRepository.getPageData(page, [surahNumber, verseNumber], size);
+    ReadingPageSchema data = await appRepository.getPageData(
+        page: pageNumber, itemToScroll: [surahNumber, verseNumber], size: size);
 
     emit(state.copyWith(
         status: () => BookmarkStatus.page, pageData: () => data));

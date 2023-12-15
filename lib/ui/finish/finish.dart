@@ -106,7 +106,10 @@ class FinishView extends StatelessWidget {
                             color: Colors.white),
                         onPressed: () {
                           //scroll up on page change
-                          _animateToIndex(0, context);
+                          context.read<AppCubit>().scrollTo(
+                              context.read<FinishCubit>().scrollController,
+                              0.0,
+                              Curves.fastOutSlowIn);
 
                           int previousPage =
                               context.read<FinishCubit>().getLastPageNumber - 1;
@@ -136,7 +139,10 @@ class FinishView extends StatelessWidget {
                             color: Colors.white),
                         onPressed: () {
                           //scroll up on page change
-                          _animateToIndex(0, context);
+                          context.read<AppCubit>().scrollTo(
+                              context.read<FinishCubit>().scrollController,
+                              0.0,
+                              Curves.fastOutSlowIn);
 
                           int nextPage =
                               context.read<FinishCubit>().getLastPageNumber + 1;
@@ -207,12 +213,4 @@ class FinishView extends StatelessWidget {
           ),
         ),
       );
-
-  void _animateToIndex(double index, BuildContext context) {
-    context.read<FinishCubit>().scrollController.animateTo(
-          index,
-          duration: const Duration(milliseconds: 1),
-          curve: Curves.fastOutSlowIn,
-        );
-  }
 }

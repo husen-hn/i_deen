@@ -8,6 +8,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
@@ -52,8 +53,12 @@ class BookmarkReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<BookmarkCubit>().getSavedPageData(
-        surahNumber, verseNumber, MediaQuery.of(context).size);
+    context.read<BookmarkCubit>().getPageData(
+        pageNumber:
+            context.read<AppCubit>().getPageNumber(surahNumber, verseNumber),
+        surahNumber: surahNumber,
+        verseNumber: verseNumber,
+        size: MediaQuery.of(context).size);
 
     return BlocBuilder<BookmarkCubit, BookmarkState>(
         builder: (context, state) => state.status == BookmarkStatus.page
@@ -86,10 +91,67 @@ class BookmarkReadingView extends StatelessWidget {
                             .saveVerse(surahNumber, verseNumber);
 
                     // get all saved verses again
-                    context.read<BookmarkCubit>().getSavedPageData(
-                        surahNumber, verseNumber, MediaQuery.of(context).size);
+                    context.read<BookmarkCubit>().getPageData(
+                        pageNumber: context
+                            .read<AppCubit>()
+                            .getPageNumber(surahNumber, verseNumber),
+                        surahNumber: surahNumber,
+                        verseNumber: verseNumber,
+                        size: MediaQuery.of(context).size);
                   }),
-                ))
+                ),
+                floatingActionButton: state.status == BookmarkStatus.page
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FloatingActionButton(
+                              backgroundColor: const Color(0xFF672CBC),
+                              child: Image.asset('assets/icons/back_rtl.png',
+                                  color: Colors.white),
+                              onPressed: () {
+                                int previousPage =
+                                    state.pageData!.pageNumber - 1;
+
+                                // // first page controller
+                                if (previousPage < 1) {
+                                  previousPage =
+                                      context.read<AppCubit>().totalPagesCount;
+                                }
+
+                                context.read<BookmarkCubit>().getPageData(
+                                    pageNumber: previousPage,
+                                    size: MediaQuery.of(context).size);
+                              }),
+                          const SizedBox(width: 10),
+                          FloatingActionButton.extended(
+                              backgroundColor: const Color(0xFF672CBC),
+                              onPressed: null,
+                              label: Text(
+                                "${'page'.tr(context)} ${state.pageData?.pageNumber}",
+                                style: const TextStyle(
+                                    fontFamily: 'BTitr', fontSize: 16),
+                              )),
+                          const SizedBox(width: 10),
+                          FloatingActionButton(
+                              backgroundColor: const Color(0xFF672CBC),
+                              child: Image.asset('assets/icons/back_ltr.png',
+                                  color: Colors.white),
+                              onPressed: () {
+                                int nextPage = state.pageData!.pageNumber + 1;
+
+                                // last page controller
+                                if (nextPage >
+                                    context.read<AppCubit>().totalPagesCount) {
+                                  nextPage = 1;
+                                }
+
+                                context.read<BookmarkCubit>().getPageData(
+                                    pageNumber: nextPage,
+                                    size: MediaQuery.of(context).size);
+                              }),
+                        ],
+                      )
+                    : Container())
             : const PageReadingShimmer());
   }
 }

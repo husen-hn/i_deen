@@ -12,7 +12,7 @@ import 'package:serat/services/helper/saved_verses_schema.dart';
 
 abstract class IAppRepository {
   Future<ReadingPageSchema> getPageData(
-      int page, List<int> itemToScroll, Size size);
+      {required int page, List<int?>? itemToScroll, required Size size});
   Future<List<SavedVerseSchema>> getSavedData();
 }
 
@@ -23,8 +23,9 @@ class AppRepository implements IAppRepository {
 
   @override
   Future<ReadingPageSchema> getPageData(
-      int page, List<int> itemToScroll, Size size) async {
-    return await _app.getPageData(page, itemToScroll, size);
+      {required int page, List<int?>? itemToScroll, required Size size}) async {
+    return await _app.getPageData(
+        page: page, itemToScroll: itemToScroll, size: size);
   }
 
   @override
