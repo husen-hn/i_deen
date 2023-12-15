@@ -11,8 +11,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
-import 'package:serat/services/helper/tr_data_success_schema.dart';
-import 'package:serat/services/helper/translation.dart';
+import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:quran/quran.dart' as quran;
 
 part 'quran_state.dart';
@@ -35,118 +34,118 @@ class QuranCubit extends Cubit<QuranState> {
       quran.getPlaceOfRevelation(surahNumber);
 
   // get verses of a surah for all verses or spacific verses
-  getVerses(int surahNumber, {List<int>? verseNumber}) async {
-    emit(state.copyWith(status: () => QuranStatus.loading));
+  // getVerses(int surahNumber, {List<int>? verseNumber}) async {
+  //   emit(state.copyWith(status: () => QuranStatus.loading));
 
-    List<Verse> trVerses = await getTrData(surahNumber);
+  //   List<Verse> trVerses = await getTrData(surahNumber);
 
-    Map<String, dynamic> verses = {
-      "verses": <String>[],
-      "translations": <String>[],
-      "saved": <String>[]
-    };
+  //   Map<String, dynamic> verses = {
+  //     "verses": <String>[],
+  //     "translations": <String>[],
+  //     "saved": <String>[]
+  //   };
 
-    if (verseNumber == null) {
-      for (var verseIndex = 0;
-          verseIndex < getVerseCount(surahNumber);
-          verseIndex++) {
-        verses["verses"].add(quran.getVerse(surahNumber, verseIndex + 1));
-        verses["translations"].add(trVerses[verseIndex].translation);
-      }
+  //   if (verseNumber == null) {
+  //     for (var verseIndex = 0;
+  //         verseIndex < getVerseCount(surahNumber);
+  //         verseIndex++) {
+  //       verses["verses"].add(quran.getVerse(surahNumber, verseIndex + 1));
+  //       verses["translations"].add(trVerses[verseIndex].translation);
+  //     }
 
-      verses["saved"].addAll(CacheHelper.getSavedVerses());
-    } else {
-      for (var verseIndex = 0; verseIndex < verseNumber.length; verseIndex++) {
-        if (verseIndex < getVerseCount(surahNumber)) {
-          verses["verses"]
-              .add(quran.getVerse(surahNumber, verseNumber[verseIndex]));
-        }
-        verses["translations"].add(trVerses[verseIndex].translation);
-      }
+  //     verses["saved"].addAll(CacheHelper.getSavedVerses());
+  //   } else {
+  //     for (var verseIndex = 0; verseIndex < verseNumber.length; verseIndex++) {
+  //       if (verseIndex < getVerseCount(surahNumber)) {
+  //         verses["verses"]
+  //             .add(quran.getVerse(surahNumber, verseNumber[verseIndex]));
+  //       }
+  //       verses["translations"].add(trVerses[verseIndex].translation);
+  //     }
 
-      verses["saved"].addAll(CacheHelper.getSavedVerses());
-    }
+  //     verses["saved"].addAll(CacheHelper.getSavedVerses());
+  //   }
 
-    emit(
-        state.copyWith(status: () => QuranStatus.verses, verses: () => verses));
-  }
+  //   emit(
+  //       state.copyWith(status: () => QuranStatus.verses, verses: () => verses));
+  // }
 
-  getPageVerses(int pageNumber) async {
-    emit(state.copyWith(status: () => QuranStatus.loading));
+  // getPageVerses(int pageNumber) async {
+  //   emit(state.copyWith(status: () => QuranStatus.loading));
 
-    Map<String, dynamic> data = {
-      'data': <Map<String, dynamic>>[],
-      'saved': <String>[]
-    };
+  //   Map<String, dynamic> data = {
+  //     'data': <Map<String, dynamic>>[],
+  //     'saved': <String>[]
+  //   };
 
-    List<Map<String, dynamic>> pageData =
-        quran.getPageData(pageNumber) as List<Map<String, dynamic>>;
+  //   List<Map<String, dynamic>> pageData =
+  //       quran.getPageData(pageNumber) as List<Map<String, dynamic>>;
 
-    for (var i = 0; i < pageData.length; i++) {
-      int surahNumber = pageData[i]['surah'];
-      String surahArabicName = getSurahNameArabic(surahNumber);
+  //   for (var i = 0; i < pageData.length; i++) {
+  //     int surahNumber = pageData[i]['surah'];
+  //     String surahArabicName = getSurahNameArabic(surahNumber);
 
-      List<Verse> trVerses = await getTrData(surahNumber);
+  //     List<Verse> trVerses = await getTrData(surahNumber);
 
-      int start = pageData[i]['start'];
-      int end = pageData[i]['end'];
+  //     int start = pageData[i]['start'];
+  //     int end = pageData[i]['end'];
 
-      List<Map<int, String>> surahVerses = [];
-      List<Map<int, String>> translations = [];
-      for (var verseNumber = start; verseNumber <= end; verseNumber++) {
-        surahVerses
-            .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
-        translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
-      }
-      data['data'].add({
-        'surahArabicName': surahArabicName,
-        'verses': surahVerses,
-        'translation': translations
-      });
-    }
+  //     List<Map<int, String>> surahVerses = [];
+  //     List<Map<int, String>> translations = [];
+  //     for (var verseNumber = start; verseNumber <= end; verseNumber++) {
+  //       surahVerses
+  //           .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
+  //       translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
+  //     }
+  //     data['data'].add({
+  //       'surahArabicName': surahArabicName,
+  //       'verses': surahVerses,
+  //       'translation': translations
+  //     });
+  //   }
 
-    data["saved"].addAll(CacheHelper.getSavedVerses());
+  //   data["saved"].addAll(CacheHelper.getSavedVerses());
 
-    emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
-  }
+  //   emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
+  // }
 
-  getJuzVerses(int juzNumber) async {
-    emit(state.copyWith(status: () => QuranStatus.loading));
-    Map<String, dynamic> data = {
-      'data': <Map<String, dynamic>>[],
-      'saved': <String>[]
-    };
+  // getJuzVerses(int juzNumber) async {
+  //   emit(state.copyWith(status: () => QuranStatus.loading));
+  //   Map<String, dynamic> data = {
+  //     'data': <Map<String, dynamic>>[],
+  //     'saved': <String>[]
+  //   };
 
-    Map<int, List<int>> juzData = quran.getSurahAndVersesFromJuz(juzNumber);
+  //   Map<int, List<int>> juzData = quran.getSurahAndVersesFromJuz(juzNumber);
 
-    for (var surahNumber in juzData.keys) {
-      String surahArabicName = getSurahNameArabic(surahNumber);
+  //   for (var surahNumber in juzData.keys) {
+  //     String surahArabicName = getSurahNameArabic(surahNumber);
 
-      List<Verse> trVerses = await getTrData(surahNumber);
+  //     List<Verse> trVerses = await getTrData(surahNumber);
 
-      int start = juzData[surahNumber]!.first;
-      int end = juzData[surahNumber]!.last;
+  //     int start = juzData[surahNumber]!.first;
+  //     int end = juzData[surahNumber]!.last;
 
-      List<Map<int, String>> surahVerses = [];
-      List<Map<int, String>> translations = [];
+  //     List<Map<int, String>> surahVerses = [];
+  //     List<Map<int, String>> translations = [];
 
-      for (var verseNumber = start; verseNumber <= end; verseNumber++) {
-        surahVerses
-            .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
-        translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
-      }
-      data['data'].add({
-        'surahArabicName': surahArabicName,
-        'surahNumber': surahNumber,
-        'verses': surahVerses,
-        'translation': translations
-      });
-    }
+  //     for (var verseNumber = start; verseNumber <= end; verseNumber++) {
+  //       surahVerses
+  //           .add({verseNumber: quran.getVerse(surahNumber, verseNumber)});
+  //       translations.add({verseNumber: trVerses[verseNumber - 1].translation!});
+  //     }
+  //     data['data'].add({
+  //       'surahArabicName': surahArabicName,
+  //       'surahNumber': surahNumber,
+  //       'verses': surahVerses,
+  //       'translation': translations
+  //     });
+  //   }
 
-    data["saved"].addAll(CacheHelper.getSavedVerses());
+  //   data["saved"].addAll(CacheHelper.getSavedVerses());
 
-    emit(state.copyWith(status: () => QuranStatus.juz, pageData: () => data));
-  }
+  //   emit(state.copyWith(status: () => QuranStatus.juz, pageData: () => data));
+  // }
 
   Future<void> saveVerse(int surahNumber, int verseNumber) async {
     await CacheHelper.saveVerse(surahNumber, verseNumber);
@@ -187,20 +186,33 @@ class QuranCubit extends Cubit<QuranState> {
     });
   }
 
-  Future<List<Verse>> getTrData(int surahNumber) async {
-    TrDataSuccessSchema data = await _getTrData(Translation.makarem);
+  // Future<List<Verse>> getTrData(int surahNumber) async {
+  //   TrDataSuccessSchema data = await _getTrData(Translation.makarem);
 
-    return data.list[surahNumber - 1].verses;
-  }
+  //   return data.list[surahNumber - 1].verses;
+  // }
 
-  Future<TrDataSuccessSchema> _getTrData(Translation tr) async {
-    String response = tr == Translation.makarem
-        ? await _readLocalJson(Translation.makarem.name!)
-        : await _readLocalJson('');
+  // Future<TrDataSuccessSchema> _getTrData(Translation tr) async {
+  //   String response = tr == Translation.makarem
+  //       ? await _readLocalJson(Translation.makarem.name!)
+  //       : await _readLocalJson('');
 
-    return TrDataSuccessSchema.fromJson(jsonDecode(response));
-  }
+  //   return TrDataSuccessSchema.fromJson(jsonDecode(response));
+  // }
 
   Future<String> _readLocalJson(String path) async =>
       await rootBundle.loadString(path);
+
+  getPageData(
+      {required int pageNumber,
+      int? surahNumber,
+      int? verseNumber,
+      required Size size}) async {
+    emit(state.copyWith(status: () => QuranStatus.loading));
+
+    ReadingPageSchema data = await appRepository.getPageData(
+        page: pageNumber, itemToScroll: [surahNumber, verseNumber], size: size);
+
+    emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
+  }
 }

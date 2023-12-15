@@ -61,6 +61,6 @@ class AppCubit extends Cubit<AppState> {
   }
 
   get totalPagesCount => quran.totalPagesCount;
-  getPageNumber(surahNumber, verseNumber) =>
+  getPageNumber(int surahNumber, int verseNumber) =>
       quran.getPageNumber(surahNumber, verseNumber);
 }

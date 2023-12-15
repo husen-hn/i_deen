@@ -97,22 +97,24 @@ class QuranView extends StatelessWidget {
                 ),
               ),
               // Tabbar contents
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .667,
-                child: TabBarView(
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      const Surah(),
-                      pg.Page(
-                          appRepository:
-                              context.read<QuranCubit>().appRepository),
-                      Verses(
-                          appRepository:
-                              context.read<QuranCubit>().appRepository),
-                      Juz(
-                          appRepository:
-                              context.read<QuranCubit>().appRepository)
-                    ]),
+              Expanded(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: TabBarView(
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        const Surah(),
+                        pg.Page(
+                            appRepository:
+                                context.read<QuranCubit>().appRepository),
+                        Verses(
+                            appRepository:
+                                context.read<QuranCubit>().appRepository),
+                        Juz(
+                            appRepository:
+                                context.read<QuranCubit>().appRepository)
+                      ]),
+                ),
               )
             ],
           ),
