@@ -41,14 +41,12 @@ class App {
       List<VerseData> verses = [];
 
       // if itemToScroll is null, we dont need to scroll
-      if (itemToScroll != null) {
-        // count previous SurahStarter height in first
-        //TODO: make it better
-        if (start == 1) {
-          surahNumber == 9
-              ? savedItemPositionCounter += size.height * .1
-              : savedItemPositionCounter += size.height * .2;
-        }
+      // count previous SurahStarter height in first
+      //TODO: make it better
+      if (itemToScroll != null && start == 1 && itemToScroll.last != 1) {
+        surahNumber == 9
+            ? savedItemPositionCounter += size.height * .1
+            : savedItemPositionCounter += size.height * .2;
       }
 
       // get surah's verses
@@ -79,6 +77,15 @@ class App {
           verses: verses));
     }
 
+    // to display surah name minus one surah height
+    // if (itemToScroll != null && itemToScroll.last == 1) {
+    //   savedItemPositionCounter -= itemToScroll.first == 9
+    //       ? savedItemPositionCounter += size.height * .1
+    //       : savedItemPositionCounter += size.height * .2;
+
+    //   // reasain saved item position
+    //   savedItemPosition = savedItemPositionCounter;
+    // }
     data.scrollPosition = savedItemPosition;
 
     return data;

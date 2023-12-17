@@ -52,7 +52,9 @@ class QuranReadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<QuranCubit>().getPageData(
         pageNumber: pageNumber ??
-            context.read<AppCubit>().getPageNumber(surahNumber!, verseNumber!),
+            context.read<AppCubit>().getPageNumber(
+                surahNumber! < 1 ? 1 : surahNumber!,
+                verseNumber! < 1 ? 1 : verseNumber!),
         surahNumber: surahNumber,
         verseNumber: verseNumber,
         size: MediaQuery.of(context).size);

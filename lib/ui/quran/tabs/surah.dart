@@ -5,9 +5,11 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/widgets/surah_item.dart';
 
 class Surah extends StatelessWidget {
@@ -22,20 +24,22 @@ class Surah extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: context.read<QuranCubit>().getTotalSurahCount,
             itemBuilder: (context, index) {
-              return SurahItem(
-                appRepository: context.read<QuranCubit>().appRepository,
-                index: index + 1,
-                title: context.read<QuranCubit>().getSurahNameArabic(index + 1),
-                englishTitle:
-                    context.read<QuranCubit>().getSurahNameEnglish(index + 1),
-                type: context
-                        .read<QuranCubit>()
-                        .getPlaceOfRevelation(index + 1)
-                        .contains('Makkah')
-                    ? 'مکی'
-                    : 'مدنی',
-                versesCount:
-                    context.read<QuranCubit>().getVerseCount(index + 1),
+              return InkWell(
+                onTap: () => context.router.push(
+                    QuranReadingRoute(surahNumber: index + 1, verseNumber: 1)),
+                child: SurahItem(
+                  index: index + 1,
+                  title:
+                      context.read<QuranCubit>().getSurahNameArabic(index + 1),
+                  type: context
+                          .read<QuranCubit>()
+                          .getPlaceOfRevelation(index + 1)
+                          .contains('Makkah')
+                      ? 'مکی'
+                      : 'مدنی',
+                  versesCount:
+                      context.read<QuranCubit>().getVerseCount(index + 1),
+                ),
               );
             },
             separatorBuilder: (context, index) {
