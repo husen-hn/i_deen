@@ -74,21 +74,6 @@ abstract class _$SeratRouter extends RootStackRouter {
         child: const Splash(),
       );
     },
-    VersesReadingRoute.name: (routeData) {
-      final args = routeData.argsAs<VersesReadingRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: VersesReading(
-          key: args.key,
-          surahNumber: args.surahNumber,
-          surahName: args.surahName,
-          surahEnglishName: args.surahEnglishName,
-          surahType: args.surahType,
-          versesCount: args.versesCount,
-          verses: args.verses,
-        ),
-      );
-    },
   };
 }
 
@@ -280,67 +265,4 @@ class SplashRoute extends PageRouteInfo<void> {
   static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [VersesReading]
-class VersesReadingRoute extends PageRouteInfo<VersesReadingRouteArgs> {
-  VersesReadingRoute({
-    Key? key,
-    required int surahNumber,
-    required String surahName,
-    required String surahEnglishName,
-    required String surahType,
-    required int versesCount,
-    required List<int>? verses,
-    List<PageRouteInfo>? children,
-  }) : super(
-          VersesReadingRoute.name,
-          args: VersesReadingRouteArgs(
-            key: key,
-            surahNumber: surahNumber,
-            surahName: surahName,
-            surahEnglishName: surahEnglishName,
-            surahType: surahType,
-            versesCount: versesCount,
-            verses: verses,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'VersesReadingRoute';
-
-  static const PageInfo<VersesReadingRouteArgs> page =
-      PageInfo<VersesReadingRouteArgs>(name);
-}
-
-class VersesReadingRouteArgs {
-  const VersesReadingRouteArgs({
-    this.key,
-    required this.surahNumber,
-    required this.surahName,
-    required this.surahEnglishName,
-    required this.surahType,
-    required this.versesCount,
-    required this.verses,
-  });
-
-  final Key? key;
-
-  final int surahNumber;
-
-  final String surahName;
-
-  final String surahEnglishName;
-
-  final String surahType;
-
-  final int versesCount;
-
-  final List<int>? verses;
-
-  @override
-  String toString() {
-    return 'VersesReadingRouteArgs{key: $key, surahNumber: $surahNumber, surahName: $surahName, surahEnglishName: $surahEnglishName, surahType: $surahType, versesCount: $versesCount, verses: $verses}';
-  }
 }

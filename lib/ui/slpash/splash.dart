@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     Future.delayed(const Duration(milliseconds: 2000), () {
-      context.router.push(const HomeRoute());
+      context.router.replace(const HomeRoute());
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     });
   }

@@ -14,7 +14,6 @@ import 'package:serat/ui/drawer/copy_right.dart';
 import 'package:serat/ui/home/home.dart';
 import 'package:serat/ui/quran/juz_reading.dart';
 import 'package:serat/ui/quran/quran_reading.dart';
-import 'package:serat/ui/quran/verses_reading.dart';
 import 'package:serat/ui/slpash/splash.dart';
 part 'serat_router.gr.dart';
 
@@ -27,11 +26,18 @@ class SeratRouter extends _$SeratRouter {
   List<AutoRoute> get routes => [
         CustomRoute(page: SplashRoute.page, initial: true),
         CustomRoute(page: HomeRoute.page),
-        CustomRoute(page: VersesReadingRoute.page),
-        CustomRoute(page: QuranReadingRoute.page),
+        CustomRoute(
+            page: QuranReadingRoute.page,
+            transitionsBuilder: TransitionsBuilders.slideLeft),
         CustomRoute(page: JuzReadingRoute.page),
-        CustomRoute(page: AboutUsRoute.page),
-        CustomRoute(page: CopyRightRoute.page),
-        CustomRoute(page: BookmarkReadingRoute.page)
+        CustomRoute(
+            page: AboutUsRoute.page,
+            transitionsBuilder: TransitionsBuilders.slideBottom),
+        CustomRoute(
+            page: CopyRightRoute.page,
+            transitionsBuilder: TransitionsBuilders.slideBottom),
+        CustomRoute(
+            page: BookmarkReadingRoute.page,
+            transitionsBuilder: TransitionsBuilders.slideLeft)
       ];
 }
