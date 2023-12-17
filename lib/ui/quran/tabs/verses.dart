@@ -12,6 +12,7 @@ import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/widgets/number_btn.dart';
 
 class Verses extends StatelessWidget {
@@ -39,8 +40,8 @@ class Verses extends StatelessWidget {
                                 .contains('Makkah')
                             ? 'مکی'
                             : 'مدنی',
-                        style: const TextStyle(
-                            fontFamily: 'BZar',
+                        style: TextStyle(
+                            fontFamily: SeratFont.bZar.name,
                             fontSize: 16,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(
@@ -58,9 +59,9 @@ class Verses extends StatelessWidget {
                 textColor: const Color(0xFF994EF8),
                 title: Text(
                   context.read<QuranCubit>().getSurahNameArabic(index + 1),
-                  style: const TextStyle(
-                      color: Color(0xFF240F4F),
-                      fontFamily: 'Amiri',
+                  style: TextStyle(
+                      color: const Color(0xFF240F4F),
+                      fontFamily: SeratFont.amiri.name,
                       fontSize: 21,
                       fontWeight: FontWeight.bold),
                 ),
@@ -79,24 +80,9 @@ class Verses extends StatelessWidget {
                               mainAxisSpacing: 10),
                       itemBuilder: (context, nestedIndex) {
                         return InkWell(
-                            onTap: () => context.router.push(VersesReadingRoute(
+                            onTap: () => context.router.push(QuranReadingRoute(
                                 surahNumber: index + 1,
-                                surahName: context
-                                    .read<QuranCubit>()
-                                    .getSurahNameArabic(index + 1),
-                                surahEnglishName: context
-                                    .read<QuranCubit>()
-                                    .getSurahNameEnglish(index + 1),
-                                surahType: context
-                                        .read<QuranCubit>()
-                                        .getPlaceOfRevelation(index + 1)
-                                        .contains('Makkah')
-                                    ? 'مکی'
-                                    : 'مدنی',
-                                versesCount: context
-                                    .read<QuranCubit>()
-                                    .getVerseCount(index + 1),
-                                verses: [nestedIndex + 1])),
+                                verseNumber: nestedIndex + 1)),
                             child: NumberBtn(number: nestedIndex + 1));
                       })
                 ],
