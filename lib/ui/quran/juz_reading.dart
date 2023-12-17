@@ -35,7 +35,7 @@ class JuzReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<QuranCubit>().getJuzVerses(juzNumber);
+    // context.read<QuranCubit>().getJuzVerses(juzNumber);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -51,94 +51,95 @@ class JuzReadingView extends StatelessWidget {
         ),
         body: BlocBuilder<QuranCubit, QuranState>(builder: (context, state) {
           if (state.status == QuranStatus.juz) {
-            return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                physics: const BouncingScrollPhysics(),
-                itemCount: state.pageData!['data'].length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // if verse number is 1, display surah name
-                      state.pageData!['data'][index]['verses'].first.keys
-                                  .first ==
-                              1
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 30),
-                              child: _surahName(
-                                  context,
-                                  state.pageData!['data'][index]
-                                      ['surahArabicName'],
-                                  juzNumber),
-                            )
-                          : Container(),
+            return Container();
+            //   return ListView.builder(
+            //       padding: const EdgeInsets.symmetric(horizontal: 10),
+            //       physics: const BouncingScrollPhysics(),
+            //       itemCount: state.pageData!['data'].length,
+            //       itemBuilder: (context, index) {
+            //         return Column(
+            //           crossAxisAlignment: CrossAxisAlignment.stretch,
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             // if verse number is 1, display surah name
+            //             state.pageData!['data'][index]['verses'].first.keys
+            //                         .first ==
+            //                     1
+            //                 ? Padding(
+            //                     padding:
+            //                         const EdgeInsets.only(top: 10, bottom: 30),
+            //                     child: _surahName(
+            //                         context,
+            //                         state.pageData!['data'][index]
+            //                             ['surahArabicName'],
+            //                         juzNumber),
+            //                   )
+            //                 : Container(),
 
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount:
-                              state.pageData!['data'][index]['verses'].length,
-                          itemBuilder: (context, nestedIndex) {
-                            return VerseItem(
-                              surahNumber: state.pageData!['data'][index]
-                                  ['surahNumber'],
-                              // display index for verses number on full surah, and display verses number on limited surah
-                              ayahNumber: state
-                                  .pageData!['data'][index]['verses']
-                                      [nestedIndex]
-                                  .keys
-                                  .first,
-                              arabicText: state.pageData!['data'][index]
-                                      ['verses'][nestedIndex][
-                                  state
-                                      .pageData!['data'][index]['verses']
-                                          [nestedIndex]
-                                      .keys
-                                      .first],
-                              translation: state.pageData!['data'][index]
-                                      ['translation'][nestedIndex][
-                                  state
-                                      .pageData!['data'][index]['verses']
-                                          [nestedIndex]
-                                      .keys
-                                      .first],
-                              isSaved: state.pageData!["saved"].contains(
-                                  '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
-                              onSaveTap: () {
-                                if (state.pageData!["saved"].contains(
-                                    '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}')) {
-                                  context.read<QuranCubit>().removeVerse(
-                                      state.pageData!['data'][index]
-                                          ['surahNumber'],
-                                      state
-                                          .pageData!['data'][index]['verses']
-                                              [nestedIndex]
-                                          .keys
-                                          .first);
-                                } else {
-                                  context.read<QuranCubit>().saveVerse(
-                                      state.pageData!['data'][index]
-                                          ['surahNumber'],
-                                      state
-                                          .pageData!['data'][index]['verses']
-                                              [nestedIndex]
-                                          .keys
-                                          .first);
-                                }
+            //             ListView.builder(
+            //                 shrinkWrap: true,
+            //                 physics: const NeverScrollableScrollPhysics(),
+            //                 itemCount:
+            //                     state.pageData!['data'][index]['verses'].length,
+            //                 itemBuilder: (context, nestedIndex) {
+            //                   return VerseItem(
+            //                     surahNumber: state.pageData!['data'][index]
+            //                         ['surahNumber'],
+            //                     // display index for verses number on full surah, and display verses number on limited surah
+            //                     ayahNumber: state
+            //                         .pageData!['data'][index]['verses']
+            //                             [nestedIndex]
+            //                         .keys
+            //                         .first,
+            //                     arabicText: state.pageData!['data'][index]
+            //                             ['verses'][nestedIndex][
+            //                         state
+            //                             .pageData!['data'][index]['verses']
+            //                                 [nestedIndex]
+            //                             .keys
+            //                             .first],
+            //                     translation: state.pageData!['data'][index]
+            //                             ['translation'][nestedIndex][
+            //                         state
+            //                             .pageData!['data'][index]['verses']
+            //                                 [nestedIndex]
+            //                             .keys
+            //                             .first],
+            //                     isSaved: state.pageData!["saved"].contains(
+            //                         '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}'),
+            //                     onSaveTap: () {
+            //                       if (state.pageData!["saved"].contains(
+            //                           '${state.pageData!['data'][index]['surahNumber']}-${state.pageData!['data'][index]['verses'][nestedIndex].keys.first}')) {
+            //                         context.read<QuranCubit>().removeVerse(
+            //                             state.pageData!['data'][index]
+            //                                 ['surahNumber'],
+            //                             state
+            //                                 .pageData!['data'][index]['verses']
+            //                                     [nestedIndex]
+            //                                 .keys
+            //                                 .first);
+            //                       } else {
+            //                         context.read<QuranCubit>().saveVerse(
+            //                             state.pageData!['data'][index]
+            //                                 ['surahNumber'],
+            //                             state
+            //                                 .pageData!['data'][index]['verses']
+            //                                     [nestedIndex]
+            //                                 .keys
+            //                                 .first);
+            //                       }
 
-                                // get all saved verses again
-                                context
-                                    .read<QuranCubit>()
-                                    .getJuzVerses(juzNumber);
-                              },
-                              onVisible: () {},
-                            );
-                          })
-                    ],
-                  );
-                });
+            //                       // get all saved verses again
+            //                       context
+            //                           .read<QuranCubit>()
+            //                           .getJuzVerses(juzNumber);
+            //                     },
+            //                     onVisible: () {},
+            //                   );
+            //                 })
+            //           ],
+            //         );
+            //       });
           } else {
             return Container();
           }

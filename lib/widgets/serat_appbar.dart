@@ -29,6 +29,8 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
               langCode == 'fa' || langCode == 'ar'
                   ? 'assets/icons/menu_rtl.png'
                   : 'assets/icons/menu.png',
+              height: 30,
+              color: const Color(0xFF8789A3),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();

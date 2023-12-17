@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
             currentIndex: state.btnNvIndex,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Image.asset(SeratIcon.appIcon.name,
+                  icon: Image.asset(SeratIcon.quran.name,
                       width: 40,
                       height: 40,
                       color: context
@@ -49,22 +49,22 @@ class HomeView extends StatelessWidget {
                   label: ''),
               BottomNavigationBarItem(
                   icon: Image.asset(SeratIcon.prayerIcon.name,
-                      width: 40,
-                      height: 40,
+                      width: 30,
+                      height: 30,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 1)),
                   label: ''),
               BottomNavigationBarItem(
                   icon: Image.asset(SeratIcon.lamp.name,
-                      width: 40,
-                      height: 40,
+                      width: 30,
+                      height: 30,
                       color: context
                           .read<HomeCubit>()
                           .activeBtnNavColor(state.btnNvIndex, 2)),
                   label: ''),
               BottomNavigationBarItem(
-                  icon: Image.asset('assets/icons/bookmark_icon.png',
+                  icon: Image.asset(SeratIcon.bookmark.name,
                       width: 30,
                       height: 30,
                       color: context

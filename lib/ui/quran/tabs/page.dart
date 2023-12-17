@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/widgets/number_btn.dart';
 
 class Page extends StatelessWidget {
@@ -31,9 +32,9 @@ class Page extends StatelessWidget {
                   children: [
                     Text(
                       context.read<QuranCubit>().getSurahNameArabic(index + 1),
-                      style: const TextStyle(
-                          color: Color(0xFF240F4F),
-                          fontFamily: 'Amiri',
+                      style: TextStyle(
+                          color: const Color(0xFF240F4F),
+                          fontFamily: SeratFont.amiri.name,
                           fontSize: 21,
                           fontWeight: FontWeight.bold),
                     ),
@@ -53,9 +54,10 @@ class Page extends StatelessWidget {
                                 mainAxisSpacing: 10),
                         itemBuilder: (context, nestedIndex) {
                           return InkWell(
-                            onTap: () => context.router.push(PageReadingRoute(
-                                surahNumber: index + 1,
-                                surahVerseNumber: nestedIndex)),
+                            onTap: () => context.router.push(QuranReadingRoute(
+                                pageNumber: context
+                                    .read<QuranCubit>()
+                                    .getSurahPages(index + 1)[nestedIndex])),
                             child: NumberBtn(
                                 number: context
                                     .read<QuranCubit>()
