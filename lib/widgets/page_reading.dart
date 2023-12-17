@@ -11,9 +11,14 @@ import 'package:serat/widgets/surah_reading.dart';
 
 class PageReading extends StatelessWidget {
   final ReadingPageSchema pageData;
-
   final Function(int surahNumber, int verseNumber, bool isSaved) onTapSave;
-  PageReading({super.key, required this.pageData, required this.onTapSave});
+  final Function(int surahNumber, int verseNumber) onVerseVisible;
+
+  PageReading(
+      {super.key,
+      required this.pageData,
+      required this.onTapSave,
+      required this.onVerseVisible});
 
   final ScrollController _controller = ScrollController();
 
@@ -39,6 +44,8 @@ class PageReading extends StatelessWidget {
             surahName: pageData.surahs[index].surahName,
             verses: pageData.surahs[index].verses,
             onTapSave: onTapSave,
+            onVisible: (surahNumber, verseNumber) =>
+                onVerseVisible(surahNumber, verseNumber),
           );
         });
   }

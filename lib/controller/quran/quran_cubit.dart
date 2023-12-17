@@ -175,34 +175,6 @@ class QuranCubit extends Cubit<QuranState> {
         status: () => QuranStatus.lastSeen, lastSeen: () => data));
   }
 
-  int lastSurahNum = 1;
-  int lastVerseNum = 1;
-  void saveLastSeen(int surahNumber, int verseNumber, Duration duration) {
-    lastSurahNum = surahNumber;
-    lastVerseNum = verseNumber;
-
-    Future.delayed(duration).then((value) async {
-      await CacheHelper.saveLastSeen(lastSurahNum, lastVerseNum);
-    });
-  }
-
-  // Future<List<Verse>> getTrData(int surahNumber) async {
-  //   TrDataSuccessSchema data = await _getTrData(Translation.makarem);
-
-  //   return data.list[surahNumber - 1].verses;
-  // }
-
-  // Future<TrDataSuccessSchema> _getTrData(Translation tr) async {
-  //   String response = tr == Translation.makarem
-  //       ? await _readLocalJson(Translation.makarem.name!)
-  //       : await _readLocalJson('');
-
-  //   return TrDataSuccessSchema.fromJson(jsonDecode(response));
-  // }
-
-  Future<String> _readLocalJson(String path) async =>
-      await rootBundle.loadString(path);
-
   getPageData(
       {required int pageNumber,
       int? surahNumber,

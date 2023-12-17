@@ -14,15 +14,20 @@ class SurahReading extends StatelessWidget {
   final int surahNumber;
   final String surahName;
   final List<VerseData> verses;
-
-  final Function(int surahNumber, int verseNumber, bool isSaved) onTapSave;
+  final Function(
+    int surahNumber,
+    int verseNumber,
+    bool isSaved,
+  ) onTapSave;
+  final Function(int surahNumber, int verseNumber) onVisible;
 
   const SurahReading(
       {super.key,
       required this.surahNumber,
       required this.surahName,
       required this.verses,
-      required this.onTapSave});
+      required this.onTapSave,
+      required this.onVisible});
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +51,18 @@ class SurahReading extends StatelessWidget {
                           height: 30,
                         ),
                         VerseItem(
-                          surahNumber: surahNumber,
-                          // display index for verses number on full surah, and display verses number on limited surah
-                          ayahNumber: verses[index].verseNumber,
-                          arabicText: verses[index].arabicText,
-                          translation: verses[index].trText,
-                          isSaved: verses[index].isSaved,
-                          onSaveTap: () => onTapSave(surahNumber,
-                              verses[index].verseNumber, verses[index].isSaved),
-                        )
+                            surahNumber: surahNumber,
+                            // display index for verses number on full surah, and display verses number on limited surah
+                            ayahNumber: verses[index].verseNumber,
+                            arabicText: verses[index].arabicText,
+                            translation: verses[index].trText,
+                            isSaved: verses[index].isSaved,
+                            onSaveTap: () => onTapSave(
+                                surahNumber,
+                                verses[index].verseNumber,
+                                verses[index].isSaved),
+                            onVisible: () => onVisible(
+                                surahNumber, verses[index].verseNumber))
                       ],
                     )
                   : VerseItem(
@@ -66,7 +74,8 @@ class SurahReading extends StatelessWidget {
                       isSaved: verses[index].isSaved,
                       onSaveTap: () => onTapSave(surahNumber,
                           verses[index].verseNumber, verses[index].isSaved),
-                    );
+                      onVisible: () =>
+                          onVisible(surahNumber, verses[index].verseNumber));
         });
   }
 }

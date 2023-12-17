@@ -63,4 +63,15 @@ class AppCubit extends Cubit<AppState> {
   get totalPagesCount => quran.totalPagesCount;
   getPageNumber(int surahNumber, int verseNumber) =>
       quran.getPageNumber(surahNumber, verseNumber);
+
+  int lastSurahNum = 1;
+  int lastVerseNum = 1;
+  void saveLastSeen(int surahNumber, int verseNumber, Duration duration) {
+    lastSurahNum = surahNumber;
+    lastVerseNum = verseNumber;
+
+    Future.delayed(duration).then((value) async {
+      await CacheHelper.saveLastSeen(lastSurahNum, lastVerseNum);
+    });
+  }
 }

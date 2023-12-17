@@ -79,26 +79,28 @@ class QuranReadingView extends StatelessWidget {
                 ),
                 // surah's listview
                 body: PageReading(
-                  pageData: state.pageData!,
-                  onTapSave: ((surahNumber, verseNumber, isSaved) {
-                    isSaved
-                        ? context
-                            .read<QuranCubit>()
-                            .removeVerse(surahNumber, verseNumber)
-                        : context
-                            .read<QuranCubit>()
-                            .saveVerse(surahNumber, verseNumber);
+                    pageData: state.pageData!,
+                    onTapSave: ((surahNumber, verseNumber, isSaved) {
+                      isSaved
+                          ? context
+                              .read<QuranCubit>()
+                              .removeVerse(surahNumber, verseNumber)
+                          : context
+                              .read<QuranCubit>()
+                              .saveVerse(surahNumber, verseNumber);
 
-                    // get all saved verses again
-                    context.read<QuranCubit>().getPageData(
-                        pageNumber: context
-                            .read<AppCubit>()
-                            .getPageNumber(surahNumber, verseNumber),
-                        surahNumber: surahNumber,
-                        verseNumber: verseNumber,
-                        size: MediaQuery.of(context).size);
-                  }),
-                ),
+                      // get all saved verses again
+                      context.read<QuranCubit>().getPageData(
+                          pageNumber: context
+                              .read<AppCubit>()
+                              .getPageNumber(surahNumber, verseNumber),
+                          surahNumber: surahNumber,
+                          verseNumber: verseNumber,
+                          size: MediaQuery.of(context).size);
+                    }),
+                    onVerseVisible: (int surahNumber, int verseNumber) =>
+                        context.read<AppCubit>().saveLastSeen(surahNumber,
+                            verseNumber, const Duration(seconds: 4))),
                 floatingActionButton: state.status == QuranStatus.page
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.end,

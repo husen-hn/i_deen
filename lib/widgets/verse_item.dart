@@ -16,7 +16,7 @@ class VerseItem extends StatelessWidget {
   final String translation;
   final bool isSaved;
   final Function() onSaveTap;
-  final Function()? onVisible;
+  final Function() onVisible;
 
   const VerseItem({
     super.key,
@@ -27,7 +27,7 @@ class VerseItem extends StatelessWidget {
     required this.translation,
     required this.isSaved,
     required this.onSaveTap,
-    this.onVisible,
+    required this.onVisible,
   });
 
   @override
@@ -37,7 +37,7 @@ class VerseItem extends StatelessWidget {
       onVisibilityChanged: (visibilityInfo) {
         double visiblePercentage = visibilityInfo.visibleFraction * 100;
         if (visiblePercentage == 100) {
-          onVisible!();
+          onVisible();
         }
       },
       child: Padding(
