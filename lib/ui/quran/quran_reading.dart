@@ -11,10 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/serat_font.dart';
-import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/widgets/page_reading.dart';
 import 'package:serat/widgets/page_reading_shimmer.dart';
+import 'package:serat/widgets/reading_appbar.dart';
 
 @RoutePage(name: 'QuranReadingRoute')
 class QuranReading extends StatelessWidget {
@@ -62,35 +61,9 @@ class QuranReadingView extends StatelessWidget {
     return BlocBuilder<QuranCubit, QuranState>(
         builder: (context, state) => state.status == QuranStatus.page
             ? Scaffold(
-                appBar: AppBar(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${'page'.tr(context)} ${state.pageData?.pageNumber}",
-                        style: TextStyle(
-                            fontFamily: SeratFont.bZar.name,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        "${'juz'.tr(context)} ${state.pageData?.pageJuzNumber}",
-                        style: TextStyle(
-                            color: const Color(0xFF8789A3),
-                            fontFamily: SeratFont.bZar.name,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 12),
-                      ),
-                    ],
-                  ),
-                  shadowColor: Colors.transparent,
-                  leading: GestureDetector(
-                      child: Image.asset(SeratIcon.backRTL.name),
-                      onTap: () {
-                        context.router.pop();
-                      }),
-                ),
+                appBar: ReadingAppbar(
+                    pageNumber: state.pageData?.pageNumber ?? 0,
+                    juzNumber: state.pageData?.pageJuzNumber ?? 0),
                 // surah's listview
                 body: PageReading(
                     pageData: state.pageData!,

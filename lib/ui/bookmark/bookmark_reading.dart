@@ -12,10 +12,9 @@ import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/serat_font.dart';
-import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/widgets/page_reading.dart';
 import 'package:serat/widgets/page_reading_shimmer.dart';
+import 'package:serat/widgets/reading_appbar.dart';
 
 @RoutePage(name: 'BookmarkReadingRoute')
 class BookmarkReading extends StatelessWidget {
@@ -63,21 +62,9 @@ class BookmarkReadingView extends StatelessWidget {
     return BlocBuilder<BookmarkCubit, BookmarkState>(
         builder: (context, state) => state.status == BookmarkStatus.page
             ? Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "${'page'.tr(context)} ${state.pageData?.pageNumber}",
-                    style: TextStyle(
-                        fontFamily: SeratFont.bZar.name,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20),
-                  ),
-                  shadowColor: Colors.transparent,
-                  leading: GestureDetector(
-                      child: Image.asset(SeratIcon.backRTL.name),
-                      onTap: () {
-                        context.router.pop();
-                      }),
-                ),
+                appBar: ReadingAppbar(
+                    pageNumber: state.pageData?.pageNumber ?? 0,
+                    juzNumber: state.pageData?.pageJuzNumber ?? 0),
                 // surah's listview
                 body: PageReading(
                     pageData: state.pageData!,
