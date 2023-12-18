@@ -64,6 +64,7 @@ class QuranReadingView extends StatelessWidget {
             ? Scaffold(
                 appBar: AppBar(
                   title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "${'page'.tr(context)} ${state.pageData?.pageNumber}",

@@ -17,38 +17,38 @@ import 'package:serat/services/helper/translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 class App {
-  final List<JuzStarterSchema> _totalJuzList = const [
-    JuzStarterSchema(1, 1, 1),
-    JuzStarterSchema(2, 2, 142),
-    JuzStarterSchema(3, 2, 253),
-    JuzStarterSchema(4, 3, 93),
-    JuzStarterSchema(5, 4, 24),
-    JuzStarterSchema(6, 4, 148),
-    JuzStarterSchema(7, 5, 82),
-    JuzStarterSchema(8, 6, 111),
-    JuzStarterSchema(9, 7, 88),
-    JuzStarterSchema(10, 8, 41),
-    JuzStarterSchema(11, 9, 93),
-    JuzStarterSchema(12, 11, 6),
-    JuzStarterSchema(13, 12, 53),
-    JuzStarterSchema(14, 15, 1),
-    JuzStarterSchema(15, 17, 1),
-    JuzStarterSchema(16, 18, 75),
-    JuzStarterSchema(17, 21, 1),
-    JuzStarterSchema(18, 23, 1),
-    JuzStarterSchema(19, 25, 21),
-    JuzStarterSchema(20, 27, 56),
-    JuzStarterSchema(21, 29, 46),
-    JuzStarterSchema(22, 33, 31),
-    JuzStarterSchema(23, 36, 28),
-    JuzStarterSchema(24, 39, 32),
-    JuzStarterSchema(25, 41, 47),
-    JuzStarterSchema(26, 46, 1),
-    JuzStarterSchema(27, 51, 31),
-    JuzStarterSchema(28, 58, 1),
-    JuzStarterSchema(29, 67, 1),
-    JuzStarterSchema(30, 78, 1),
-  ];
+  List<JuzStarterSchema> get _totalJuzList => const [
+        JuzStarterSchema(1, 1, 1),
+        JuzStarterSchema(2, 2, 142),
+        JuzStarterSchema(3, 2, 253),
+        JuzStarterSchema(4, 3, 93),
+        JuzStarterSchema(5, 4, 24),
+        JuzStarterSchema(6, 4, 148),
+        JuzStarterSchema(7, 5, 82),
+        JuzStarterSchema(8, 6, 111),
+        JuzStarterSchema(9, 7, 88),
+        JuzStarterSchema(10, 8, 41),
+        JuzStarterSchema(11, 9, 93),
+        JuzStarterSchema(12, 11, 6),
+        JuzStarterSchema(13, 12, 53),
+        JuzStarterSchema(14, 15, 1),
+        JuzStarterSchema(15, 17, 1),
+        JuzStarterSchema(16, 18, 75),
+        JuzStarterSchema(17, 21, 1),
+        JuzStarterSchema(18, 23, 1),
+        JuzStarterSchema(19, 25, 21),
+        JuzStarterSchema(20, 27, 56),
+        JuzStarterSchema(21, 29, 46),
+        JuzStarterSchema(22, 33, 31),
+        JuzStarterSchema(23, 36, 28),
+        JuzStarterSchema(24, 39, 32),
+        JuzStarterSchema(25, 41, 47),
+        JuzStarterSchema(26, 46, 1),
+        JuzStarterSchema(27, 51, 31),
+        JuzStarterSchema(28, 58, 1),
+        JuzStarterSchema(29, 67, 1),
+        JuzStarterSchema(30, 78, 1),
+      ];
 
   Future<ReadingPageSchema> getPageData(
       {required int page, List<int?>? itemToScroll, required Size size}) async {
@@ -218,4 +218,7 @@ class App {
 
     return isSaved;
   }
+
+  JuzStarterSchema starterJuzData(int juzNumber) =>
+      _totalJuzList.firstWhere((e) => e.juzNumber == juzNumber);
 }

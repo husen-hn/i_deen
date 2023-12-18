@@ -32,6 +32,10 @@ class QuranCubit extends Cubit<QuranState> {
   List<int> getSurahPages(int surahNumber) => quran.getSurahPages(surahNumber);
   String getPlaceOfRevelation(int surahNumber) =>
       quran.getPlaceOfRevelation(surahNumber);
+  int starterSurahNumberByJuz(int juzNumber) =>
+      appRepository.starterJuzData(juzNumber).surahNumber;
+  int starterVerseNumberByJuz(int juzNumber) =>
+      appRepository.starterJuzData(juzNumber).verseNumber;
 
   Future<void> saveVerse(int surahNumber, int verseNumber) async {
     await CacheHelper.saveVerse(surahNumber, verseNumber);
