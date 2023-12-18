@@ -16,7 +16,9 @@ enum SeratIcon {
   prayerIcon,
   lamp,
   bookmark,
-  quran
+  quran,
+  save,
+  saved
 }
 
 extension CatExtension on SeratIcon {
@@ -44,6 +46,10 @@ extension CatExtension on SeratIcon {
         return 'assets/icons/bookmark_icon.png';
       case SeratIcon.quran:
         return 'assets/icons/quran.png';
+      case SeratIcon.save:
+        return 'assets/icons/save.png';
+      case SeratIcon.saved:
+        return 'assets/icons/saved.png';
 
       default:
         return '';

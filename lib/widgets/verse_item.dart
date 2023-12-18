@@ -6,12 +6,16 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VerseItem extends StatelessWidget {
   final String? surahName;
+  final int? juzNumber;
   final int surahNumber;
-  final int ayahNumber;
+  final int verseNumber;
   final String arabicText;
   final String translation;
   final bool isSaved;
@@ -21,8 +25,9 @@ class VerseItem extends StatelessWidget {
   const VerseItem({
     super.key,
     this.surahName,
+    this.juzNumber,
     required this.surahNumber,
-    required this.ayahNumber,
+    required this.verseNumber,
     required this.arabicText,
     required this.translation,
     required this.isSaved,
@@ -33,7 +38,7 @@ class VerseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: Key('$surahNumber-$ayahNumber'),
+      key: Key('$surahNumber-$verseNumber'),
       onVisibilityChanged: (visibilityInfo) {
         double visiblePercentage = visibilityInfo.visibleFraction * 100;
         if (visiblePercentage == 100) {
@@ -46,77 +51,109 @@ class VerseItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // toolbar
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              decoration: const BoxDecoration(
-                color: Color(0xFF1219310D),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 30,
-                          height: 30,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF863ED5),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
-                          ),
-                          child: Center(
-                              child: Text(
-                            ayahNumber.toString(),
-                            style: const TextStyle(
-                                fontFamily: 'BTitr',
-                                fontSize: 14,
-                                color: Colors.white),
-                          )),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                juzNumber == null
+                    ? Container()
+                    : Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        decoration: const BoxDecoration(
+                          color: Color.fromRGBO(134, 62, 213, 1),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        const SizedBox(width: 10),
-                        surahName == null
-                            ? Container()
-                            : Text(surahName!,
-                                style: const TextStyle(
-                                    color: Color(0xFF863ED5),
-                                    fontFamily: 'Amiri',
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 20))
-                      ],
+                        width: 30,
+                        height: 50,
+                        child: Center(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: Text(
+                              "${'juz'.tr(context)} $juzNumber",
+                              style: TextStyle(
+                                  fontFamily: SeratFont.bTitr.name,
+                                  fontSize: 14,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                Expanded(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(25, 49, 13, 0.071),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * .2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Image.asset('assets/icons/share.png'),
-                          // Image.asset('assets/icons/play.png'),
-                          InkWell(
-                              onTap: onSaveTap,
-                              child: isSaved
-                                  ? Image.asset('assets/icons/saved.png',
-                                      color: const Color(0xFF863ED5))
-                                  : Image.asset('assets/icons/save.png',
-                                      color: const Color(0xFF863ED5)))
+                          Row(
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 30,
+                                decoration: const BoxDecoration(
+                                  color: Color.fromRGBO(134, 62, 213, 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  verseNumber.toString(),
+                                  style: TextStyle(
+                                      fontFamily: SeratFont.bTitr.name,
+                                      fontSize: 14,
+                                      color: Colors.white),
+                                )),
+                              ),
+                              const SizedBox(width: 10),
+                              surahName == null
+                                  ? Container()
+                                  : Text(surahName!,
+                                      style: TextStyle(
+                                          color: const Color.fromRGBO(
+                                              134, 62, 213, 1),
+                                          fontFamily: SeratFont.amiri.name,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 20))
+                            ],
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .2,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // Image.asset('assets/icons/share.png'),
+                                // Image.asset('assets/icons/play.png'),
+                                InkWell(
+                                    onTap: onSaveTap,
+                                    child: isSaved
+                                        ? Image.asset(SeratIcon.saved.name,
+                                            color: const Color(0xFF863ED5))
+                                        : Image.asset(SeratIcon.save.name,
+                                            color: const Color(0xFF863ED5)))
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    )
-                  ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height * .02),
             // text section
             Text(
               arabicText,
               textAlign: TextAlign.justify,
-              style: const TextStyle(
-                  color: Color(0xFF240F4F),
-                  fontFamily: 'QuranTaha',
+              style: TextStyle(
+                  color: const Color(0xFF240F4F),
+                  fontFamily: SeratFont.quranTaha.name,
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
                   height: 2),
@@ -124,9 +161,9 @@ class VerseItem extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * .02),
             Text(translation,
                 textAlign: TextAlign.justify,
-                style: const TextStyle(
-                    color: Color(0xFF240F4F),
-                    fontFamily: 'BZar',
+                style: TextStyle(
+                    color: const Color(0xFF240F4F),
+                    fontFamily: SeratFont.bZar.name,
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
                     height: 2)),

@@ -63,12 +63,25 @@ class QuranReadingView extends StatelessWidget {
         builder: (context, state) => state.status == QuranStatus.page
             ? Scaffold(
                 appBar: AppBar(
-                  title: Text(
-                    "${'page'.tr(context)} ${state.pageData?.pageNumber}",
-                    style: TextStyle(
-                        fontFamily: SeratFont.bZar.name,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20),
+                  title: Row(
+                    children: [
+                      Text(
+                        "${'page'.tr(context)} ${state.pageData?.pageNumber}",
+                        style: TextStyle(
+                            fontFamily: SeratFont.bZar.name,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        "${'juz'.tr(context)} ${state.pageData?.pageJuzNumber}",
+                        style: TextStyle(
+                            color: const Color(0xFF8789A3),
+                            fontFamily: SeratFont.bZar.name,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 12),
+                      ),
+                    ],
                   ),
                   shadowColor: Colors.transparent,
                   leading: GestureDetector(

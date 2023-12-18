@@ -9,7 +9,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
-import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/widgets/number_btn.dart';
 
@@ -29,8 +28,8 @@ class Juz extends StatelessWidget {
                 crossAxisCount: 4, crossAxisSpacing: 10, mainAxisSpacing: 10),
             itemBuilder: (context, index) {
               return InkWell(
-                  onTap: () => context.router
-                      .push(JuzReadingRoute(juzNumber: index + 1)),
+                  // onTap: () => context.router
+                  //     .push(JuzReadingRoute(juzNumber: index + 1)),
                   child: NumberBtn(number: index + 1));
             });
       },

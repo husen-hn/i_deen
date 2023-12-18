@@ -51,9 +51,10 @@ class SurahReading extends StatelessWidget {
                           height: 30,
                         ),
                         VerseItem(
+                            juzNumber: verses[index].juzNumber,
                             surahNumber: surahNumber,
                             // display index for verses number on full surah, and display verses number on limited surah
-                            ayahNumber: verses[index].verseNumber,
+                            verseNumber: verses[index].verseNumber,
                             arabicText: verses[index].arabicText,
                             translation: verses[index].trText,
                             isSaved: verses[index].isSaved,
@@ -66,9 +67,10 @@ class SurahReading extends StatelessWidget {
                       ],
                     )
                   : VerseItem(
+                      juzNumber: verses[index].juzNumber,
                       surahNumber: surahNumber,
                       // display index for verses number on full surah, and display verses number on limited surah
-                      ayahNumber: verses[index].verseNumber,
+                      verseNumber: verses[index].verseNumber,
                       arabicText: verses[index].arabicText,
                       translation: verses[index].trText,
                       isSaved: verses[index].isSaved,

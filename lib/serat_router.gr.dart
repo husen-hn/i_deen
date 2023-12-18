@@ -45,16 +45,6 @@ abstract class _$SeratRouter extends RootStackRouter {
         child: const Home(),
       );
     },
-    JuzReadingRoute.name: (routeData) {
-      final args = routeData.argsAs<JuzReadingRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: JuzReading(
-          key: args.key,
-          juzNumber: args.juzNumber,
-        ),
-      );
-    },
     QuranReadingRoute.name: (routeData) {
       final args = routeData.argsAs<QuranReadingRouteArgs>(
           orElse: () => const QuranReadingRouteArgs());
@@ -165,44 +155,6 @@ class HomeRoute extends PageRouteInfo<void> {
   static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [JuzReading]
-class JuzReadingRoute extends PageRouteInfo<JuzReadingRouteArgs> {
-  JuzReadingRoute({
-    Key? key,
-    required int juzNumber,
-    List<PageRouteInfo>? children,
-  }) : super(
-          JuzReadingRoute.name,
-          args: JuzReadingRouteArgs(
-            key: key,
-            juzNumber: juzNumber,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'JuzReadingRoute';
-
-  static const PageInfo<JuzReadingRouteArgs> page =
-      PageInfo<JuzReadingRouteArgs>(name);
-}
-
-class JuzReadingRouteArgs {
-  const JuzReadingRouteArgs({
-    this.key,
-    required this.juzNumber,
-  });
-
-  final Key? key;
-
-  final int juzNumber;
-
-  @override
-  String toString() {
-    return 'JuzReadingRouteArgs{key: $key, juzNumber: $juzNumber}';
-  }
 }
 
 /// generated route for

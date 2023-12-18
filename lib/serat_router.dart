@@ -12,7 +12,6 @@ import 'package:serat/ui/bookmark/bookmark_reading.dart';
 import 'package:serat/ui/drawer/about_us.dart';
 import 'package:serat/ui/drawer/copy_right.dart';
 import 'package:serat/ui/home/home.dart';
-import 'package:serat/ui/quran/juz_reading.dart';
 import 'package:serat/ui/quran/quran_reading.dart';
 import 'package:serat/ui/slpash/splash.dart';
 part 'serat_router.gr.dart';
@@ -29,7 +28,6 @@ class SeratRouter extends _$SeratRouter {
         CustomRoute(
             page: QuranReadingRoute.page,
             transitionsBuilder: TransitionsBuilders.slideLeft),
-        CustomRoute(page: JuzReadingRoute.page),
         CustomRoute(
             page: AboutUsRoute.page,
             transitionsBuilder: TransitionsBuilders.slideBottom),

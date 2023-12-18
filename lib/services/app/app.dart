@@ -9,6 +9,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:serat/services/helper/cache_helper.dart';
+import 'package:serat/services/helper/juz_starter_schema.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/services/helper/saved_verses_schema.dart';
 import 'package:serat/services/helper/tr_data_success_schema.dart';
@@ -16,10 +17,46 @@ import 'package:serat/services/helper/translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 class App {
+  final List<JuzStarterSchema> _totalJuzList = const [
+    JuzStarterSchema(1, 1, 1),
+    JuzStarterSchema(2, 2, 142),
+    JuzStarterSchema(3, 2, 253),
+    JuzStarterSchema(4, 3, 93),
+    JuzStarterSchema(5, 4, 24),
+    JuzStarterSchema(6, 4, 148),
+    JuzStarterSchema(7, 5, 82),
+    JuzStarterSchema(8, 6, 111),
+    JuzStarterSchema(9, 7, 88),
+    JuzStarterSchema(10, 8, 41),
+    JuzStarterSchema(11, 9, 93),
+    JuzStarterSchema(12, 11, 6),
+    JuzStarterSchema(13, 12, 53),
+    JuzStarterSchema(14, 15, 1),
+    JuzStarterSchema(15, 17, 1),
+    JuzStarterSchema(16, 18, 75),
+    JuzStarterSchema(17, 21, 1),
+    JuzStarterSchema(18, 23, 1),
+    JuzStarterSchema(19, 25, 21),
+    JuzStarterSchema(20, 27, 56),
+    JuzStarterSchema(21, 29, 46),
+    JuzStarterSchema(22, 33, 31),
+    JuzStarterSchema(23, 36, 28),
+    JuzStarterSchema(24, 39, 32),
+    JuzStarterSchema(25, 41, 47),
+    JuzStarterSchema(26, 46, 1),
+    JuzStarterSchema(27, 51, 31),
+    JuzStarterSchema(28, 58, 1),
+    JuzStarterSchema(29, 67, 1),
+    JuzStarterSchema(30, 78, 1),
+  ];
+
   Future<ReadingPageSchema> getPageData(
       {required int page, List<int?>? itemToScroll, required Size size}) async {
     ReadingPageSchema data = ReadingPageSchema(
-        pageNumber: page, scrollPosition: null, surahs: <SurahData>[]);
+        pageNumber: page,
+        pageJuzNumber: null,
+        scrollPosition: null,
+        surahs: <SurahData>[]);
 
     // [{surah: 112, start: 1, end: 5}, {surah: 113, start: 1, end: 4}]
     List<Map<String, dynamic>> pageData =
@@ -54,6 +91,15 @@ class App {
         String arabicText = quran.getVerse(surahNumber, verseNumber);
         String trText = trData[verseNumber - 1].translation ?? '';
 
+        int? verseJuzNumber;
+
+        for (var i = 0; i < _totalJuzList.length; i++) {
+          if (surahNumber == _totalJuzList[i].surahNumber &&
+              verseNumber == _totalJuzList[i].verseNumber) {
+            verseJuzNumber = _totalJuzList[i].juzNumber;
+          }
+        }
+
         // if itemToScroll is null, we dont need to scroll
         if (itemToScroll != null) {
           if (itemToScroll.first == surahNumber &&
@@ -66,6 +112,7 @@ class App {
         }
         verses.add(VerseData(
             verseNumber: verseNumber,
+            juzNumber: verseJuzNumber,
             arabicText: arabicText,
             trText: trText,
             isSaved: _isVerseSaved(savedVerses, surahNumber, verseNumber)));
@@ -86,6 +133,8 @@ class App {
     //   // reasain saved item position
     //   savedItemPosition = savedItemPositionCounter;
     // }
+    data.pageJuzNumber = _getJuzNumber(
+        data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
     data.scrollPosition = savedItemPosition;
 
     return data;
@@ -112,6 +161,9 @@ class App {
 
     return data;
   }
+
+  int _getJuzNumber(int surahNumber, int verseNumber) =>
+      quran.getJuzNumber(surahNumber, verseNumber);
 
   //TODO: make it better
   double _countHeightByText(String arabicText, String trText, Size size) {
