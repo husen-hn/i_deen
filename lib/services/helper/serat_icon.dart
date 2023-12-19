@@ -6,11 +6,13 @@
 //
 
 enum SeratIcon {
+  back,
   backRTL,
   verse,
   nameOfGod,
   namazLogo,
   appIcon,
+  appIconShadow,
   namazLogoAg,
   lastRead,
   prayerIcon,
@@ -18,12 +20,20 @@ enum SeratIcon {
   bookmark,
   quran,
   save,
-  saved
+  saved,
+  menu,
+  menuRTL,
+  cloud1,
+  cloud2,
+  cloud3,
+  star
 }
 
 extension CatExtension on SeratIcon {
   String get name {
     switch (this) {
+      case SeratIcon.back:
+        return 'assets/icons/back_ltr.png';
       case SeratIcon.backRTL:
         return 'assets/icons/back_rtl.png';
       case SeratIcon.verse:
@@ -34,6 +44,8 @@ extension CatExtension on SeratIcon {
         return 'assets/namaz_logo.png';
       case SeratIcon.appIcon:
         return 'assets/app_icon.png';
+      case SeratIcon.appIconShadow:
+        return 'assets/app_icon_shadow.png';
       case SeratIcon.namazLogoAg:
         return 'assets/namaz_logo_ag.png';
       case SeratIcon.lastRead:
@@ -50,6 +62,18 @@ extension CatExtension on SeratIcon {
         return 'assets/icons/save.png';
       case SeratIcon.saved:
         return 'assets/icons/saved.png';
+      case SeratIcon.menuRTL:
+        return 'assets/icons/menu_rtl.png';
+      case SeratIcon.menu:
+        return 'assets/icons/menu.png';
+      case SeratIcon.cloud1:
+        return 'assets/icons/cloud1.png';
+      case SeratIcon.cloud2:
+        return 'assets/icons/cloud2.png';
+      case SeratIcon.cloud3:
+        return 'assets/icons/cloud3.png';
+      case SeratIcon.star:
+        return 'assets/icons/star.png';
 
       default:
         return '';

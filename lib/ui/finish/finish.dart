@@ -102,7 +102,7 @@ class FinishView extends StatelessWidget {
                     FloatingActionButton(
                         backgroundColor: const Color(0xFF672CBC),
                         child: Image.asset('assets/icons/back_rtl.png',
-                            color: Colors.white),
+                            color: Colors.white, width: 20),
                         onPressed: () {
                           //scroll up on page change
                           context.read<AppCubit>().scrollTo(
@@ -135,7 +135,7 @@ class FinishView extends StatelessWidget {
                     FloatingActionButton(
                         backgroundColor: const Color(0xFF672CBC),
                         child: Image.asset('assets/icons/back_ltr.png',
-                            color: Colors.white),
+                            color: Colors.white, width: 20),
                         onPressed: () {
                           //scroll up on page change
                           context.read<AppCubit>().scrollTo(

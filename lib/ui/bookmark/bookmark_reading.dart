@@ -96,7 +96,7 @@ class BookmarkReadingView extends StatelessWidget {
                           FloatingActionButton(
                               backgroundColor: const Color(0xFF672CBC),
                               child: Image.asset('assets/icons/back_rtl.png',
-                                  color: Colors.white),
+                                  color: Colors.white, width: 20),
                               onPressed: () {
                                 int previousPage =
                                     state.pageData!.pageNumber - 1;
@@ -123,8 +123,11 @@ class BookmarkReadingView extends StatelessWidget {
                           const SizedBox(width: 10),
                           FloatingActionButton(
                               backgroundColor: const Color(0xFF672CBC),
-                              child: Image.asset('assets/icons/back_ltr.png',
-                                  color: Colors.white),
+                              child: Image.asset(
+                                'assets/icons/back_ltr.png',
+                                color: Colors.white,
+                                width: 20,
+                              ),
                               onPressed: () {
                                 int nextPage = state.pageData!.pageNumber + 1;
 

@@ -6,6 +6,8 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 
 class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;
@@ -18,8 +20,10 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: const TextStyle(
-            fontFamily: 'Amiri', fontWeight: FontWeight.w900, fontSize: 24),
+        style: TextStyle(
+            fontFamily: SeratFont.amiri.name,
+            fontWeight: FontWeight.w900,
+            fontSize: 24),
       ),
       shadowColor: Colors.transparent,
       leading: Builder(
@@ -27,10 +31,10 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
           return IconButton(
             icon: Image.asset(
               langCode == 'fa' || langCode == 'ar'
-                  ? 'assets/icons/menu_rtl.png'
-                  : 'assets/icons/menu.png',
-              height: 30,
-              color: const Color(0xFF8789A3),
+                  ? SeratIcon.menuRTL.name
+                  : SeratIcon.menu.name,
+              height: 14,
+              color: const Color.fromRGBO(135, 137, 163, 1),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();

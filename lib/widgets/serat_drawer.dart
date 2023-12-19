@@ -27,7 +27,7 @@ class SeratDrawer extends StatelessWidget {
               gradient: LinearGradient(
                   colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
             ),
-            child: Image.asset(SeratIcon.appIcon.name),
+            child: Image.asset(SeratIcon.appIconShadow.name),
           ),
           ListTile(
             leading: const Icon(Icons.info_outline),

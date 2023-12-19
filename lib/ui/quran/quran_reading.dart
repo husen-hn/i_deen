@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/widgets/page_reading.dart';
 import 'package:serat/widgets/page_reading_shimmer.dart';
 import 'package:serat/widgets/reading_appbar.dart';
@@ -94,8 +95,8 @@ class QuranReadingView extends StatelessWidget {
                         children: [
                           FloatingActionButton(
                               backgroundColor: const Color(0xFF672CBC),
-                              child: Image.asset('assets/icons/back_rtl.png',
-                                  color: Colors.white),
+                              child: Image.asset(SeratIcon.backRTL.name,
+                                  color: Colors.white, width: 20),
                               onPressed: () {
                                 int previousPage =
                                     state.pageData!.pageNumber - 1;
@@ -112,7 +113,8 @@ class QuranReadingView extends StatelessWidget {
                               }),
                           const SizedBox(width: 10),
                           FloatingActionButton.extended(
-                              backgroundColor: const Color(0xFF672CBC),
+                              backgroundColor:
+                                  const Color.fromRGBO(103, 44, 188, 1),
                               onPressed: null,
                               label: Text(
                                 "${'page'.tr(context)} ${state.pageData?.pageNumber}",
@@ -121,9 +123,10 @@ class QuranReadingView extends StatelessWidget {
                               )),
                           const SizedBox(width: 10),
                           FloatingActionButton(
-                              backgroundColor: const Color(0xFF672CBC),
-                              child: Image.asset('assets/icons/back_ltr.png',
-                                  color: Colors.white),
+                              backgroundColor:
+                                  const Color.fromRGBO(103, 44, 188, 1),
+                              child: Image.asset(SeratIcon.back.name,
+                                  color: Colors.white, width: 20),
                               onPressed: () {
                                 int nextPage = state.pageData!.pageNumber + 1;
 

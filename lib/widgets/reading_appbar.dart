@@ -42,9 +42,13 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       shadowColor: Colors.transparent,
-      leading: GestureDetector(
-          child: Image.asset(SeratIcon.backRTL.name),
-          onTap: () {
+      leading: IconButton(
+          icon: Image.asset(
+            SeratIcon.backRTL.name,
+            height: 16,
+            color: const Color.fromRGBO(135, 137, 163, 1),
+          ),
+          onPressed: () {
             context.router.pop();
           }),
     );

@@ -63,8 +63,8 @@ flutter:
     - assets/namaz_logo.png
     - assets/namaz-logo-name.png
     - assets/besmelah.png
-    - assets/app_logo.png
     - assets/app_icon.png
+    - assets/app_icon_shadow.png
     - assets/namaz_logo_ag.png
 
     - assets/icons/bookmark_icon.png
