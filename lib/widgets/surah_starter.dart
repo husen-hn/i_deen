@@ -45,12 +45,7 @@ class SurahStarter extends StatelessWidget {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        SeratIcon.verse.name,
-                        color: Colors.white,
-                        width: 30,
-                        height: 30,
-                      ),
+                      _icon(),
                       Text(
                         surahName,
                         style: TextStyle(
@@ -59,12 +54,7 @@ class SurahStarter extends StatelessWidget {
                             fontWeight: FontWeight.w800,
                             fontSize: 30),
                       ),
-                      Image.asset(
-                        SeratIcon.verse.name,
-                        color: Colors.white,
-                        width: 30,
-                        height: 30,
-                      )
+                      _icon()
                     ]),
               ],
             ),
@@ -80,4 +70,28 @@ class SurahStarter extends StatelessWidget {
       ],
     );
   }
+
+  Stack _icon() => Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            SeratIcon.verse.name,
+            color: Colors.white,
+            width: 10,
+            height: 10,
+          ),
+          Image.asset(
+            SeratIcon.verse.name,
+            color: Colors.white,
+            width: 20,
+            height: 20,
+          ),
+          Image.asset(
+            SeratIcon.verse.name,
+            color: Colors.white,
+            width: 30,
+            height: 30,
+          )
+        ],
+      );
 }

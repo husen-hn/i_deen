@@ -6,6 +6,8 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VerseItemExpansion extends StatelessWidget {
@@ -54,8 +56,8 @@ class VerseItemExpansion extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           maintainState: true,
-          collapsedIconColor: const Color(0xFF994EF8),
-          iconColor: const Color(0xFF994EF8),
+          collapsedIconColor: const Color.fromRGBO(153, 78, 248, 1),
+          iconColor: const Color.fromRGBO(153, 78, 248, 1),
           childrenPadding: const EdgeInsets.symmetric(horizontal: 12.0),
           expandedAlignment: Alignment.centerRight,
           title: Container(
@@ -75,14 +77,14 @@ class VerseItemExpansion extends StatelessWidget {
                         width: 30,
                         height: 30,
                         decoration: const BoxDecoration(
-                          color: Color(0xFF863ED5),
+                          color: Color.fromRGBO(134, 62, 213, 1),
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                         ),
                         child: Center(
                             child: Text(
                           ayahNumber.toString(),
-                          style: const TextStyle(
-                              fontFamily: 'BTitr',
+                          style: TextStyle(
+                              fontFamily: SeratFont.bTitr.name,
                               fontSize: 14,
                               color: Colors.white),
                         )),
@@ -91,9 +93,9 @@ class VerseItemExpansion extends StatelessWidget {
                       surahName == null
                           ? Container()
                           : Text(surahName!,
-                              style: const TextStyle(
-                                  color: Color(0xFF863ED5),
-                                  fontFamily: 'Amiri',
+                              style: TextStyle(
+                                  color: const Color.fromRGBO(134, 62, 213, 1),
+                                  fontFamily: SeratFont.amiri.name,
                                   fontWeight: FontWeight.w800,
                                   fontSize: 20))
                     ],
@@ -108,10 +110,12 @@ class VerseItemExpansion extends StatelessWidget {
                         InkWell(
                             onTap: onSaveTap,
                             child: isSaved
-                                ? Image.asset('assets/icons/saved.png',
-                                    color: const Color(0xFF863ED5))
-                                : Image.asset('assets/icons/save.png',
-                                    color: const Color(0xFF863ED5)))
+                                ? Image.asset(SeratIcon.saved.name,
+                                    color:
+                                        const Color.fromRGBO(134, 62, 213, 1))
+                                : Image.asset(SeratIcon.save.name,
+                                    color:
+                                        const Color.fromRGBO(134, 62, 213, 1)))
                       ],
                     ),
                   )

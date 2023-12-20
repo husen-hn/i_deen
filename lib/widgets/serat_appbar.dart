@@ -34,7 +34,7 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
                   ? SeratIcon.menuRTL.name
                   : SeratIcon.menu.name,
               height: 14,
-              color: const Color.fromRGBO(135, 137, 163, 1),
+              color: const Color.fromARGB(255, 53, 53, 61),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();

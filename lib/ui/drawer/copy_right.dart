@@ -7,6 +7,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/services/helper/serat_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage(name: 'CopyRightRoute')
@@ -17,17 +18,21 @@ class CopyRight extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'کپی رایت',
-          style: TextStyle(
-              fontFamily: 'BZar', fontWeight: FontWeight.w900, fontSize: 20),
-        ),
-        shadowColor: Colors.transparent,
-        leading: GestureDetector(
-          child: Image.asset('assets/icons/back_rtl.png'),
-          onTap: () => context.router.pop(),
-        ),
-      ),
+          title: const Text(
+            'کپی رایت',
+            style: TextStyle(
+                fontFamily: 'BZar', fontWeight: FontWeight.w900, fontSize: 20),
+          ),
+          shadowColor: Colors.transparent,
+          leading: IconButton(
+              icon: Image.asset(
+                SeratIcon.backRTL.name,
+                height: 16,
+                color: const Color.fromRGBO(135, 137, 163, 1),
+              ),
+              onPressed: () {
+                context.router.pop();
+              })),
       body: Center(
         child: Directionality(
           textDirection: TextDirection.ltr,
