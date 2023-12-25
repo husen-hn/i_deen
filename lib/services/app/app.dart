@@ -83,7 +83,9 @@ class App {
       if (itemToScroll != null && start == 1 && itemToScroll.last != 1) {
         surahNumber == 9
             ? savedItemPositionCounter += size.height * .1
-            : savedItemPositionCounter += size.height * .2;
+            :
+            // savedItemPositionCounter += size.height * .2
+            savedItemPositionCounter += 178;
       }
 
       // get surah's verses
@@ -108,6 +110,7 @@ class App {
           } else {
             savedItemPositionCounter +=
                 _countHeightByText(arabicText, trText, size);
+            print('***savedItemPositionCounter***$savedItemPositionCounter');
           }
         }
         verses.add(VerseData(
@@ -135,6 +138,7 @@ class App {
     // }
     data.pageJuzNumber = _getJuzNumber(
         data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
+    print('***savedItemPosition***$savedItemPosition');
     data.scrollPosition = savedItemPosition;
 
     return data;
@@ -172,7 +176,7 @@ class App {
     // print('*******Size*******${size.width}');
 
     // // in default each item height is 200
-    double defHeight = 40 + ((size.height * .02) * 4);
+    double defHeight = 128.0; //40 + ((size.height * .02) * 4);
     double arabicTextLinesChar = (size.width / 100) * 17.4;
     double trTextLinesChar = (size.width / 100) * 20.25;
 
@@ -181,11 +185,11 @@ class App {
 
     for (var i = 0; i < arabicTextLines; i++) {
       // each arabic line height is 45.0
-      defHeight += 60.0;
+      defHeight += 46.0;
     }
     for (var i = 0; i < trTextLines; i++) {
-      // each tr line height is 37.0
-      defHeight += 45.0;
+      // each tr line height is 42.0
+      defHeight += 43.0;
     }
 
     return defHeight;

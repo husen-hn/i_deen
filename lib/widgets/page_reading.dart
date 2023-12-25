@@ -32,21 +32,31 @@ class PageReading extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback(
         (_) => _scrollDown(pageData.scrollPosition ?? 0.0));
 
-    return ListView.builder(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
-        physics: const BouncingScrollPhysics(),
-        controller: _controller,
-        itemCount: pageData.surahs.length,
-        itemBuilder: (context, index) {
-          // Reading is a listview of surah's verses
-          return SurahReading(
-            surahNumber: pageData.surahs[index].surahNumber,
-            surahName: pageData.surahs[index].surahName,
-            verses: pageData.surahs[index].verses,
-            onTapSave: onTapSave,
-            onVisible: (surahNumber, verseNumber) =>
-                onVerseVisible(surahNumber, verseNumber),
-          );
-        });
+    return NotificationListener(
+      child: ListView.builder(
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
+          physics: const BouncingScrollPhysics(),
+          controller: _controller,
+          itemCount: pageData.surahs.length,
+          itemBuilder: (context, index) {
+            // Reading is a listview of surah's verses
+            return SurahReading(
+              surahNumber: pageData.surahs[index].surahNumber,
+              surahName: pageData.surahs[index].surahName,
+              verses: pageData.surahs[index].verses,
+              onTapSave: onTapSave,
+              onVisible: (surahNumber, verseNumber) =>
+                  onVerseVisible(surahNumber, verseNumber),
+            );
+          }),
+      onNotification: (t) {
+        // if (t is ScrollEndNotification) {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       SnackBar(content: Text(_controller.offset.toString())));
+        // }
+
+        return true;
+      },
+    );
   }
 }

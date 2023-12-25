@@ -5,6 +5,7 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:adivery/adivery_ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
@@ -60,6 +61,12 @@ class QuranView extends StatelessWidget {
                               verseNumber:
                                   state.lastSeen!['verseNumber'].toString())
                           : const LastSeenStatusShimmer()),
+              BannerAd(
+                'a355be22-970a-46b8-bc52-f0a59c4ded05',
+                BannerAdSize.LARGE_BANNER,
+                onAdLoaded: (ad) {},
+                onAdClicked: (ad) {},
+              ),
               // Tabbar view
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
