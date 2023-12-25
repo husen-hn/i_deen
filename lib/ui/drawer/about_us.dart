@@ -18,6 +18,7 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       appBar: AppBar(
         title: Text(
           'درباره ما',

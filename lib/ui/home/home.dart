@@ -34,47 +34,57 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
         bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) => BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            currentIndex: state.btnNvIndex,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Image.asset(SeratIcon.quran.name,
-                      width: 35,
-                      height: 35,
-                      color: context
-                          .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 0)),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset(SeratIcon.prayerIcon.name,
-                      width: 35,
-                      height: 35,
-                      color: context
-                          .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 1)),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset(SeratIcon.lamp.name,
-                      width: 35,
-                      height: 35,
-                      color: context
-                          .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 2)),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset(SeratIcon.bookmark.name,
-                      width: 35,
-                      height: 35,
-                      color: context
-                          .read<HomeCubit>()
-                          .activeBtnNavColor(state.btnNvIndex, 3)),
-                  label: ''),
-            ],
-            onTap: (int index) {
-              context.read<HomeCubit>().setActiveButtonIndex(index);
-            },
+          builder: (context, state) => Container(
+            decoration: const BoxDecoration(
+                border:
+                    Border(top: BorderSide(width: 0.5, color: Colors.grey))),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.shifting,
+              currentIndex: state.btnNvIndex,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: Image.asset(SeratIcon.quran.name,
+                        width: 35,
+                        height: 35,
+                        color: context
+                            .read<HomeCubit>()
+                            .activeBtnNavColor(state.btnNvIndex, 0)),
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Image.asset(SeratIcon.prayerIcon.name,
+                        width: 35,
+                        height: 35,
+                        color: context
+                            .read<HomeCubit>()
+                            .activeBtnNavColor(state.btnNvIndex, 1)),
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Image.asset(SeratIcon.lamp.name,
+                        width: 35,
+                        height: 35,
+                        color: context
+                            .read<HomeCubit>()
+                            .activeBtnNavColor(state.btnNvIndex, 2)),
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Image.asset(SeratIcon.bookmark.name,
+                        width: 35,
+                        height: 35,
+                        color: context
+                            .read<HomeCubit>()
+                            .activeBtnNavColor(state.btnNvIndex, 3)),
+                    backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+                    label: ''),
+              ],
+              onTap: (int index) {
+                context.read<HomeCubit>().setActiveButtonIndex(index);
+              },
+            ),
           ),
         ),
         body: BlocBuilder<HomeCubit, HomeState>(

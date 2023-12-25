@@ -5,7 +5,6 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-import 'package:adivery/adivery_ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
@@ -45,6 +44,7 @@ class QuranView extends StatelessWidget {
     context.read<QuranCubit>().getLastSeen();
 
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       appBar: SeratAppbar(langCode: langCode, title: 'app_name'.tr(context)),
       drawer: SeratDrawer(),
       body: DefaultTabController(
@@ -61,15 +61,9 @@ class QuranView extends StatelessWidget {
                               verseNumber:
                                   state.lastSeen!['verseNumber'].toString())
                           : const LastSeenStatusShimmer()),
-              BannerAd(
-                'a355be22-970a-46b8-bc52-f0a59c4ded05',
-                BannerAdSize.LARGE_BANNER,
-                onAdLoaded: (ad) {},
-                onAdClicked: (ad) {},
-              ),
               // Tabbar view
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 0, right: 0),
                 child: Stack(
                   fit: StackFit.passthrough,
                   alignment: Alignment.bottomCenter,
@@ -86,7 +80,8 @@ class QuranView extends StatelessWidget {
                     TabBar(
                         indicatorColor: const Color(0xFF672CBC),
                         labelColor: const Color(0xFF672CBC),
-                        dividerColor: Colors.green,
+                        dividerColor: Colors.grey,
+                        dividerHeight: 0.5,
                         unselectedLabelColor: const Color(0xFF8789A3),
                         isScrollable: true,
                         indicatorWeight: 3,
@@ -94,6 +89,7 @@ class QuranView extends StatelessWidget {
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'BTitr'),
+                        tabAlignment: TabAlignment.center,
                         tabs: [
                           TabItem(title: 'surah'.tr(context)),
                           TabItem(title: 'page'.tr(context)),

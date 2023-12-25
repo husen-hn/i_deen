@@ -62,6 +62,7 @@ class QuranReadingView extends StatelessWidget {
     return BlocBuilder<QuranCubit, QuranState>(
         builder: (context, state) => state.status == QuranStatus.page
             ? Scaffold(
+                backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                 appBar: ReadingAppbar(
                     pageNumber: state.pageData?.pageNumber ?? 0,
                     juzNumber: state.pageData?.pageJuzNumber ?? 0),
@@ -119,7 +120,9 @@ class QuranReadingView extends StatelessWidget {
                               label: Text(
                                 "${'page'.tr(context)} ${state.pageData?.pageNumber}",
                                 style: const TextStyle(
-                                    fontFamily: 'BTitr', fontSize: 16),
+                                    fontFamily: 'BTitr',
+                                    fontSize: 16,
+                                    color: Colors.white),
                               )),
                           const SizedBox(width: 10),
                           FloatingActionButton(

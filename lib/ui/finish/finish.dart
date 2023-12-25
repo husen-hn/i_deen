@@ -37,6 +37,7 @@ class FinishView extends StatelessWidget {
         .read<FinishCubit>()
         .getPageData(context.read<FinishCubit>().getLastPageNumber);
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       appBar: SeratAppbar(langCode: langCode, title: 'finish'.tr(context)),
       drawer: SeratDrawer(),
       body: BlocBuilder<FinishCubit, FinishState>(builder: (context, state) {
@@ -129,7 +130,9 @@ class FinishView extends StatelessWidget {
                         label: Text(
                           "صفحه ${state.pageData!['page']}",
                           style: const TextStyle(
-                              fontFamily: 'BTitr', fontSize: 16),
+                              fontFamily: 'BTitr',
+                              fontSize: 16,
+                              color: Colors.white),
                         )),
                     const SizedBox(width: 10),
                     FloatingActionButton(

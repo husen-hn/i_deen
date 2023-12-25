@@ -19,6 +19,7 @@ class _BookmarkShimmerState extends State<BookmarkShimmer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
         body: Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
             highlightColor: Colors.grey[100]!,

@@ -46,6 +46,7 @@ class BookmarkView extends StatelessWidget {
     context.read<BookmarkCubit>().getAllSavedVerses();
 
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       appBar: SeratAppbar(langCode: langCode, title: 'saveds'.tr(context)),
       drawer: SeratDrawer(),
       body:

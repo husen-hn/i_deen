@@ -25,6 +25,8 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
             fontWeight: FontWeight.w900,
             fontSize: 24),
       ),
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+      surfaceTintColor: const Color.fromRGBO(250, 250, 250, 1),
       shadowColor: Colors.transparent,
       leading: Builder(
         builder: (BuildContext context) {

@@ -17,6 +17,7 @@ class CopyRight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       appBar: AppBar(
           title: const Text(
             'کپی رایت',
