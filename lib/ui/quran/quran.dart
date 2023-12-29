@@ -106,7 +106,9 @@ class QuranView extends StatelessWidget {
                   child: TabBarView(
                       physics: const BouncingScrollPhysics(),
                       children: [
-                        const Surah(),
+                        Surah(
+                            appRepository:
+                                context.read<QuranCubit>().appRepository),
                         pg.Page(
                             appRepository:
                                 context.read<QuranCubit>().appRepository),
