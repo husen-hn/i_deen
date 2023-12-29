@@ -20,6 +20,7 @@ class VerseItem extends StatelessWidget {
   final String translation;
   final bool isSaved;
   final Function() onSaveTap;
+  final Function() onShare;
   final Function() onVisible;
 
   const VerseItem({
@@ -32,6 +33,7 @@ class VerseItem extends StatelessWidget {
     required this.translation,
     required this.isSaved,
     required this.onSaveTap,
+    required this.onShare,
     required this.onVisible,
   });
 
@@ -127,8 +129,17 @@ class VerseItem extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                // Image.asset('assets/icons/share.png'),
-                                // Image.asset('assets/icons/play.png'),
+                                InkWell(
+                                    onTap: onShare,
+                                    child: SizedBox(
+                                      width: 25,
+                                      child: Image.asset(SeratIcon.share.name,
+                                          color: const Color(0xFF863ED5)),
+                                    )),
+                                // SizedBox(
+                                //     width: 25,
+                                //     child:
+                                //         Image.asset('assets/icons/play.png')),
                                 InkWell(
                                     onTap: onSaveTap,
                                     child: isSaved

@@ -19,6 +19,9 @@ class SurahReading extends StatelessWidget {
     int verseNumber,
     bool isSaved,
   ) onTapSave;
+  final Function(
+          int surahNumber, int verseNumber, String arabicText, String trText)
+      onTapShare;
   final Function(int surahNumber, int verseNumber) onVisible;
 
   const SurahReading(
@@ -27,6 +30,7 @@ class SurahReading extends StatelessWidget {
       required this.surahName,
       required this.verses,
       required this.onTapSave,
+      required this.onTapShare,
       required this.onVisible});
 
   @override
@@ -62,6 +66,11 @@ class SurahReading extends StatelessWidget {
                                 surahNumber,
                                 verses[index].verseNumber,
                                 verses[index].isSaved),
+                            onShare: () => onTapShare(
+                                surahNumber,
+                                verses[index].verseNumber,
+                                verses[index].arabicText,
+                                verses[index].trText),
                             onVisible: () => onVisible(
                                 surahNumber, verses[index].verseNumber))
                       ],
@@ -76,6 +85,11 @@ class SurahReading extends StatelessWidget {
                       isSaved: verses[index].isSaved,
                       onSaveTap: () => onTapSave(surahNumber,
                           verses[index].verseNumber, verses[index].isSaved),
+                      onShare: () => onTapShare(
+                          surahNumber,
+                          verses[index].verseNumber,
+                          verses[index].arabicText,
+                          verses[index].trText),
                       onVisible: () =>
                           onVisible(surahNumber, verses[index].verseNumber));
         });

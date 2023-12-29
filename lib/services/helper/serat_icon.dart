@@ -26,7 +26,8 @@ enum SeratIcon {
   cloud1,
   cloud2,
   cloud3,
-  star
+  star,
+  share
 }
 
 extension CatExtension on SeratIcon {
@@ -74,6 +75,8 @@ extension CatExtension on SeratIcon {
         return 'assets/icons/cloud3.png';
       case SeratIcon.star:
         return 'assets/icons/star.png';
+      case SeratIcon.share:
+        return 'assets/icons/share.png';
 
       default:
         return '';

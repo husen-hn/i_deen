@@ -69,7 +69,7 @@ class BookmarkReadingView extends StatelessWidget {
                 // surah's listview
                 body: PageReading(
                     pageData: state.pageData!,
-                    onTapSave: ((surahNumber, verseNumber, isSaved) {
+                    onTapSave: (surahNumber, verseNumber, isSaved) {
                       isSaved
                           ? context
                               .read<BookmarkCubit>()
@@ -86,7 +86,14 @@ class BookmarkReadingView extends StatelessWidget {
                           surahNumber: surahNumber,
                           verseNumber: verseNumber,
                           size: MediaQuery.of(context).size);
-                    }),
+                    },
+                    onTapShare: (surahNumber, verseNumber, arabicText, trText) {
+                      String surahName = context
+                          .read<BookmarkCubit>()
+                          .getSurahNameArabic(surahNumber);
+                      context.read<AppCubit>().shareText(
+                          "${'ayah'.tr(context)} $verseNumber ${'surah'.tr(context)} $surahName\n\n$arabicText\n$trText\n\n\n${'app_name'.tr(context)}\n${'app_introduce'.tr(context)}\n[${'dl_link'.tr(context)}](${'app_link'.tr(context)})");
+                    },
                     onVerseVisible: (int surahNumber, int verseNumber) =>
                         context.read<AppCubit>().saveLastSeen(surahNumber,
                             verseNumber, const Duration(seconds: 4))),

@@ -12,6 +12,7 @@ import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:quran/quran.dart' as quran;
+import 'package:share_plus/share_plus.dart';
 
 part 'app_state.dart';
 
@@ -73,5 +74,9 @@ class AppCubit extends Cubit<AppState> {
     Future.delayed(duration).then((value) async {
       await CacheHelper.saveLastSeen(lastSurahNum, lastVerseNum);
     });
+  }
+
+  void shareText(String text) {
+    Share.share(text);
   }
 }

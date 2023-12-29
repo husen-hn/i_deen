@@ -91,14 +91,4 @@ class QuranCubit extends Cubit<QuranState> {
 
     nativeAd.loadAd();
   }
-
-  // getNativeAd() {
-  //   emit(state.copyWith(status: () => QuranStatus.loading));
-  //   late NativeAd nativeAd;
-  //   nativeAd = NativeAd('ff454979-efaa-4ab8-b084-7db19e995d9b',
-  //       onAdLoaded: () => emit(state.copyWith(
-  //           status: () => QuranStatus.nativeAd, nativeAd: () => nativeAd)));
-
-  //   nativeAd.loadAd();
-  // }
 }

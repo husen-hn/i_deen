@@ -11,6 +11,7 @@ import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/services/helper/saved_verses_schema.dart';
+import 'package:quran/quran.dart' as quran;
 
 part 'bookmark_state.dart';
 
@@ -19,6 +20,9 @@ class BookmarkCubit extends Cubit<BookmarkState> {
   BookmarkCubit({required this.appRepository})
       : super(const BookmarkState()
             .copyWith(status: () => BookmarkStatus.initial));
+
+  String getSurahNameArabic(int surahNumber) =>
+      quran.getSurahNameArabic(surahNumber);
 
   getAllSavedVerses() async {
     emit(state.copyWith(status: () => BookmarkStatus.loading));
