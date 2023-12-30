@@ -6,24 +6,49 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 
 class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;
   final String title;
-  const SeratAppbar({super.key, required this.langCode, required this.title})
+  final int? juzNumber;
+  final SeratFont font;
+  final double fontSize;
+  const SeratAppbar(
+      {super.key,
+      required this.langCode,
+      required this.title,
+      this.juzNumber,
+      this.font = SeratFont.amiri,
+      this.fontSize = 24})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      title: Text(
-        title,
-        style: TextStyle(
-            fontFamily: SeratFont.amiri.name,
-            fontWeight: FontWeight.w900,
-            fontSize: 24),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontFamily: font.name,
+                fontWeight: FontWeight.w900,
+                fontSize: fontSize),
+          ),
+          juzNumber == null
+              ? Container()
+              : Text(
+                  "${'juz'.tr(context)} $juzNumber",
+                  style: TextStyle(
+                      color: const Color(0xFF8789A3),
+                      fontFamily: SeratFont.bZar.name,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 12),
+                )
+        ],
       ),
       backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
       surfaceTintColor: const Color.fromRGBO(250, 250, 250, 1),

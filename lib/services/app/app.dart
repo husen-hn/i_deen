@@ -51,7 +51,9 @@ class App {
       ];
 
   Future<ReadingPageSchema> getPageData(
-      {required int page, List<int?>? itemToScroll, required Size size}) async {
+      {required int page,
+      List<int?>? itemToScroll,
+      required Size? size}) async {
     ReadingPageSchema data = ReadingPageSchema(
         pageNumber: page,
         pageJuzNumber: null,
@@ -80,7 +82,10 @@ class App {
       // if itemToScroll is null, we dont need to scroll
       // count previous SurahStarter height in first
       //TODO: make it better
-      if (itemToScroll != null && start == 1 && itemToScroll.last != 1) {
+      if (size != null &&
+          itemToScroll != null &&
+          start == 1 &&
+          itemToScroll.last != 1) {
         surahNumber == 9
             ? savedItemPositionCounter += size.height * .1
             :
@@ -103,14 +108,13 @@ class App {
         }
 
         // if itemToScroll is null, we dont need to scroll
-        if (itemToScroll != null) {
+        if (size != null && itemToScroll != null) {
           if (itemToScroll.first == surahNumber &&
               itemToScroll.last == verseNumber) {
             savedItemPosition = savedItemPositionCounter;
           } else {
             savedItemPositionCounter +=
                 _countHeightByText(arabicText, trText, size);
-            print('***savedItemPositionCounter***$savedItemPositionCounter');
           }
         }
         verses.add(VerseData(
@@ -138,8 +142,10 @@ class App {
     // }
     data.pageJuzNumber = _getJuzNumber(
         data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
-    print('***savedItemPosition***$savedItemPosition');
-    data.scrollPosition = savedItemPosition;
+
+    if (size != null && itemToScroll != null) {
+      data.scrollPosition = savedItemPosition;
+    }
 
     return data;
   }

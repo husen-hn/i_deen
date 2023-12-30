@@ -9,19 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/finish/finish_cubit.dart';
-import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/serat_font.dart';
+import 'package:serat/ui/finish/finish_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
 import 'package:quran/quran.dart' as quran;
 import 'package:serat/widgets/surah_starter.dart';
 
 class Finish extends StatelessWidget {
-  const Finish({super.key});
+  final AppRepository appRepository;
+  const Finish({required this.appRepository, super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<FinishCubit>(create: (BuildContext context) => FinishCubit())
+      BlocProvider<FinishCubit>(
+          create: (BuildContext context) =>
+              FinishCubit(appRepository: appRepository))
     ], child: const FinishView());
   }
 }
@@ -35,69 +40,67 @@ class FinishView extends StatelessWidget {
 
     context
         .read<FinishCubit>()
-        .getPageData(context.read<FinishCubit>().getLastPageNumber);
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
-      appBar: SeratAppbar(langCode: langCode, title: 'finish'.tr(context)),
-      drawer: SeratDrawer(),
-      body: BlocBuilder<FinishCubit, FinishState>(builder: (context, state) {
-        return state.status == FinishStatus.page
-            ? SafeArea(
-                child: ListView.builder(
-                    controller: context.read<FinishCubit>().scrollController,
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 70, left: 20, right: 20),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.pageData!['data'].length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // if verse number is 1, display surah name
-                          state.pageData!['data'][index]['verses'].first.keys
-                                      .first ==
-                                  1
-                              ? Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, bottom: 30),
-                                  child: SurahStarter(
-                                      size: MediaQuery.of(context).size,
-                                      surahName: state.pageData!['data'][index]
-                                          ['surahArabicName'],
-                                      surahNumber: state.pageData!['data']
-                                          [index]['surahNumber']))
-                              : Container(),
-                          RichText(
-                              textAlign: TextAlign.justify,
-                              textDirection: TextDirection.rtl,
-                              text: TextSpan(
-                                  children: state.pageData!['data'][index]
-                                          ['verses']
-                                      .map<InlineSpan>((verse) => TextSpan(
-                                            style: const TextStyle(
-                                                fontFamily: 'AmiriQuran',
-                                                fontSize: 26,
-                                                color: Colors.black,
-                                                height: 3),
-                                            children: [
-                                              TextSpan(
-                                                  text: verse[
-                                                          verse.keys.first] +
-                                                      '\t${quran.getVerseEndSymbol(verse.keys.first)}\t'),
-                                            ],
-                                          ))
-                                      .toList()))
-                        ],
-                      );
-                    }),
-              )
-            : Container();
-      }),
-      floatingActionButton: BlocBuilder<FinishCubit, FinishState>(
-        builder: (context, state) {
-          return state.status == FinishStatus.page
-              ? Row(
+        .getPageData(pageNumber: context.read<FinishCubit>().getLastPageNumber);
+    return BlocBuilder<FinishCubit, FinishState>(
+        builder: (context, state) => state.status == FinishStatus.page
+            ? Scaffold(
+                backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+                appBar: SeratAppbar(
+                  langCode: langCode,
+                  title: "صفحه ${state.pageData?.pageNumber}",
+                  juzNumber: state.pageData?.pageJuzNumber ?? 0,
+                  font: SeratFont.bZar,
+                  fontSize: 20,
+                ),
+                drawer: SeratDrawer(),
+                body: SafeArea(
+                  child: ListView.builder(
+                      controller: context.read<FinishCubit>().scrollController,
+                      padding: const EdgeInsets.only(
+                          top: 10, bottom: 70, left: 20, right: 20),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: state.pageData?.surahs.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // if verse number is 1, display surah name
+                            state.pageData!.surahs[index].surahNumber == 1
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 30),
+                                    child: SurahStarter(
+                                        size: MediaQuery.of(context).size,
+                                        surahName: state
+                                            .pageData!.surahs[index].surahName,
+                                        surahNumber: state.pageData!
+                                            .surahs[index].surahNumber))
+                                : Container(),
+                            RichText(
+                                textAlign: TextAlign.justify,
+                                textDirection: TextDirection.rtl,
+                                text: TextSpan(
+                                    children: state
+                                        .pageData!.surahs[index].verses
+                                        .map<InlineSpan>((verse) => TextSpan(
+                                              style: const TextStyle(
+                                                  fontFamily: 'AmiriQuran',
+                                                  fontSize: 26,
+                                                  color: Colors.black,
+                                                  height: 3),
+                                              children: [
+                                                TextSpan(
+                                                    text:
+                                                        '${verse.arabicText}\t${quran.getVerseEndSymbol(verse.verseNumber)}\t'),
+                                              ],
+                                            ))
+                                        .toList()))
+                          ],
+                        );
+                      }),
+                ),
+                floatingActionButton: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton(
@@ -121,14 +124,16 @@ class FinishView extends StatelessWidget {
                           }
 
                           context.read<FinishCubit>().setLastPage(previousPage);
-                          context.read<FinishCubit>().getPageData(previousPage);
+                          context
+                              .read<FinishCubit>()
+                              .getPageData(pageNumber: previousPage);
                         }),
                     const SizedBox(width: 10),
                     FloatingActionButton.extended(
                         backgroundColor: const Color(0xFF672CBC),
                         onPressed: null,
                         label: Text(
-                          "صفحه ${state.pageData!['page']}",
+                          "صفحه ${state.pageData!.pageNumber}",
                           style: const TextStyle(
                               fontFamily: 'BTitr',
                               fontSize: 16,
@@ -156,63 +161,12 @@ class FinishView extends StatelessWidget {
                           }
 
                           context.read<FinishCubit>().setLastPage(nextPage);
-                          context.read<FinishCubit>().getPageData(nextPage);
+                          context
+                              .read<FinishCubit>()
+                              .getPageData(pageNumber: nextPage);
                         }),
                   ],
-                )
-              : Container();
-        },
-      ),
-    );
+                ))
+            : const FinishShimmer());
   }
-
-  Widget _surahName(BuildContext context, String surahName, int surahNumber) =>
-      Container(
-        width: MediaQuery.of(context).size.width * .5,
-        height: surahNumber == 9
-            ? MediaQuery.of(context).size.height * .1
-            : MediaQuery.of(context).size.height * .2,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          gradient: const LinearGradient(
-              colors: [Color(0xFF9055FF), Color(0xFFDF98FA)]),
-          boxShadow: [
-            BoxShadow(
-                color: const Color(0xFF9055FF).withOpacity(0.2),
-                spreadRadius: 3,
-                blurRadius: 10,
-                offset: const Offset(0, 20))
-          ],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('assets/icons/ayah.png', color: Colors.white),
-                  Text(
-                    surahName,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Amiri',
-                        fontWeight: FontWeight.w800,
-                        fontSize: 30),
-                  ),
-                  Image.asset('assets/icons/ayah.png', color: Colors.white)
-                ],
-              ),
-              // to not display besmelah in tobe surah
-              surahNumber == 9
-                  ? Container()
-                  : Image.asset(
-                      'assets/besmelah.png',
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width * .6,
-                    ),
-            ],
-          ),
-        ),
-      );
 }

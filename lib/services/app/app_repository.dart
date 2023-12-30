@@ -25,7 +25,7 @@ class AppRepository implements IAppRepository {
 
   @override
   Future<ReadingPageSchema> getPageData(
-      {required int page, List<int?>? itemToScroll, required Size size}) async {
+      {required int page, List<int?>? itemToScroll, Size? size}) async {
     return await _app.getPageData(
         page: page, itemToScroll: itemToScroll, size: size);
   }
