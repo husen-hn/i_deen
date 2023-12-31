@@ -63,6 +63,11 @@ class BookmarkReadingView extends StatelessWidget {
             ? Scaffold(
                 backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                 appBar: ReadingAppbar(
+                    surahName: state.pageData?.surahs.fold(
+                            '',
+                            (previousValue, element) =>
+                                '$previousValue ${element.surahName}') ??
+                        '',
                     pageNumber: state.pageData?.pageNumber ?? 0,
                     juzNumber: state.pageData?.pageJuzNumber ?? 0),
                 // surah's listview

@@ -13,6 +13,7 @@ import 'package:serat/services/helper/serat_icon.dart';
 class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String langCode;
   final String title;
+  final String? subTitle;
   final int? juzNumber;
   final SeratFont font;
   final double fontSize;
@@ -20,6 +21,7 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
       {super.key,
       required this.langCode,
       required this.title,
+      this.subTitle,
       this.juzNumber,
       this.font = SeratFont.amiri,
       this.fontSize = 24})
@@ -31,12 +33,28 @@ class SeratAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-                fontFamily: font.name,
-                fontWeight: FontWeight.w900,
-                fontSize: fontSize),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                    fontFamily: font.name,
+                    fontWeight: FontWeight.w900,
+                    fontSize: fontSize),
+              ),
+              subTitle != null ? const SizedBox(height: 5) : Container(),
+              subTitle != null
+                  ? Text(
+                      subTitle ?? '',
+                      style: TextStyle(
+                          color: const Color(0xFF8789A3),
+                          fontFamily: SeratFont.bZar.name,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12),
+                    )
+                  : Container()
+            ],
           ),
           juzNumber == null
               ? Container()

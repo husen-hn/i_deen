@@ -12,10 +12,14 @@ import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 
 class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
+  final String surahName;
   final int pageNumber;
   final int juzNumber;
   const ReadingAppbar(
-      {super.key, required this.pageNumber, required this.juzNumber})
+      {super.key,
+      required this.surahName,
+      required this.pageNumber,
+      required this.juzNumber})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
@@ -24,12 +28,26 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "${'page'.tr(context)} $pageNumber",
-            style: TextStyle(
-                fontFamily: SeratFont.bZar.name,
-                fontWeight: FontWeight.w900,
-                fontSize: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${'page'.tr(context)} $pageNumber",
+                style: TextStyle(
+                    fontFamily: SeratFont.bZar.name,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                surahName,
+                style: TextStyle(
+                    color: const Color(0xFF8789A3),
+                    fontFamily: SeratFont.bZar.name,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12),
+              )
+            ],
           ),
           Text(
             "${'juz'.tr(context)} $juzNumber",

@@ -48,6 +48,14 @@ class FinishView extends StatelessWidget {
                 appBar: SeratAppbar(
                   langCode: langCode,
                   title: "صفحه ${state.pageData?.pageNumber}",
+                  subTitle: state.pageData?.surahs
+                          .fold(
+                              '',
+                              (previousValue, element) =>
+                                  '$previousValue ${element.surahName}')
+                          .trim()
+                          .replaceAll(' ', '، ') ??
+                      '',
                   juzNumber: state.pageData?.pageJuzNumber ?? 0,
                   font: SeratFont.bZar,
                   fontSize: 20,
