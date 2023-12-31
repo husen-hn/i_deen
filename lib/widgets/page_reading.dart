@@ -24,6 +24,8 @@ class PageReading extends StatelessWidget {
       required this.onTapShare,
       required this.onVerseVisible});
 
+  final List<double> itemHeights = [];
+
   final ScrollController _controller = ScrollController();
 
   void _scrollDown(double position) {
@@ -33,18 +35,15 @@ class PageReading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => _scrollDown(pageData.scrollPosition ?? 0.0));
-
-    return NotificationListener(
-      child: ListView.builder(
-          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
-          physics: const BouncingScrollPhysics(),
-          controller: _controller,
-          itemCount: pageData.surahs.length,
-          itemBuilder: (context, index) {
-            // Reading is a listview of surah's verses
-            return SurahReading(
+    return ListView.builder(
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
+        physics: const BouncingScrollPhysics(),
+        controller: _controller,
+        shrinkWrap: true,
+        itemCount: pageData.surahs.length,
+        itemBuilder: (context, index) {
+          // Reading is a listview of surah's verses
+          return SurahReading(
               surahNumber: pageData.surahs[index].surahNumber,
               surahName: pageData.surahs[index].surahName,
               verses: pageData.surahs[index].verses,
@@ -52,16 +51,19 @@ class PageReading extends StatelessWidget {
               onTapShare: onTapShare,
               onVisible: (surahNumber, verseNumber) =>
                   onVerseVisible(surahNumber, verseNumber),
-            );
-          }),
-      onNotification: (t) {
-        // if (t is ScrollEndNotification) {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //       SnackBar(content: Text(_controller.offset.toString())));
-        // }
-
-        return true;
-      },
-    );
+              onSizes: (double sizes) {
+                itemHeights.add(sizes);
+                // when itemHeights is equal to scrollPosition so we reach to the position to scroll
+                // for display the right item so we have to display item-1 index so remove .lenght -1
+                // scroll up in null value
+                if (pageData.scrollPosition == null) {
+                  _scrollDown(0);
+                } else if (itemHeights.length <= pageData.scrollPosition!) {
+                  final double scrollPosition =
+                      itemHeights.fold(0.0, (sum, element) => sum + element);
+                  _scrollDown(scrollPosition);
+                }
+              });
+        });
   }
 }

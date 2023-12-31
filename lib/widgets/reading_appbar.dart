@@ -42,6 +42,7 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
+      surfaceTintColor: const Color.fromRGBO(250, 250, 250, 1),
       shadowColor: Colors.transparent,
       leading: IconButton(
           icon: Image.asset(

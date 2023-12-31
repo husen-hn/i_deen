@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/widgets/surah_starter.dart';
 import 'package:serat/widgets/verse_item.dart';
+import 'package:serat/widgets/widget_size.dart';
 
 class SurahReading extends StatelessWidget {
   final int surahNumber;
@@ -22,6 +23,7 @@ class SurahReading extends StatelessWidget {
   final Function(
           int surahNumber, int verseNumber, String arabicText, String trText)
       onTapShare;
+  final Function(double height) onSizes;
   final Function(int surahNumber, int verseNumber) onVisible;
 
   const SurahReading(
@@ -31,6 +33,7 @@ class SurahReading extends StatelessWidget {
       required this.verses,
       required this.onTapSave,
       required this.onTapShare,
+      required this.onSizes,
       required this.onVisible});
 
   @override
@@ -47,10 +50,14 @@ class SurahReading extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SurahStarter(
-                            size: MediaQuery.of(context).size,
-                            surahName: surahName,
-                            surahNumber: surahNumber),
+                        WidgetSize(
+                          onChange: (Size? size) =>
+                              onSizes((size?.height ?? 0) + 30),
+                          child: SurahStarter(
+                              size: MediaQuery.of(context).size,
+                              surahName: surahName,
+                              surahNumber: surahNumber),
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -71,6 +78,8 @@ class SurahReading extends StatelessWidget {
                                 verses[index].verseNumber,
                                 verses[index].arabicText,
                                 verses[index].trText),
+                            onHeight: (double height) =>
+                                onSizes(height), //itemSizes.add(height),
                             onVisible: () => onVisible(
                                 surahNumber, verses[index].verseNumber))
                       ],
@@ -90,6 +99,8 @@ class SurahReading extends StatelessWidget {
                           verses[index].verseNumber,
                           verses[index].arabicText,
                           verses[index].trText),
+                      onHeight: (double height) =>
+                          onSizes(height), //itemSizes.add(height),
                       onVisible: () =>
                           onVisible(surahNumber, verses[index].verseNumber));
         });

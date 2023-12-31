@@ -36,10 +36,10 @@ class WidgetSizeState extends State<WidgetSize> {
   Size? oldSize;
 
   void postFrameCallback(_) {
-    var context = widgetKey.currentContext;
+    BuildContext? context = widgetKey.currentContext;
     if (context == null) return;
 
-    var newSize = context.size;
+    Size? newSize = context.size;
     if (oldSize == newSize) return;
 
     oldSize = newSize;

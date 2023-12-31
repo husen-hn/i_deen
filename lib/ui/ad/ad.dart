@@ -34,16 +34,24 @@ class AdView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AdCubit>().getNativeAd();
+    if (adType == AdType.nativeAd) {
+      context.read<AdCubit>().getNativeAd();
+    } else if (adType == AdType.bannerAd) {
+      context.read<AdCubit>().getBannerAd();
+    }
 
     return SizedBox(
-      height: 380,
-      child: adType == AdType.nativeAd
-          ? BlocBuilder<AdCubit, AdState>(
-              builder: (context, state) => state.status == AdStatus.loaded
+        height: 380,
+        child: BlocBuilder<AdCubit, AdState>(
+          builder: (context, state) => adType == AdType.nativeAd
+              ? state.status == AdStatus.loaded
                   ? NativeAdWidget(nativeAd: state.nativeAd!)
-                  : const NativeAdWidgetShimmer())
-          : const Text('error'),
-    );
+                  : const NativeAdWidgetShimmer()
+              : adType == AdType.bannerAd
+                  ? state.status == AdStatus.loaded
+                      ? state.bannerAd!
+                      : const NativeAdWidgetShimmer()
+                  : const Text('error'),
+        ));
   }
 }

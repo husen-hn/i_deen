@@ -51,9 +51,7 @@ class App {
       ];
 
   Future<ReadingPageSchema> getPageData(
-      {required int page,
-      List<int?>? itemToScroll,
-      required Size? size}) async {
+      {required int page, List<int?>? itemToScroll}) async {
     ReadingPageSchema data = ReadingPageSchema(
         pageNumber: page,
         pageJuzNumber: null,
@@ -65,8 +63,8 @@ class App {
         quran.getPageData(page) as List<Map<String, dynamic>>;
 
     // count previous items height to find saved item position
-    double savedItemPositionCounter = 0.0;
-    double? savedItemPosition;
+    int savedItemCounter = 0;
+    int? savedItemIndex;
 
     // get surahs
     for (var i = 0; i < pageData.length; i++) {
@@ -80,17 +78,9 @@ class App {
       List<VerseData> verses = [];
 
       // if itemToScroll is null, we dont need to scroll
-      // count previous SurahStarter height in first
-      //TODO: make it better
-      if (size != null &&
-          itemToScroll != null &&
-          start == 1 &&
-          itemToScroll.last != 1) {
-        surahNumber == 9
-            ? savedItemPositionCounter += size.height * .1
-            :
-            // savedItemPositionCounter += size.height * .2
-            savedItemPositionCounter += 178;
+      // count previous SurahStarter index in first
+      if (itemToScroll != null && start == 1) {
+        savedItemCounter += 1;
       }
 
       // get surah's verses
@@ -108,13 +98,16 @@ class App {
         }
 
         // if itemToScroll is null, we dont need to scroll
-        if (size != null && itemToScroll != null) {
+        if (itemToScroll != null) {
           if (itemToScroll.first == surahNumber &&
               itemToScroll.last == verseNumber) {
-            savedItemPosition = savedItemPositionCounter;
+            // mines 1 when selected verse is the first verse to displat besmelah
+            if (itemToScroll.last == 1) {
+              savedItemCounter -= 1;
+            }
+            savedItemIndex = savedItemCounter;
           } else {
-            savedItemPositionCounter +=
-                _countHeightByText(arabicText, trText, size);
+            savedItemCounter += 1;
           }
         }
         verses.add(VerseData(
@@ -131,20 +124,11 @@ class App {
           verses: verses));
     }
 
-    // to display surah name minus one surah height
-    // if (itemToScroll != null && itemToScroll.last == 1) {
-    //   savedItemPositionCounter -= itemToScroll.first == 9
-    //       ? savedItemPositionCounter += size.height * .1
-    //       : savedItemPositionCounter += size.height * .2;
-
-    //   // reasain saved item position
-    //   savedItemPosition = savedItemPositionCounter;
-    // }
     data.pageJuzNumber = _getJuzNumber(
         data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
 
-    if (size != null && itemToScroll != null) {
-      data.scrollPosition = savedItemPosition;
+    if (itemToScroll != null) {
+      data.scrollPosition = savedItemIndex;
     }
 
     return data;
@@ -174,32 +158,6 @@ class App {
 
   int _getJuzNumber(int surahNumber, int verseNumber) =>
       quran.getJuzNumber(surahNumber, verseNumber);
-
-  //TODO: make it better
-  double _countHeightByText(String arabicText, String trText, Size size) {
-    // print('******arabicText****71***${arabicText}');
-    // print('*******trText*****81**${trText.length}');
-    // print('*******Size*******${size.width}');
-
-    // // in default each item height is 200
-    double defHeight = 128.0; //40 + ((size.height * .02) * 4);
-    double arabicTextLinesChar = (size.width / 100) * 17.4;
-    double trTextLinesChar = (size.width / 100) * 20.25;
-
-    double arabicTextLines = arabicText.length / arabicTextLinesChar;
-    double trTextLines = trText.length / trTextLinesChar;
-
-    for (var i = 0; i < arabicTextLines; i++) {
-      // each arabic line height is 45.0
-      defHeight += 46.0;
-    }
-    for (var i = 0; i < trTextLines; i++) {
-      // each tr line height is 42.0
-      defHeight += 43.0;
-    }
-
-    return defHeight;
-  }
 
   Future<List<Verse>> _getTrData(Translation tr, int surahNumber) async {
     String response = tr == Translation.makarem

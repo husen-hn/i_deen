@@ -7,6 +7,7 @@
 
 import 'package:adivery/adivery_ads.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:serat/services/app/app_repository.dart';
 
 part 'ad_state.dart';
@@ -37,5 +38,24 @@ class AdCubit extends Cubit<AdState> {
     );
 
     nativeAd.loadAd();
+  }
+
+  getBannerAd() {
+    emit(state.copyWith(status: () => AdStatus.loading));
+
+    late BannerAd bannerAd;
+
+    bannerAd = BannerAd(
+      _bannerPlacementID,
+      BannerAdSize.LARGE_BANNER,
+      onAdLoaded: (ad) => emit(
+        state.copyWith(status: () => AdStatus.loaded, bannerAd: () => bannerAd),
+      ),
+      onError: (Ad ad, String reason) {
+        emit(
+          state.copyWith(status: () => AdStatus.error, errorMsg: () => reason),
+        );
+      },
+    );
   }
 }

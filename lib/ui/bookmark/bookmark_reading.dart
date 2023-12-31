@@ -56,8 +56,7 @@ class BookmarkReadingView extends StatelessWidget {
         pageNumber:
             context.read<AppCubit>().getPageNumber(surahNumber, verseNumber),
         surahNumber: surahNumber,
-        verseNumber: verseNumber,
-        size: MediaQuery.of(context).size);
+        verseNumber: verseNumber);
 
     return BlocBuilder<BookmarkCubit, BookmarkState>(
         builder: (context, state) => state.status == BookmarkStatus.page
@@ -84,8 +83,7 @@ class BookmarkReadingView extends StatelessWidget {
                               .read<AppCubit>()
                               .getPageNumber(surahNumber, verseNumber),
                           surahNumber: surahNumber,
-                          verseNumber: verseNumber,
-                          size: MediaQuery.of(context).size);
+                          verseNumber: verseNumber);
                     },
                     onTapShare: (surahNumber, verseNumber, arabicText, trText) {
                       String surahName = context
@@ -115,9 +113,9 @@ class BookmarkReadingView extends StatelessWidget {
                                       context.read<AppCubit>().totalPagesCount;
                                 }
 
-                                context.read<BookmarkCubit>().getPageData(
-                                    pageNumber: previousPage,
-                                    size: MediaQuery.of(context).size);
+                                context
+                                    .read<BookmarkCubit>()
+                                    .getPageData(pageNumber: previousPage);
                               }),
                           const SizedBox(width: 10),
                           FloatingActionButton.extended(
@@ -147,9 +145,9 @@ class BookmarkReadingView extends StatelessWidget {
                                   nextPage = 1;
                                 }
 
-                                context.read<BookmarkCubit>().getPageData(
-                                    pageNumber: nextPage,
-                                    size: MediaQuery.of(context).size);
+                                context
+                                    .read<BookmarkCubit>()
+                                    .getPageData(pageNumber: nextPage);
                               }),
                         ],
                       )

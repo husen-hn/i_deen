@@ -9,7 +9,6 @@ import 'dart:convert';
 
 import 'package:adivery/adivery_ads.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
@@ -72,14 +71,11 @@ class QuranCubit extends Cubit<QuranState> {
   }
 
   getPageData(
-      {required int pageNumber,
-      int? surahNumber,
-      int? verseNumber,
-      required Size size}) async {
+      {required int pageNumber, int? surahNumber, int? verseNumber}) async {
     emit(state.copyWith(status: () => QuranStatus.loading));
 
     ReadingPageSchema data = await appRepository.getPageData(
-        page: pageNumber, itemToScroll: [surahNumber, verseNumber], size: size);
+        page: pageNumber, itemToScroll: [surahNumber, verseNumber]);
 
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
   }

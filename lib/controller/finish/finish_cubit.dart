@@ -64,8 +64,6 @@ class FinishCubit extends Cubit<FinishState> {
 
     ReadingPageSchema data = await appRepository.getPageData(page: pageNumber);
 
-    print('***********$data');
-
     emit(state.copyWith(status: () => FinishStatus.page, pageData: () => data));
   }
 

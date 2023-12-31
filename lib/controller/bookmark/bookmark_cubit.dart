@@ -6,7 +6,6 @@
 //
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
@@ -42,14 +41,11 @@ class BookmarkCubit extends Cubit<BookmarkState> {
   }
 
   getPageData(
-      {required int pageNumber,
-      int? surahNumber,
-      int? verseNumber,
-      required Size size}) async {
+      {required int pageNumber, int? surahNumber, int? verseNumber}) async {
     emit(state.copyWith(status: () => BookmarkStatus.loading));
 
     ReadingPageSchema data = await appRepository.getPageData(
-        page: pageNumber, itemToScroll: [surahNumber, verseNumber], size: size);
+        page: pageNumber, itemToScroll: [surahNumber, verseNumber]);
 
     emit(state.copyWith(
         status: () => BookmarkStatus.page, pageData: () => data));

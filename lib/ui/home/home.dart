@@ -91,9 +91,13 @@ class HomeView extends StatelessWidget {
             builder: (context, state) => state.btnNvIndex == 0
                 ? Quran(appRepository: context.read<AppCubit>().appRepository)
                 : state.btnNvIndex == 1
-                    ? const Finish()
+                    ? Finish(
+                        appRepository: context.read<AppCubit>().appRepository,
+                      )
                     : state.btnNvIndex == 2
-                        ? const Prayer()
+                        ? Prayer(
+                            appRepository:
+                                context.read<AppCubit>().appRepository)
                         : Bookmark(
                             appRepository:
                                 context.read<AppCubit>().appRepository)));

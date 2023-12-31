@@ -56,8 +56,7 @@ class QuranReadingView extends StatelessWidget {
                 surahNumber! < 1 ? 1 : surahNumber!,
                 verseNumber! < 1 ? 1 : verseNumber!),
         surahNumber: surahNumber,
-        verseNumber: verseNumber,
-        size: MediaQuery.of(context).size);
+        verseNumber: verseNumber);
 
     return BlocBuilder<QuranCubit, QuranState>(
         builder: (context, state) => state.status == QuranStatus.page
@@ -84,8 +83,7 @@ class QuranReadingView extends StatelessWidget {
                               .read<AppCubit>()
                               .getPageNumber(surahNumber, verseNumber),
                           surahNumber: surahNumber,
-                          verseNumber: verseNumber,
-                          size: MediaQuery.of(context).size);
+                          verseNumber: verseNumber);
                     }),
                     onTapShare: (surahNumber, verseNumber, arabicText, trText) {
                       String surahName = context
@@ -115,9 +113,9 @@ class QuranReadingView extends StatelessWidget {
                                       context.read<AppCubit>().totalPagesCount;
                                 }
 
-                                context.read<QuranCubit>().getPageData(
-                                    pageNumber: previousPage,
-                                    size: MediaQuery.of(context).size);
+                                context
+                                    .read<QuranCubit>()
+                                    .getPageData(pageNumber: previousPage);
                               }),
                           const SizedBox(width: 10),
                           FloatingActionButton.extended(
@@ -146,9 +144,9 @@ class QuranReadingView extends StatelessWidget {
                                   nextPage = 1;
                                 }
 
-                                context.read<QuranCubit>().getPageData(
-                                    pageNumber: nextPage,
-                                    size: MediaQuery.of(context).size);
+                                context
+                                    .read<QuranCubit>()
+                                    .getPageData(pageNumber: nextPage);
                               }),
                         ],
                       )
