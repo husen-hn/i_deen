@@ -73,4 +73,17 @@ class QuranCubit extends Cubit<QuranState> {
 
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
   }
+
+  String getPageSurahNamesInOneLine(List<SurahData>? surahs) {
+    if (surahs == null) return '';
+
+    String surahNames = surahs
+        .fold('',
+            (previousValue, element) => '$previousValue ${element.surahName}')
+        .trim();
+
+    return surahNames.contains('آل عمران')
+        ? surahNames
+        : surahNames.replaceAll(' ', '، ');
+  }
 }

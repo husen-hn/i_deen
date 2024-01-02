@@ -100,25 +100,13 @@ class VerseItemExpansion extends StatelessWidget {
                                   fontSize: 20))
                     ],
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .2,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Image.asset('assets/icons/share.png'),
-                        // Image.asset('assets/icons/play.png'),
-                        InkWell(
-                            onTap: onSaveTap,
-                            child: isSaved
-                                ? Image.asset(SeratIcon.saved.name,
-                                    color:
-                                        const Color.fromRGBO(134, 62, 213, 1))
-                                : Image.asset(SeratIcon.save.name,
-                                    color:
-                                        const Color.fromRGBO(134, 62, 213, 1)))
-                      ],
-                    ),
-                  )
+                  InkWell(
+                      onTap: onSaveTap,
+                      child: SizedBox(
+                        width: 25,
+                        child: Image.asset(SeratIcon.bin.name,
+                            color: const Color.fromRGBO(134, 62, 213, 1)),
+                      ))
                 ],
               ),
             ),

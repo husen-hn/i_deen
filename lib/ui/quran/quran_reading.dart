@@ -85,14 +85,9 @@ class QuranReadingView extends StatelessWidget {
             ? Scaffold(
                 backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                 appBar: ReadingAppbar(
-                    surahName: state.pageData?.surahs
-                            .fold(
-                                '',
-                                (previousValue, element) =>
-                                    '$previousValue ${element.surahName}')
-                            .trim()
-                            .replaceAll(' ', '، ') ??
-                        '',
+                    surahName: context
+                        .read<QuranCubit>()
+                        .getPageSurahNamesInOneLine(state.pageData?.surahs),
                     pageNumber: state.pageData?.pageNumber ?? 0,
                     juzNumber: state.pageData?.pageJuzNumber ?? 0),
                 // surah's listview
