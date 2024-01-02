@@ -94,6 +94,7 @@ class Verses extends StatelessWidget {
                             return InkWell(
                                 onTap: () => context.router.push(
                                     QuranReadingRoute(
+                                        appRepository: appRepository,
                                         surahNumber: index + 1,
                                         verseNumber: nestedIndex + 1)),
                                 child: NumberBtn(number: nestedIndex + 1));

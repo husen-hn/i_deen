@@ -7,7 +7,6 @@
 
 import 'dart:convert';
 
-import 'package:adivery/adivery_ads.dart';
 import 'package:bloc/bloc.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
@@ -63,11 +62,6 @@ class QuranCubit extends Cubit<QuranState> {
 
     emit(state.copyWith(
         status: () => QuranStatus.lastSeen, lastSeen: () => data));
-
-    getNativeAd((nativeAd) => emit(state.copyWith(
-        status: () => QuranStatus.lastSeen,
-        lastSeen: () => data,
-        nativeAd: () => nativeAd)));
   }
 
   getPageData(
@@ -78,13 +72,5 @@ class QuranCubit extends Cubit<QuranState> {
         page: pageNumber, itemToScroll: [surahNumber, verseNumber]);
 
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
-  }
-
-  getNativeAd(Function(NativeAd nativeAd) onAdLoaded) {
-    late NativeAd nativeAd;
-    nativeAd = NativeAd('ff454979-efaa-4ab8-b084-7db19e995d9b',
-        onAdLoaded: () => onAdLoaded(nativeAd));
-
-    nativeAd.loadAd();
   }
 }

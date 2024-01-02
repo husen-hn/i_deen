@@ -65,6 +65,7 @@ class Page extends StatelessWidget {
                         itemBuilder: (context, nestedIndex) {
                           return InkWell(
                             onTap: () => context.router.push(QuranReadingRoute(
+                                appRepository: appRepository,
                                 pageNumber: context
                                     .read<QuranCubit>()
                                     .getSurahPages(index + 1)[nestedIndex])),

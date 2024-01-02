@@ -5,11 +5,15 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:serat/controller/ad/ad_cubit.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
+import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/widgets/page_reading.dart';
@@ -18,12 +22,17 @@ import 'package:serat/widgets/reading_appbar.dart';
 
 @RoutePage(name: 'QuranReadingRoute')
 class QuranReading extends StatelessWidget {
+  final AppRepository appRepository;
   final int? pageNumber;
   final int? surahNumber;
   final int? verseNumber;
 
   const QuranReading(
-      {super.key, this.pageNumber, this.surahNumber, this.verseNumber});
+      {super.key,
+      required this.appRepository,
+      this.pageNumber,
+      this.surahNumber,
+      this.verseNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +40,13 @@ class QuranReading extends StatelessWidget {
         providers: [
           BlocProvider<QuranCubit>(
               create: (BuildContext context) => QuranCubit(
+                  appRepository: context.read<AppCubit>().appRepository)),
+          BlocProvider<AdCubit>(
+              create: (BuildContext context) => AdCubit(
                   appRepository: context.read<AppCubit>().appRepository))
         ],
         child: QuranReadingView(
+            appRepository: appRepository,
             pageNumber: pageNumber,
             surahNumber: surahNumber,
             verseNumber: verseNumber));
@@ -41,15 +54,24 @@ class QuranReading extends StatelessWidget {
 }
 
 class QuranReadingView extends StatelessWidget {
+  final AppRepository appRepository;
   final int? pageNumber;
   final int? surahNumber;
   final int? verseNumber;
 
   const QuranReadingView(
-      {super.key, this.pageNumber, this.surahNumber, this.verseNumber});
+      {super.key,
+      required this.appRepository,
+      this.pageNumber,
+      this.surahNumber,
+      this.verseNumber});
 
   @override
   Widget build(BuildContext context) {
+    if (Random().nextInt(5) == 0) {
+      context.read<AdCubit>().getRewardedAd();
+    }
+
     context.read<QuranCubit>().getPageData(
         pageNumber: pageNumber ??
             context.read<AppCubit>().getPageNumber(

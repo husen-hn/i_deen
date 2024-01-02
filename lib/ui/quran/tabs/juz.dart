@@ -30,6 +30,7 @@ class Juz extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                   onTap: () => context.router.push(QuranReadingRoute(
+                      appRepository: appRepository,
                       surahNumber: context
                           .read<QuranCubit>()
                           .starterSurahNumberByJuz(index + 1),

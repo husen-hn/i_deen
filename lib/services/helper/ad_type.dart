@@ -5,4 +5,4 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-enum AdType { nativeAd, bannerAd }
+enum AdType { nativeAd }

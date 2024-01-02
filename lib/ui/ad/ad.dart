@@ -16,7 +16,12 @@ import 'package:serat/widgets/native_ad_widget_shimmer.dart';
 class Ad extends StatelessWidget {
   final AppRepository appRepository;
   final AdType adType;
-  const Ad({required this.appRepository, required this.adType, super.key});
+  final double? height;
+  const Ad(
+      {required this.appRepository,
+      required this.adType,
+      this.height,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,34 +29,29 @@ class Ad extends StatelessWidget {
       BlocProvider<AdCubit>(
           create: (BuildContext context) =>
               AdCubit(appRepository: appRepository))
-    ], child: AdView(adType: adType));
+    ], child: AdView(adType: adType, height: height ?? 380));
   }
 }
 
 class AdView extends StatelessWidget {
   final AdType adType;
-  const AdView({required this.adType, super.key});
+  final double height;
+  const AdView({required this.adType, required this.height, super.key});
 
   @override
   Widget build(BuildContext context) {
     if (adType == AdType.nativeAd) {
       context.read<AdCubit>().getNativeAd();
-    } else if (adType == AdType.bannerAd) {
-      context.read<AdCubit>().getBannerAd();
     }
 
     return SizedBox(
-        height: 380,
+        height: height,
         child: BlocBuilder<AdCubit, AdState>(
           builder: (context, state) => adType == AdType.nativeAd
               ? state.status == AdStatus.loaded
                   ? NativeAdWidget(nativeAd: state.nativeAd!)
                   : const NativeAdWidgetShimmer()
-              : adType == AdType.bannerAd
-                  ? state.status == AdStatus.loaded
-                      ? state.bannerAd!
-                      : const NativeAdWidgetShimmer()
-                  : const Text('error'),
+              : const Text('error'),
         ));
   }
 }

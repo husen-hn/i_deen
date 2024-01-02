@@ -35,8 +35,10 @@ class Surah extends StatelessWidget {
                   ? Ad(appRepository: appRepository, adType: AdType.nativeAd)
                   : Container(),
               InkWell(
-                onTap: () => context.router.push(
-                    QuranReadingRoute(surahNumber: index + 1, verseNumber: 1)),
+                onTap: () => context.router.push(QuranReadingRoute(
+                    appRepository: appRepository,
+                    surahNumber: index + 1,
+                    verseNumber: 1)),
                 child: SurahItem(
                   index: index + 1,
                   title:

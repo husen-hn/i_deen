@@ -46,12 +46,12 @@ abstract class _$SeratRouter extends RootStackRouter {
       );
     },
     QuranReadingRoute.name: (routeData) {
-      final args = routeData.argsAs<QuranReadingRouteArgs>(
-          orElse: () => const QuranReadingRouteArgs());
+      final args = routeData.argsAs<QuranReadingRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: QuranReading(
           key: args.key,
+          appRepository: args.appRepository,
           pageNumber: args.pageNumber,
           surahNumber: args.surahNumber,
           verseNumber: args.verseNumber,
@@ -162,6 +162,7 @@ class HomeRoute extends PageRouteInfo<void> {
 class QuranReadingRoute extends PageRouteInfo<QuranReadingRouteArgs> {
   QuranReadingRoute({
     Key? key,
+    required AppRepository appRepository,
     int? pageNumber,
     int? surahNumber,
     int? verseNumber,
@@ -170,6 +171,7 @@ class QuranReadingRoute extends PageRouteInfo<QuranReadingRouteArgs> {
           QuranReadingRoute.name,
           args: QuranReadingRouteArgs(
             key: key,
+            appRepository: appRepository,
             pageNumber: pageNumber,
             surahNumber: surahNumber,
             verseNumber: verseNumber,
@@ -186,12 +188,15 @@ class QuranReadingRoute extends PageRouteInfo<QuranReadingRouteArgs> {
 class QuranReadingRouteArgs {
   const QuranReadingRouteArgs({
     this.key,
+    required this.appRepository,
     this.pageNumber,
     this.surahNumber,
     this.verseNumber,
   });
 
   final Key? key;
+
+  final AppRepository appRepository;
 
   final int? pageNumber;
 
@@ -201,7 +206,7 @@ class QuranReadingRouteArgs {
 
   @override
   String toString() {
-    return 'QuranReadingRouteArgs{key: $key, pageNumber: $pageNumber, surahNumber: $surahNumber, verseNumber: $verseNumber}';
+    return 'QuranReadingRouteArgs{key: $key, appRepository: $appRepository, pageNumber: $pageNumber, surahNumber: $surahNumber, verseNumber: $verseNumber}';
   }
 }
 

@@ -30,7 +30,7 @@ Future<void> bootstrap() async {
 
   final AppRepository appRepository = AppRepository();
 
-  AdiveryPlugin.initialize('59c36ce3-7125-40a7-bd34-144e6906c796');
+  AdiveryPlugin.initialize('9ecea5b9-139c-44d2-bd9d-1c9149f214e4');
 
   runApp(App(appRepository: appRepository));
 }

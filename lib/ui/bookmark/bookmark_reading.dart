@@ -5,9 +5,12 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:serat/controller/ad/ad_cubit.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
@@ -34,7 +37,10 @@ class BookmarkReading extends StatelessWidget {
         providers: [
           BlocProvider<BookmarkCubit>(
               create: (BuildContext context) =>
-                  BookmarkCubit(appRepository: appRepository))
+                  BookmarkCubit(appRepository: appRepository)),
+          BlocProvider<AdCubit>(
+              create: (BuildContext context) => AdCubit(
+                  appRepository: context.read<AppCubit>().appRepository))
         ],
         child: BookmarkReadingView(
           surahNumber: surahNumber,
@@ -52,6 +58,10 @@ class BookmarkReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (Random().nextInt(5) == 0) {
+      context.read<AdCubit>().getRewardedAd();
+    }
+
     context.read<BookmarkCubit>().getPageData(
         pageNumber:
             context.read<AppCubit>().getPageNumber(surahNumber, verseNumber),
@@ -63,10 +73,13 @@ class BookmarkReadingView extends StatelessWidget {
             ? Scaffold(
                 backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
                 appBar: ReadingAppbar(
-                    surahName: state.pageData?.surahs.fold(
-                            '',
-                            (previousValue, element) =>
-                                '$previousValue ${element.surahName}') ??
+                    surahName: state.pageData?.surahs
+                            .fold(
+                                '',
+                                (previousValue, element) =>
+                                    '$previousValue ${element.surahName}')
+                            .trim()
+                            .replaceAll(' ', '، ') ??
                         '',
                     pageNumber: state.pageData?.pageNumber ?? 0,
                     juzNumber: state.pageData?.pageJuzNumber ?? 0),
