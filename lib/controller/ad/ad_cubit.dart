@@ -21,24 +21,34 @@ class AdCubit extends Cubit<AdState> {
   get _nativePlacementID => '4eb76b8d-d532-4efa-ad2e-65a9b5715c58';
   get _interstitialPlacementID => '39a0fce5-e61d-4d5d-a9cd-4576eb443874';
 
-  getNativeAd() {
+  getNativeAd() async {
     emit(state.copyWith(status: () => AdStatus.loading));
 
     late NativeAd nativeAd;
 
-    nativeAd = NativeAd(
-      _nativePlacementID,
-      onAdLoaded: () => emit(
-        state.copyWith(status: () => AdStatus.loaded, nativeAd: () => nativeAd),
-      ),
-      onError: (String reason) {
-        emit(
-          state.copyWith(status: () => AdStatus.error, errorMsg: () => reason),
-        );
-      },
-    );
+    // check network connection
+    if (!await appRepository.checkConnection()) {
+      emit(
+        state.copyWith(
+            status: () => AdStatus.error, errorMsg: () => 'Network connection'),
+      );
+    } else {
+      nativeAd = NativeAd(
+        _nativePlacementID,
+        onAdLoaded: () => emit(
+          state.copyWith(
+              status: () => AdStatus.loaded, nativeAd: () => nativeAd),
+        ),
+        onError: (String reason) {
+          emit(
+            state.copyWith(
+                status: () => AdStatus.error, errorMsg: () => reason),
+          );
+        },
+      );
 
-    nativeAd.loadAd();
+      nativeAd.loadAd();
+    }
   }
 
   getRewardedAd() {

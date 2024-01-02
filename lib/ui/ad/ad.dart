@@ -25,18 +25,28 @@ class Ad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider<AdCubit>(
-          create: (BuildContext context) =>
-              AdCubit(appRepository: appRepository))
-    ], child: AdView(adType: adType, height: height ?? 380));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<AdCubit>(
+              create: (BuildContext context) =>
+                  AdCubit(appRepository: appRepository))
+        ],
+        child: AdView(
+            appRepository: appRepository,
+            adType: adType,
+            height: height ?? 380));
   }
 }
 
 class AdView extends StatelessWidget {
+  final AppRepository appRepository;
   final AdType adType;
   final double height;
-  const AdView({required this.adType, required this.height, super.key});
+  const AdView(
+      {required this.appRepository,
+      required this.adType,
+      required this.height,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +54,15 @@ class AdView extends StatelessWidget {
       context.read<AdCubit>().getNativeAd();
     }
 
-    return SizedBox(
-        height: height,
-        child: BlocBuilder<AdCubit, AdState>(
-          builder: (context, state) => adType == AdType.nativeAd
-              ? state.status == AdStatus.loaded
-                  ? NativeAdWidget(nativeAd: state.nativeAd!)
-                  : const NativeAdWidgetShimmer()
-              : const Text('error'),
-        ));
+    return BlocBuilder<AdCubit, AdState>(
+        builder: (context, state) => adType == AdType.nativeAd
+            ? state.status == AdStatus.loading
+                ? SizedBox(height: height, child: const NativeAdWidgetShimmer())
+                : state.status == AdStatus.loaded
+                    ? SizedBox(
+                        height: height,
+                        child: NativeAdWidget(nativeAd: state.nativeAd!))
+                    : Container()
+            : const Text('Error'));
   }
 }

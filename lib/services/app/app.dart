@@ -6,6 +6,7 @@
 //
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:serat/services/helper/cache_helper.dart';
@@ -132,6 +133,19 @@ class App {
     }
 
     return data;
+  }
+
+  Future<bool> checkConnection() async {
+    bool res = true;
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        res = true;
+      }
+    } on SocketException catch (_) {
+      res = false;
+    }
+    return res;
   }
 
   Future<List<SavedVerseSchema>> getSavedData() async {

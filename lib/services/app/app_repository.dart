@@ -15,6 +15,7 @@ abstract class IAppRepository {
       {required int page, List<int?>? itemToScroll});
   Future<List<SavedVerseSchema>> getSavedData();
   JuzStarterSchema starterJuzData(int juzNumber);
+  Future<bool> checkConnection();
 }
 
 class AppRepository implements IAppRepository {
@@ -36,4 +37,7 @@ class AppRepository implements IAppRepository {
   @override
   JuzStarterSchema starterJuzData(int juzNumber) =>
       _app.starterJuzData(juzNumber);
+
+  @override
+  Future<bool> checkConnection() => _app.checkConnection();
 }
