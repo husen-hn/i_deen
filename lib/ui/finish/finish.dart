@@ -93,32 +93,19 @@ class FinishView extends StatelessWidget {
                                 text: TextSpan(
                                     children: state
                                         .pageData!.surahs[index].verses
-                                        .map<InlineSpan>((verse) {
-                                  //           verse.verseNumber == 1
-                                  // ? Padding(
-                                  //     padding: const EdgeInsets.only(
-                                  //         top: 10, bottom: 30),
-                                  //     child: SurahStarter(
-                                  //         size: MediaQuery.of(context).size,
-                                  //         surahName: state
-                                  //             .pageData!.surahs[index].surahName,
-                                  //         surahNumber: state.pageData!
-                                  //             .surahs[index].surahNumber))
-                                  // : Container();
-
-                                  return TextSpan(
-                                    style: const TextStyle(
-                                        fontFamily: 'AmiriQuran',
-                                        fontSize: 26,
-                                        color: Colors.black,
-                                        height: 3),
-                                    children: [
-                                      TextSpan(
-                                          text:
-                                              '${verse.arabicText}\t${quran.getVerseEndSymbol(verse.verseNumber)}\t'),
-                                    ],
-                                  );
-                                }).toList()))
+                                        .map<InlineSpan>((verse) => TextSpan(
+                                              style: const TextStyle(
+                                                  fontFamily: 'AmiriQuran',
+                                                  fontSize: 26,
+                                                  color: Colors.black,
+                                                  height: 3),
+                                              children: [
+                                                TextSpan(
+                                                    text:
+                                                        '${verse.arabicText}\t${quran.getVerseEndSymbol(verse.verseNumber)}\t'),
+                                              ],
+                                            ))
+                                        .toList()))
                           ],
                         );
                       }),

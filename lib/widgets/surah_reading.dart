@@ -69,10 +69,8 @@ class SurahReading extends StatelessWidget {
                             arabicText: verses[index].arabicText,
                             translation: verses[index].trText,
                             isSaved: verses[index].isSaved,
-                            onSaveTap: () => onTapSave(
-                                surahNumber,
-                                verses[index].verseNumber,
-                                verses[index].isSaved),
+                            onSaveTap: (bool isSaved) => onTapSave(surahNumber,
+                                verses[index].verseNumber, isSaved),
                             onShare: () => onTapShare(
                                 surahNumber,
                                 verses[index].verseNumber,
@@ -92,8 +90,8 @@ class SurahReading extends StatelessWidget {
                       arabicText: verses[index].arabicText,
                       translation: verses[index].trText,
                       isSaved: verses[index].isSaved,
-                      onSaveTap: () => onTapSave(surahNumber,
-                          verses[index].verseNumber, verses[index].isSaved),
+                      onSaveTap: (bool isSaved) => onTapSave(
+                          surahNumber, verses[index].verseNumber, isSaved),
                       onShare: () => onTapShare(
                           surahNumber,
                           verses[index].verseNumber,

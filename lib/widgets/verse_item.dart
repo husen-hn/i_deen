@@ -12,7 +12,7 @@ import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/widgets/widget_size.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class VerseItem extends StatelessWidget {
+class VerseItem extends StatefulWidget {
   final String? surahName;
   final int? juzNumber;
   final int surahNumber;
@@ -20,7 +20,7 @@ class VerseItem extends StatelessWidget {
   final String arabicText;
   final String translation;
   final bool isSaved;
-  final Function() onSaveTap;
+  final Function(bool isSaved) onSaveTap;
   final Function() onShare;
   final Function() onVisible;
   final Function(double height) onHeight;
@@ -41,17 +41,30 @@ class VerseItem extends StatelessWidget {
   });
 
   @override
+  State<VerseItem> createState() => _VerseItemState();
+}
+
+class _VerseItemState extends State<VerseItem> {
+  bool isSaved = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isSaved = widget.isSaved;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: Key('$surahNumber-$verseNumber'),
+      key: Key('${widget.surahNumber}-${widget.verseNumber}'),
       onVisibilityChanged: (visibilityInfo) {
         double visiblePercentage = visibilityInfo.visibleFraction * 100;
         if (visiblePercentage == 100) {
-          onVisible();
+          widget.onVisible();
         }
       },
       child: WidgetSize(
-        onChange: (Size? size) => onHeight(size?.height ?? 0),
+        onChange: (Size? size) => widget.onHeight(size?.height ?? 0),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Column(
@@ -62,7 +75,7 @@ class VerseItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  juzNumber == null
+                  widget.juzNumber == null
                       ? Container()
                       : Container(
                           margin: const EdgeInsets.only(left: 5),
@@ -76,7 +89,7 @@ class VerseItem extends StatelessWidget {
                             child: RotatedBox(
                               quarterTurns: 1,
                               child: Text(
-                                "${'juz'.tr(context)} $juzNumber",
+                                "${'juz'.tr(context)} ${widget.juzNumber}",
                                 style: TextStyle(
                                     fontFamily: SeratFont.bTitr.name,
                                     fontSize: 14,
@@ -110,7 +123,7 @@ class VerseItem extends StatelessWidget {
                                   ),
                                   child: Center(
                                       child: Text(
-                                    verseNumber.toString(),
+                                    widget.verseNumber.toString(),
                                     style: TextStyle(
                                         fontFamily: SeratFont.bTitr.name,
                                         fontSize: 14,
@@ -118,9 +131,9 @@ class VerseItem extends StatelessWidget {
                                   )),
                                 ),
                                 const SizedBox(width: 10),
-                                surahName == null
+                                widget.surahName == null
                                     ? Container()
-                                    : Text(surahName!,
+                                    : Text(widget.surahName!,
                                         style: TextStyle(
                                             color: const Color.fromRGBO(
                                                 134, 62, 213, 1),
@@ -136,14 +149,19 @@ class VerseItem extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
-                                      onTap: onShare,
+                                      onTap: widget.onShare,
                                       child: SizedBox(
                                         width: 25,
                                         child: Image.asset(SeratIcon.share.name,
                                             color: const Color(0xFF863ED5)),
                                       )),
                                   InkWell(
-                                      onTap: onSaveTap,
+                                      onTap: () {
+                                        setState(() {
+                                          isSaved = !isSaved;
+                                          widget.onSaveTap(!isSaved);
+                                        });
+                                      },
                                       child: isSaved
                                           ? Image.asset(SeratIcon.saved.name,
                                               color: const Color(0xFF863ED5))
@@ -162,7 +180,7 @@ class VerseItem extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height * .02),
               // text section
               Text(
-                arabicText,
+                widget.arabicText,
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                     color: const Color(0xFF240F4F),
@@ -172,7 +190,7 @@ class VerseItem extends StatelessWidget {
                     height: 2),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * .02),
-              Text(translation,
+              Text(widget.translation,
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                       color: const Color(0xFF240F4F),
