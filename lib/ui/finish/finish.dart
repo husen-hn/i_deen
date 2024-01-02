@@ -74,7 +74,9 @@ class FinishView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // if verse number is 1, display surah name
-                            state.pageData!.surahs[index].surahNumber == 1
+                            state.pageData!.surahs[index].verses.first
+                                        .verseNumber ==
+                                    1
                                 ? Padding(
                                     padding: const EdgeInsets.only(
                                         top: 10, bottom: 30),
@@ -91,19 +93,32 @@ class FinishView extends StatelessWidget {
                                 text: TextSpan(
                                     children: state
                                         .pageData!.surahs[index].verses
-                                        .map<InlineSpan>((verse) => TextSpan(
-                                              style: const TextStyle(
-                                                  fontFamily: 'AmiriQuran',
-                                                  fontSize: 26,
-                                                  color: Colors.black,
-                                                  height: 3),
-                                              children: [
-                                                TextSpan(
-                                                    text:
-                                                        '${verse.arabicText}\t${quran.getVerseEndSymbol(verse.verseNumber)}\t'),
-                                              ],
-                                            ))
-                                        .toList()))
+                                        .map<InlineSpan>((verse) {
+                                  //           verse.verseNumber == 1
+                                  // ? Padding(
+                                  //     padding: const EdgeInsets.only(
+                                  //         top: 10, bottom: 30),
+                                  //     child: SurahStarter(
+                                  //         size: MediaQuery.of(context).size,
+                                  //         surahName: state
+                                  //             .pageData!.surahs[index].surahName,
+                                  //         surahNumber: state.pageData!
+                                  //             .surahs[index].surahNumber))
+                                  // : Container();
+
+                                  return TextSpan(
+                                    style: const TextStyle(
+                                        fontFamily: 'AmiriQuran',
+                                        fontSize: 26,
+                                        color: Colors.black,
+                                        height: 3),
+                                    children: [
+                                      TextSpan(
+                                          text:
+                                              '${verse.arabicText}\t${quran.getVerseEndSymbol(verse.verseNumber)}\t'),
+                                    ],
+                                  );
+                                }).toList()))
                           ],
                         );
                       }),
