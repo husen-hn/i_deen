@@ -25,6 +25,7 @@ class PageReading extends StatelessWidget {
       required this.onVerseVisible});
 
   final List<double> itemHeights = [];
+  bool isScrolledToZero = false;
 
   final ScrollController _controller = ScrollController();
 
@@ -57,7 +58,11 @@ class PageReading extends StatelessWidget {
                 // for display the right item so we have to display item-1 index so remove .lenght -1
                 // scroll up in null value
                 if (pageData.scrollPosition == null) {
-                  _scrollDown(0);
+                  if (!isScrolledToZero) {
+                    _scrollDown(0);
+                  }
+                  // just one time scroll to zero position on pageData.scrollPosition == null
+                  isScrolledToZero = true;
                 } else if (itemHeights.length <= pageData.scrollPosition!) {
                   final double scrollPosition =
                       itemHeights.fold(0.0, (sum, element) => sum + element);
