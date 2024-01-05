@@ -11,10 +11,11 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/juz_starter_schema.dart';
+import 'package:serat/services/helper/original_data_success_schema.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/services/helper/saved_verses_schema.dart';
 import 'package:serat/services/helper/tr_data_success_schema.dart';
-import 'package:serat/services/helper/translation.dart';
+import 'package:serat/services/helper/serat_translation.dart';
 import 'package:quran/quran.dart' as quran;
 
 class App {
@@ -73,7 +74,8 @@ class App {
       int start = pageData[i]['start'];
       int end = pageData[i]['end'];
 
-      List<Verse> trData = await _getTrData(Translation.makarem, surahNumber);
+      List<TrVerse> trData =
+          await _getTrData(SeratTranslation.makarem, surahNumber);
       List<SavedVerseSchema> savedVerses = await getSavedData();
 
       List<VerseData> verses = [];
@@ -157,13 +159,16 @@ class App {
       int surahNumber = int.parse(savedVerses[savedIndex].split('-').first);
       int verseNumber = int.parse(savedVerses[savedIndex].split('-').last);
 
-      List<Verse> trVerses = await _getTrData(Translation.makarem, surahNumber);
+      List<OriginalVerse> originalVerses = await _getOriginalData(surahNumber);
+
+      List<TrVerse> trVerses =
+          await _getTrData(SeratTranslation.makarem, surahNumber);
 
       data.add(SavedVerseSchema(
           surahNumber: surahNumber,
           surahArabicName: quran.getSurahNameArabic(surahNumber),
           verseNumber: verseNumber,
-          verseArabicText: quran.getVerse(surahNumber, verseNumber),
+          verseArabicText: originalVerses[verseNumber - 1].content ?? '',
           translation: trVerses[verseNumber - 1].translation ?? ''));
     }
 
@@ -173,13 +178,22 @@ class App {
   int _getJuzNumber(int surahNumber, int verseNumber) =>
       quran.getJuzNumber(surahNumber, verseNumber);
 
-  Future<List<Verse>> _getTrData(Translation tr, int surahNumber) async {
-    String response = tr == Translation.makarem
-        ? await _readLocalJson(Translation.makarem.name!)
+  Future<List<TrVerse>> _getTrData(SeratTranslation tr, int surahNumber) async {
+    String response = tr == SeratTranslation.makarem
+        ? await _readLocalJson(SeratTranslation.makarem.name!)
         : await _readLocalJson('');
 
     TrDataSuccessSchema data =
         TrDataSuccessSchema.fromJson(jsonDecode(response));
+
+    return data.list[surahNumber - 1].verses;
+  }
+
+  Future<List<OriginalVerse>> _getOriginalData(int surahNumber) async {
+    String response = await _readLocalJson(SeratTranslation.original.name!);
+
+    OriginalDataSuccessSchema data =
+        OriginalDataSuccessSchema.fromJson(jsonDecode(response));
 
     return data.list[surahNumber - 1].verses;
   }

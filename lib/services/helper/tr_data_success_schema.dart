@@ -31,20 +31,20 @@ class ListElement {
   });
 
   final int? number;
-  final List<Verse> verses;
+  final List<TrVerse> verses;
 
   factory ListElement.fromJson(Map<String, dynamic> json) {
     return ListElement(
       number: json["number"],
       verses: json["verses"] == null
           ? []
-          : List<Verse>.from(json["verses"]!.map((x) => Verse.fromJson(x))),
+          : List<TrVerse>.from(json["verses"]!.map((x) => TrVerse.fromJson(x))),
     );
   }
 }
 
-class Verse {
-  Verse({
+class TrVerse {
+  TrVerse({
     required this.number,
     required this.translation,
   });
@@ -52,8 +52,8 @@ class Verse {
   final int? number;
   final String? translation;
 
-  factory Verse.fromJson(Map<String, dynamic> json) {
-    return Verse(
+  factory TrVerse.fromJson(Map<String, dynamic> json) {
+    return TrVerse(
       number: json["number"],
       translation: json["translation"],
     );

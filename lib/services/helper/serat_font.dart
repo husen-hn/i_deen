@@ -5,7 +5,7 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-enum SeratFont { bTitr, bZar, amiri, quranTaha, amiriQuran }
+enum SeratFont { bTitr, bZar, amiri, quranTaha, amiriQuran, thuluth }
 
 extension CatExtension on SeratFont {
   String? get name {
@@ -20,6 +20,8 @@ extension CatExtension on SeratFont {
         return 'AmiriQuran';
       case SeratFont.quranTaha:
         return 'QuranTaha';
+      case SeratFont.thuluth:
+        return 'Thuluth';
 
       default:
         return null;
