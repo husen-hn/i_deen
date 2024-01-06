@@ -15,11 +15,13 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String surahName;
   final int pageNumber;
   final int juzNumber;
+  final int hizbNumber;
   const ReadingAppbar(
       {super.key,
       required this.surahName,
       required this.pageNumber,
-      required this.juzNumber})
+      required this.juzNumber,
+      required this.hizbNumber})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
@@ -49,13 +51,26 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
               )
             ],
           ),
-          Text(
-            "${'juz'.tr(context)} $juzNumber",
-            style: TextStyle(
-                color: const Color(0xFF8789A3),
-                fontFamily: SeratFont.bZar.name,
-                fontWeight: FontWeight.w900,
-                fontSize: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${'juz'.tr(context)} $juzNumber",
+                style: TextStyle(
+                    color: const Color(0xFF8789A3),
+                    fontFamily: SeratFont.bZar.name,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 12),
+              ),
+              Text(
+                "${'juz'.tr(context)} $hizbNumber",
+                style: TextStyle(
+                    color: const Color(0xFF8789A3),
+                    fontFamily: SeratFont.bZar.name,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 12),
+              )
+            ],
           )
         ],
       ),

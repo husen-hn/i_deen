@@ -8,12 +8,14 @@
 class ReadingPageSchema {
   int pageNumber;
   int? pageJuzNumber;
+  int? pageHizbNumber;
   int? scrollPosition;
   final List<SurahData> surahs;
 
   ReadingPageSchema(
       {required this.pageNumber,
       required this.pageJuzNumber,
+      required this.pageHizbNumber,
       required this.scrollPosition,
       required this.surahs});
 }
@@ -33,6 +35,7 @@ class SurahData {
 class VerseData {
   final int verseNumber;
   final int? juzNumber;
+  final int? hizbNumber;
   final String arabicText;
   final String trText;
   final bool isSaved;
@@ -40,6 +43,7 @@ class VerseData {
   const VerseData(
       {required this.verseNumber,
       required this.juzNumber,
+      required this.hizbNumber,
       required this.arabicText,
       required this.trText,
       required this.isSaved});

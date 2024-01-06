@@ -6,6 +6,7 @@
 //
 
 import 'package:serat/services/app/app.dart';
+import 'package:serat/services/helper/hizb_starter_schema.dart';
 import 'package:serat/services/helper/juz_starter_schema.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
 import 'package:serat/services/helper/saved_verses_schema.dart';
@@ -15,6 +16,7 @@ abstract class IAppRepository {
       {required int page, List<int?>? itemToScroll});
   Future<List<SavedVerseSchema>> getSavedData();
   JuzStarterSchema starterJuzData(int juzNumber);
+  HizbStarterSchema starterHizbData(int hizbNumber);
   Future<bool> isNetworkActive();
   Future<bool> isVpnActive();
 }
@@ -38,6 +40,10 @@ class AppRepository implements IAppRepository {
   @override
   JuzStarterSchema starterJuzData(int juzNumber) =>
       _app.starterJuzData(juzNumber);
+
+  @override
+  HizbStarterSchema starterHizbData(int hizbNumber) =>
+      _app.starterHizbData(hizbNumber);
 
   @override
   Future<bool> isNetworkActive() => _app.isNetworkActive();

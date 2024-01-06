@@ -10,6 +10,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:serat/services/helper/cache_helper.dart';
+import 'package:serat/services/helper/hizb_starter_schema.dart';
 import 'package:serat/services/helper/juz_starter_schema.dart';
 import 'package:serat/services/helper/original_data_success_schema.dart';
 import 'package:serat/services/helper/reading_page_schema.dart';
@@ -51,12 +52,75 @@ class App {
         JuzStarterSchema(29, 67, 1),
         JuzStarterSchema(30, 78, 1),
       ];
+  List<HizbStarterSchema> get _totalHizbList => const [
+        HizbStarterSchema(1, 1, 1),
+        HizbStarterSchema(2, 2, 75),
+        HizbStarterSchema(3, 2, 142),
+        HizbStarterSchema(4, 2, 203),
+        HizbStarterSchema(5, 2, 253),
+        HizbStarterSchema(6, 3, 15),
+        HizbStarterSchema(7, 3, 93),
+        HizbStarterSchema(8, 3, 164),
+        HizbStarterSchema(9, 4, 23),
+        HizbStarterSchema(10, 4, 88),
+        HizbStarterSchema(11, 4, 148),
+        HizbStarterSchema(12, 5, 27),
+        HizbStarterSchema(13, 5, 82),
+        HizbStarterSchema(14, 6, 30),
+        HizbStarterSchema(15, 6, 111),
+        HizbStarterSchema(16, 7, 1),
+        HizbStarterSchema(17, 7, 85),
+        HizbStarterSchema(18, 7, 171),
+        HizbStarterSchema(19, 8, 41),
+        HizbStarterSchema(20, 9, 34),
+        HizbStarterSchema(21, 9, 90),
+        HizbStarterSchema(22, 10, 26),
+        HizbStarterSchema(23, 11, 6),
+        HizbStarterSchema(24, 11, 84),
+        HizbStarterSchema(25, 12, 53),
+        HizbStarterSchema(26, 13, 19),
+        HizbStarterSchema(27, 15, 1),
+        HizbStarterSchema(28, 16, 51),
+        HizbStarterSchema(29, 17, 1),
+        HizbStarterSchema(30, 17, 99),
+        HizbStarterSchema(31, 18, 75),
+        HizbStarterSchema(32, 20, 1),
+        HizbStarterSchema(33, 21, 1),
+        HizbStarterSchema(34, 22, 1),
+        HizbStarterSchema(35, 23, 1),
+        HizbStarterSchema(36, 24, 21),
+        HizbStarterSchema(37, 25, 21),
+        HizbStarterSchema(38, 26, 111),
+        HizbStarterSchema(39, 27, 54),
+        HizbStarterSchema(40, 28, 51),
+        HizbStarterSchema(41, 29, 46),
+        HizbStarterSchema(42, 31, 22),
+        HizbStarterSchema(43, 33, 28),
+        HizbStarterSchema(44, 34, 24),
+        HizbStarterSchema(45, 35, 28),
+        HizbStarterSchema(46, 37, 145),
+        HizbStarterSchema(47, 39, 32),
+        HizbStarterSchema(48, 40, 41),
+        HizbStarterSchema(49, 41, 47),
+        HizbStarterSchema(50, 43, 24),
+        HizbStarterSchema(51, 46, 1),
+        HizbStarterSchema(52, 48, 18),
+        HizbStarterSchema(53, 51, 31),
+        HizbStarterSchema(54, 55, 1),
+        HizbStarterSchema(55, 58, 1),
+        HizbStarterSchema(56, 62, 1),
+        HizbStarterSchema(57, 67, 1),
+        HizbStarterSchema(58, 72, 1),
+        HizbStarterSchema(59, 78, 1),
+        HizbStarterSchema(60, 87, 1)
+      ];
 
   Future<ReadingPageSchema> getPageData(
       {required int page, List<int?>? itemToScroll}) async {
     ReadingPageSchema data = ReadingPageSchema(
         pageNumber: page,
         pageJuzNumber: null,
+        pageHizbNumber: null,
         scrollPosition: null,
         surahs: <SurahData>[]);
 
@@ -100,6 +164,15 @@ class App {
           }
         }
 
+        int? verseHizbNumber;
+
+        for (var i = 0; i < _totalHizbList.length; i++) {
+          if (surahNumber == _totalHizbList[i].surahNumber &&
+              verseNumber == _totalHizbList[i].verseNumber) {
+            verseHizbNumber = _totalHizbList[i].hizbNumber;
+          }
+        }
+
         // if itemToScroll is null, we dont need to scroll
         if (itemToScroll != null) {
           if (itemToScroll.first == surahNumber &&
@@ -116,6 +189,7 @@ class App {
         verses.add(VerseData(
             verseNumber: verseNumber,
             juzNumber: verseJuzNumber,
+            hizbNumber: verseHizbNumber,
             arabicText: arabicText,
             trText: trText,
             isSaved: _isVerseSaved(savedVerses, surahNumber, verseNumber)));
@@ -129,6 +203,9 @@ class App {
 
     data.pageJuzNumber = _getJuzNumber(
         data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
+
+    // data.pageHizbNumber = _getHizbNumber(
+    //     data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
 
     if (itemToScroll != null) {
       data.scrollPosition = savedItemIndex;
@@ -177,7 +254,7 @@ class App {
       int surahNumber = int.parse(savedVerses[savedIndex].split('-').first);
       int verseNumber = int.parse(savedVerses[savedIndex].split('-').last);
 
-      List<OriginalVerse> originalVerses = await _getOriginalData(surahNumber);
+      // List<OriginalVerse> originalVerses = await _getOriginalData(surahNumber);
 
       List<TrVerse> trVerses =
           await _getTrData(SeratTranslation.makarem, surahNumber);
@@ -196,6 +273,11 @@ class App {
 
   int _getJuzNumber(int surahNumber, int verseNumber) =>
       quran.getJuzNumber(surahNumber, verseNumber);
+
+  // int _getHizbNumber(int surahNumber, int verseNumber) {
+  //   _totalHizbList.fin
+  //   return
+  // }
 
   Future<List<TrVerse>> _getTrData(SeratTranslation tr, int surahNumber) async {
     String response = tr == SeratTranslation.makarem
@@ -236,4 +318,7 @@ class App {
 
   JuzStarterSchema starterJuzData(int juzNumber) =>
       _totalJuzList.firstWhere((e) => e.juzNumber == juzNumber);
+
+  HizbStarterSchema starterHizbData(int hizbNumber) =>
+      _totalHizbList.firstWhere((e) => e.hizbNumber == hizbNumber);
 }

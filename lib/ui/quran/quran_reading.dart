@@ -89,7 +89,8 @@ class QuranReadingView extends StatelessWidget {
                         .read<QuranCubit>()
                         .getPageSurahNamesInOneLine(state.pageData?.surahs),
                     pageNumber: state.pageData?.pageNumber ?? 0,
-                    juzNumber: state.pageData?.pageJuzNumber ?? 0),
+                    juzNumber: state.pageData?.pageJuzNumber ?? 0,
+                    hizbNumber: state.pageData?.pageHizbNumber ?? 0),
                 // surah's listview
                 body: PageReading(
                     pageData: state.pageData!,
