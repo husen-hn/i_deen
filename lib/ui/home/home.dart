@@ -8,8 +8,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/home/home_cubit.dart';
+import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/ui/bookmark/bookmark.dart';
 import 'package:serat/ui/finish/finish.dart';
@@ -18,12 +21,15 @@ import 'package:serat/ui/quran/quran.dart';
 
 @RoutePage(name: 'HomeRoute')
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final AppRepository appRepository;
+  const Home({required this.appRepository, super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<HomeCubit>(create: (BuildContext context) => HomeCubit())
+      BlocProvider<HomeCubit>(
+          create: (BuildContext context) =>
+              HomeCubit(appRepository: appRepository)),
     ], child: const HomeView());
   }
 }
@@ -33,9 +39,35 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<HomeCubit>().checkConnection();
     return Scaffold(
         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
-        bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
+        bottomNavigationBar: BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {
+            if (state.status == HomeStatus.initial) {
+              if (state.vpnConnection == true) {
+                MotionToast.warning(
+                        position: MotionToastPosition.top,
+                        toastDuration: const Duration(seconds: 5),
+                        title: Text('اینترنت غیر از ایران',
+                            style: TextStyle(fontFamily: SeratFont.bTitr.name)),
+                        description: Text(
+                            "جهت بهبود عملکرد فیلترشکن خود را خاموش کنید.",
+                            style: TextStyle(fontFamily: SeratFont.bZar.name)))
+                    .show(context);
+              } else if (state.networkConnection == false) {
+                MotionToast.error(
+                        position: MotionToastPosition.top,
+                        toastDuration: const Duration(seconds: 5),
+                        title: Text('عدم دسترسی به اینترنت',
+                            style: TextStyle(fontFamily: SeratFont.bTitr.name)),
+                        description: Text(
+                            "جهت بهبود عملکرد اینترنت خود را روشن کنید.",
+                            style: TextStyle(fontFamily: SeratFont.bZar.name)))
+                    .show(context);
+              }
+            }
+          },
           builder: (context, state) => Container(
             decoration: const BoxDecoration(
                 border:

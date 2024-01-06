@@ -40,9 +40,13 @@ abstract class _$SeratRouter extends RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const Home(),
+        child: Home(
+          appRepository: args.appRepository,
+          key: args.key,
+        ),
       );
     },
     QuranReadingRoute.name: (routeData) {
@@ -145,16 +149,39 @@ class CopyRightRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [Home]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({
+    required AppRepository appRepository,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           HomeRoute.name,
+          args: HomeRouteArgs(
+            appRepository: appRepository,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<HomeRouteArgs> page = PageInfo<HomeRouteArgs>(name);
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({
+    required this.appRepository,
+    this.key,
+  });
+
+  final AppRepository appRepository;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{appRepository: $appRepository, key: $key}';
+  }
 }
 
 /// generated route for

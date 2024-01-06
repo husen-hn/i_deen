@@ -7,15 +7,27 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/services/app/app_repository.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit()
+  final AppRepository appRepository;
+  HomeCubit({required this.appRepository})
       : super(const HomeState().copyWith(
           status: () => HomeStatus.initial,
           btnNvIndex: () => 0,
         ));
+
+  checkConnection() async {
+    bool isNetworkActive = await appRepository.isNetworkActive();
+    bool isVpnActive = await appRepository.isVpnActive();
+
+    emit(state.copyWith(
+        status: () => HomeStatus.initial,
+        networkConnection: () => isNetworkActive,
+        vpnConnection: () => isVpnActive));
+  }
 
   void setActiveButtonIndex(int index) {
     emit(state.copyWith(

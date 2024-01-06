@@ -8,27 +8,44 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:serat/controller/app/app_cubit.dart';
+import 'package:serat/controller/splash/splash_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 
 @RoutePage(name: 'SplashRoute')
-class Splash extends StatefulWidget {
+class Splash extends StatelessWidget {
   const Splash({super.key});
 
   @override
-  State<Splash> createState() => _SplashState();
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider<SplashCubit>(
+          create: (BuildContext context) => SplashCubit(
+              appRepository: context.read<AppCubit>().appRepository))
+    ], child: const SplashView());
+  }
 }
 
-class _SplashState extends State<Splash> {
+class SplashView extends StatefulWidget {
+  const SplashView({super.key});
+
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-    Future.delayed(const Duration(milliseconds: 20), () {
-      context.router.replace(const HomeRoute());
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      context.router.replace(
+          HomeRoute(appRepository: context.read<AppCubit>().appRepository));
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     });
   }
@@ -178,9 +195,12 @@ class _SplashState extends State<Splash> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * .05,
                 ),
-                const CircularProgressIndicator(
-                  color: Color.fromRGBO(103, 44, 188, 1),
-                )
+                BlocBuilder<SplashCubit, SplashState>(
+                    builder: (context, state) {
+                  return const CircularProgressIndicator(
+                    color: Color.fromRGBO(103, 44, 188, 1),
+                  );
+                })
               ],
             ),
           ),

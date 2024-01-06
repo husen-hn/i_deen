@@ -27,6 +27,7 @@ dependencies:
   adivery: ^4.6.1
   share_plus: ^7.2.1
   cupertino_icons: ^1.0.2
+  motion_toast: ^2.7.10
 
 dev_dependencies:
   flutter_test:

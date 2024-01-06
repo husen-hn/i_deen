@@ -27,12 +27,8 @@ class AdCubit extends Cubit<AdState> {
     late NativeAd nativeAd;
 
     // check network connection
-    if (!await appRepository.checkConnection()) {
-      emit(
-        state.copyWith(
-            status: () => AdStatus.error, errorMsg: () => 'Network connection'),
-      );
-    } else {
+    if (await appRepository.isNetworkActive() &&
+        !await appRepository.isVpnActive()) {
       nativeAd = NativeAd(
         _nativePlacementID,
         onAdLoaded: () => emit(
@@ -48,6 +44,11 @@ class AdCubit extends Cubit<AdState> {
       );
 
       nativeAd.loadAd();
+    } else {
+      emit(
+        state.copyWith(
+            status: () => AdStatus.error, errorMsg: () => 'Network connection'),
+      );
     }
   }
 

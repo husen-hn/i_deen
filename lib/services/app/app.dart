@@ -137,7 +137,7 @@ class App {
     return data;
   }
 
-  Future<bool> checkConnection() async {
+  Future<bool> isNetworkActive() async {
     bool res = true;
     try {
       final result = await InternetAddress.lookup('google.com');
@@ -148,6 +148,24 @@ class App {
       res = false;
     }
     return res;
+  }
+
+  Future<bool> isVpnActive() async {
+    bool isVpnActive;
+    List<NetworkInterface> interfaces = await NetworkInterface.list(
+        includeLoopback: false, type: InternetAddressType.any);
+
+    interfaces.isNotEmpty
+        ? isVpnActive = interfaces.any((interface) =>
+            interface.name.contains("tun") ||
+            interface.name.contains("ppp") ||
+            interface.name.contains("pptp") ||
+            interface.name.contains("tap") ||
+            interface.name.contains("l2tp") ||
+            interface.name.contains("ipsec") ||
+            interface.name.contains("vpn"))
+        : isVpnActive = false;
+    return isVpnActive;
   }
 
   Future<List<SavedVerseSchema>> getSavedData() async {
@@ -168,7 +186,8 @@ class App {
           surahNumber: surahNumber,
           surahArabicName: quran.getSurahNameArabic(surahNumber),
           verseNumber: verseNumber,
-          verseArabicText: originalVerses[verseNumber - 1].content ?? '',
+          verseArabicText: quran.getVerse(surahNumber,
+              verseNumber), //originalVerses[verseNumber - 1].content ?? '',
           translation: trVerses[verseNumber - 1].translation ?? ''));
     }
 
