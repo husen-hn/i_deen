@@ -129,9 +129,8 @@ class QuranReadingView extends StatelessWidget {
                                       context.read<AppCubit>().totalPagesCount;
                                 }
 
-                                context
-                                    .read<QuranCubit>()
-                                    .getPageData(pageNumber: previousPage);
+                                context.read<QuranCubit>().getPageData(
+                                    pageNumber: previousPage, scrollUp: true);
                               }),
                           const SizedBox(width: 10),
                           FloatingActionButton.extended(
@@ -160,9 +159,8 @@ class QuranReadingView extends StatelessWidget {
                                   nextPage = 1;
                                 }
 
-                                context
-                                    .read<QuranCubit>()
-                                    .getPageData(pageNumber: nextPage);
+                                context.read<QuranCubit>().getPageData(
+                                    pageNumber: nextPage, scrollUp: true);
                               }),
                         ],
                       )

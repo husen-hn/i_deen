@@ -60,6 +60,8 @@ class PageReading extends StatelessWidget {
                   final double scrollPosition =
                       itemHeights.fold(0.0, (sum, element) => sum + element);
                   _scrollDown(scrollPosition);
+                } else if (pageData.scrollPosition! == 0) {
+                  _scrollDown(0);
                 }
               });
         });

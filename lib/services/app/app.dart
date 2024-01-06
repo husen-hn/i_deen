@@ -116,7 +116,7 @@ class App {
       ];
 
   Future<ReadingPageSchema> getPageData(
-      {required int page, List<int?>? itemToScroll}) async {
+      {required int page, List<int?>? itemToScroll, bool? scrollUp}) async {
     ReadingPageSchema data = ReadingPageSchema(
         pageNumber: page,
         pageJuzNumber: null,
@@ -207,8 +207,12 @@ class App {
     // data.pageHizbNumber = _getHizbNumber(
     //     data.surahs.last.surahNumber, data.surahs.last.verses.last.verseNumber);
 
-    if (itemToScroll != null) {
+    if (itemToScroll != null &&
+        itemToScroll.first != null &&
+        itemToScroll.last != null) {
       data.scrollPosition = savedItemIndex;
+    } else if (scrollUp == true) {
+      data.scrollPosition = 0;
     }
 
     return data;

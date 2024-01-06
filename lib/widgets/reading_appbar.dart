@@ -62,14 +62,14 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
                     fontWeight: FontWeight.w900,
                     fontSize: 12),
               ),
-              Text(
-                "${'juz'.tr(context)} $hizbNumber",
-                style: TextStyle(
-                    color: const Color(0xFF8789A3),
-                    fontFamily: SeratFont.bZar.name,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 12),
-              )
+              // Text(
+              //   "${'juz'.tr(context)} $hizbNumber",
+              //   style: TextStyle(
+              //       color: const Color(0xFF8789A3),
+              //       fontFamily: SeratFont.bZar.name,
+              //       fontWeight: FontWeight.w900,
+              //       fontSize: 12),
+              // )
             ],
           )
         ],

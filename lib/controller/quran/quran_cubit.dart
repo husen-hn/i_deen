@@ -70,11 +70,16 @@ class QuranCubit extends Cubit<QuranState> {
   }
 
   getPageData(
-      {required int pageNumber, int? surahNumber, int? verseNumber}) async {
+      {required int pageNumber,
+      int? surahNumber,
+      int? verseNumber,
+      bool? scrollUp}) async {
     emit(state.copyWith(status: () => QuranStatus.loading));
 
     ReadingPageSchema data = await appRepository.getPageData(
-        page: pageNumber, itemToScroll: [surahNumber, verseNumber]);
+        page: pageNumber,
+        itemToScroll: [surahNumber, verseNumber],
+        scrollUp: scrollUp);
 
     emit(state.copyWith(status: () => QuranStatus.page, pageData: () => data));
   }
