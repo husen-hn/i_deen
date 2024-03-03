@@ -33,12 +33,6 @@ abstract class _$SeratRouter extends RootStackRouter {
         ),
       );
     },
-    CopyRightRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CopyRight(),
-      );
-    },
     HomeRoute.name: (routeData) {
       final args = routeData.argsAs<HomeRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -60,6 +54,12 @@ abstract class _$SeratRouter extends RootStackRouter {
           surahNumber: args.surahNumber,
           verseNumber: args.verseNumber,
         ),
+      );
+    },
+    SettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const Settings(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -131,20 +131,6 @@ class BookmarkReadingRouteArgs {
   String toString() {
     return 'BookmarkReadingRouteArgs{key: $key, appRepository: $appRepository, surahNumber: $surahNumber, verseNumber: $verseNumber}';
   }
-}
-
-/// generated route for
-/// [CopyRight]
-class CopyRightRoute extends PageRouteInfo<void> {
-  const CopyRightRoute({List<PageRouteInfo>? children})
-      : super(
-          CopyRightRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CopyRightRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -235,6 +221,20 @@ class QuranReadingRouteArgs {
   String toString() {
     return 'QuranReadingRouteArgs{key: $key, appRepository: $appRepository, pageNumber: $pageNumber, surahNumber: $surahNumber, verseNumber: $verseNumber}';
   }
+}
+
+/// generated route for
+/// [Settings]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -17,12 +17,13 @@ class PageReading extends StatelessWidget {
       onTapShare;
   final Function(int surahNumber, int verseNumber) onVerseVisible;
 
-  PageReading(
-      {super.key,
-      required this.pageData,
-      required this.onTapSave,
-      required this.onTapShare,
-      required this.onVerseVisible});
+  PageReading({
+    super.key,
+    required this.pageData,
+    required this.onTapSave,
+    required this.onTapShare,
+    required this.onVerseVisible,
+  });
 
   final List<double> itemHeights = [];
 

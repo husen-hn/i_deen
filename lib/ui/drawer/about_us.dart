@@ -46,28 +46,37 @@ class AboutUs extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               "${'app_name'.tr(context)} اپلیکیشن تلاوت و ختم قرآن به همراه مقالات نمازی",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 24),
+              textAlign: TextAlign.right,
+              style: TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 20),
             ),
             const SizedBox(height: 40),
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[850]),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width,
+                child: _copyRightView()),
+            const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   "توسعه داده شده توسط",
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.right,
                   style:
-                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 20),
+                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 18),
                 ),
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: () => _launchUrl('https://github.com/husen-hn'),
                   child: const Text(
                     "Husen",
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
-                      fontSize: 20,
+                      fontSize: 16,
                       color: Colors.blue,
                     ),
                   ),
@@ -76,13 +85,13 @@ class AboutUs extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   "اسپانسر:",
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.right,
                   style:
-                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 20),
+                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 18),
                 ),
                 const SizedBox(width: 10),
                 InkWell(
@@ -90,56 +99,137 @@ class AboutUs extends StatelessWidget {
                       _launchUrl('https://www.namaz.ir/azrbaijan-gharbi'),
                   child: Text(
                     "ستاد اقامه نماز آذربایجان غربی",
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontFamily: SeratFont.bZar.name,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.blue,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 40),
-            const Text(
-              "راه های ارتباطی",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'BZar', fontSize: 24),
-            ),
             const SizedBox(height: 10),
-            InkWell(
-              onTap: () => _launchUrl('mailto://husen.hn@proton.me'),
-              child: const Text(
-                "husen.hn@proton.me",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontFamily: 'BZar',
-                  fontSize: 16,
-                  color: Colors.blue,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "راه های ارتباطی:",
+                  textAlign: TextAlign.right,
+                  style:
+                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 18),
                 ),
-              ),
+                const SizedBox(width: 10),
+                InkWell(
+                  onTap: () => _launchUrl('https://t.me/lxhusen'),
+                  child: const Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Text(
+                      "@lxhusen",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontFamily: 'BZar',
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            InkWell(
-              onTap: () => _launchUrl('https://t.me/lxhusen'),
-              child: const Directionality(
-                textDirection: TextDirection.ltr,
-                child: Text(
-                  "@lxhusen",
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _copyRightView() {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "UI & Icons:",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () => _launchUrl(
+                    'https://www.figma.com/community/file/966921639679380402'),
+                child: const Text(
+                  "@tanvir_ux",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     decoration: TextDecoration.underline,
-                    fontFamily: 'BZar',
-                    fontSize: 16,
                     color: Colors.blue,
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Quran Package:",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () =>
+                    _launchUrl('https://pub.dev/packages/quran/license'),
+                child: const Text(
+                  "License",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "fonts are licensed under the",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () => _launchUrl(
+                    'https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL'),
+                child: const Text(
+                  "Open Font License.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 40),
+          const Text(
+            "Copyright © Serat Application, All Rights Reserved Unauthorized copying of this application, via any medium is strictly prohibited Proprietary and confidential Written by Husen <husen.hn@proton.me>, November 2023",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
       ),
     );
   }

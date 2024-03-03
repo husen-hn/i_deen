@@ -48,7 +48,7 @@ class SeratDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pop(context);
-              context.router.push(const CopyRightRoute());
+              context.router.push(const SettingsRoute());
             },
           ),
           Expanded(

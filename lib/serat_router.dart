@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/ui/bookmark/bookmark_reading.dart';
 import 'package:serat/ui/drawer/about_us.dart';
-import 'package:serat/ui/drawer/copy_right.dart';
+import 'package:serat/ui/drawer/settings.dart';
 import 'package:serat/ui/home/home.dart';
 import 'package:serat/ui/quran/quran_reading.dart';
 import 'package:serat/ui/slpash/splash.dart';
@@ -32,7 +32,7 @@ class SeratRouter extends _$SeratRouter {
             page: AboutUsRoute.page,
             transitionsBuilder: TransitionsBuilders.slideBottom),
         CustomRoute(
-            page: CopyRightRoute.page,
+            page: SettingsRoute.page,
             transitionsBuilder: TransitionsBuilders.slideBottom),
         CustomRoute(
             page: BookmarkReadingRoute.page,
