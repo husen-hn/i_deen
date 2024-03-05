@@ -41,9 +41,9 @@ class SeratDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.copyright_outlined),
+            leading: const Icon(Icons.settings),
             title: const Text(
-              'کپی رایت',
+              'تنظیمات',
               style: TextStyle(fontFamily: 'BZar'),
             ),
             onTap: () {

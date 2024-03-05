@@ -5,7 +5,9 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
@@ -55,6 +57,8 @@ class _VerseItemState extends State<VerseItem> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsMenuIconKey = GlobalKey();
+
     return VisibilityDetector(
       key: Key('${widget.surahNumber}-${widget.verseNumber}'),
       onVisibilityChanged: (visibilityInfo) {
@@ -166,7 +170,43 @@ class _VerseItemState extends State<VerseItem> {
                                           ? Image.asset(SeratIcon.saved.name,
                                               color: const Color(0xFF863ED5))
                                           : Image.asset(SeratIcon.save.name,
-                                              color: const Color(0xFF863ED5)))
+                                              color: const Color(0xFF863ED5))),
+                                  InkWell(
+                                      key: settingsMenuIconKey,
+                                      onTap: () {
+                                        // get currect position of item
+                                        RenderBox box = settingsMenuIconKey
+                                            .currentContext!
+                                            .findRenderObject() as RenderBox;
+                                        Offset position =
+                                            box.localToGlobal(Offset.zero);
+
+                                        // display popup
+                                        showMenu(
+                                            context: context,
+                                            position: RelativeRect.fromLTRB(
+                                                0, position.dy, position.dx, 0),
+                                            color: Colors.white,
+                                            items: [
+                                              PopupMenuItem(
+                                                onTap: () {
+                                                  context.router.push(
+                                                      const SettingsRoute());
+                                                },
+                                                child: Text(
+                                                  'تنظیمات',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          SeratFont.bZar.name,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                            ]);
+                                      },
+                                      child: const Icon(Icons.more_vert,
+                                          color: Color(0xFF863ED5)))
                                 ],
                               ),
                             )

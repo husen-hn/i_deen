@@ -93,3 +93,19 @@ flutter:
     - assets/icons/cloud2.png
     - assets/icons/cloud3.png
     - assets/icons/bin.png
+
+    - assets/persons/ansarian.jpg
+    - assets/persons/ayati.jpg
+    - assets/persons/bahrampour.jpg
+    - assets/persons/fooladvand.jpg
+    - assets/persons/ghomshei.jpg
+    - assets/persons/khorramdel.jpg
+    - assets/persons/khorramshahi.jpg
+    - assets/persons/makarem.jpg
+    - assets/persons/moezzi.jpg
+    - assets/persons/mojtabavi.jpg
+
+    - assets/themes/light.jpg
+    - assets/themes/batele.jpg
+    - assets/themes/nokhodi.jpg
+    - assets/themes/dark.png
