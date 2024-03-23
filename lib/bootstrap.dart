@@ -12,6 +12,7 @@ import 'package:adivery/adivery.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/articles/articles_repository.dart';
 import 'package:serat/services/observer.dart';
 import 'package:serat/ui/app/app.dart';
 
@@ -29,8 +30,12 @@ Future<void> bootstrap() async {
   Bloc.observer = const Observer();
 
   final AppRepository appRepository = AppRepository();
+  final ArticlesRepository articlesRepository = ArticlesRepository();
 
   AdiveryPlugin.initialize('9ecea5b9-139c-44d2-bd9d-1c9149f214e4');
 
-  runApp(App(appRepository: appRepository));
+  runApp(App(
+    appRepository: appRepository,
+    articlesRepository: articlesRepository,
+  ));
 }

@@ -29,6 +29,9 @@ class SeratRouter extends _$SeratRouter {
             page: QuranReadingRoute.page,
             transitionsBuilder: TransitionsBuilders.slideLeft),
         CustomRoute(
+            page: ArticleReadingRoute.page,
+            transitionsBuilder: TransitionsBuilders.slideLeft),
+        CustomRoute(
             page: AboutUsRoute.page,
             transitionsBuilder: TransitionsBuilders.slideBottom),
         CustomRoute(

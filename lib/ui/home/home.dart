@@ -16,7 +16,7 @@ import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
 import 'package:serat/ui/bookmark/bookmark.dart';
 import 'package:serat/ui/finish/finish.dart';
-import 'package:serat/ui/prayer/prayer.dart';
+import 'package:serat/ui/articles/articles.dart';
 import 'package:serat/ui/quran/quran.dart';
 
 @RoutePage(name: 'HomeRoute')
@@ -127,9 +127,11 @@ class HomeView extends StatelessWidget {
                         appRepository: context.read<AppCubit>().appRepository,
                       )
                     : state.btnNvIndex == 2
-                        ? Prayer(
+                        ? Articles(
                             appRepository:
-                                context.read<AppCubit>().appRepository)
+                                context.read<AppCubit>().appRepository,
+                            articlesRepository:
+                                context.read<AppCubit>().articlesRepository)
                         : Bookmark(
                             appRepository:
                                 context.read<AppCubit>().appRepository)));

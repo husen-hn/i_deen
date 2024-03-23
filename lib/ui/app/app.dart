@@ -11,11 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/articles/articles_repository.dart';
 
 class App extends StatelessWidget {
   final AppRepository appRepository;
+  final ArticlesRepository articlesRepository;
 
-  const App({required this.appRepository, Key? key}) : super(key: key);
+  const App(
+      {required this.appRepository, required this.articlesRepository, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +29,9 @@ class App extends StatelessWidget {
         ],
         child: MultiBlocProvider(providers: [
           BlocProvider<AppCubit>(
-              create: (BuildContext abContext) =>
-                  AppCubit(appRepository: appRepository))
+              create: (BuildContext abContext) => AppCubit(
+                  appRepository: appRepository,
+                  articlesRepository: articlesRepository))
         ], child: const AppView()));
   }
 }

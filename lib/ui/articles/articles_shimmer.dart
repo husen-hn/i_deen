@@ -1,5 +1,5 @@
 //
-//  prayer_shimmer.dart
+//  articles_shimmer.dart
 //  Created on 2023 12 November.
 //  Copyright © husen-hn Github
 //  Developed by 2023 Hossein HassanNejad.
@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PrayerShimmer extends StatelessWidget {
-  const PrayerShimmer({super.key});
+class ArticlesShimmer extends StatelessWidget {
+  const ArticlesShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,9 @@ class PrayerShimmer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                height: 60,
-                color: Colors.white,
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                width: double.infinity,
-                height: 130,
-                color: Colors.white,
-              ),
               // article
               Container(
-                margin: const EdgeInsets.only(top: 40, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 30, left: 10, right: 10),
                 width: double.infinity,
                 height: 200,
                 decoration: const BoxDecoration(

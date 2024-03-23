@@ -9,14 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/articles/articles_repository.dart';
 import 'package:serat/ui/app/app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     final AppRepository appRepository = AppRepository();
+    final ArticlesRepository articlesRepository = ArticlesRepository();
     await tester.pumpWidget(App(
       appRepository: appRepository,
+      articlesRepository: articlesRepository,
     ));
 
     // Verify that our counter starts at 0.

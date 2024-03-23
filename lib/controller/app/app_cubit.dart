@@ -9,6 +9,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/articles/articles_repository.dart';
 import 'package:serat/services/helper/cache_helper.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:quran/quran.dart' as quran;
@@ -18,8 +19,9 @@ part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppRepository appRepository;
+  ArticlesRepository articlesRepository;
 
-  AppCubit({required this.appRepository})
+  AppCubit({required this.appRepository, required this.articlesRepository})
       : super(const AppState()
             .copyWith(status: () => AppStatus.langCode, langCode: () => 'fa'));
 
