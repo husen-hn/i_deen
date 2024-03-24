@@ -21,6 +21,20 @@ abstract class _$SeratRouter extends RootStackRouter {
         child: const AboutUs(),
       );
     },
+    ArticleReadingRoute.name: (routeData) {
+      final args = routeData.argsAs<ArticleReadingRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ArticleReading(
+          key: args.key,
+          mainImg: args.mainImg,
+          title: args.title,
+          langCode: args.langCode,
+          content: args.content,
+          appRepository: args.appRepository,
+        ),
+      );
+    },
     BookmarkReadingRoute.name: (routeData) {
       final args = routeData.argsAs<BookmarkReadingRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -83,6 +97,64 @@ class AboutUsRoute extends PageRouteInfo<void> {
   static const String name = 'AboutUsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ArticleReading]
+class ArticleReadingRoute extends PageRouteInfo<ArticleReadingRouteArgs> {
+  ArticleReadingRoute({
+    Key? key,
+    required String mainImg,
+    required String title,
+    required String langCode,
+    required String content,
+    required AppRepository appRepository,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ArticleReadingRoute.name,
+          args: ArticleReadingRouteArgs(
+            key: key,
+            mainImg: mainImg,
+            title: title,
+            langCode: langCode,
+            content: content,
+            appRepository: appRepository,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ArticleReadingRoute';
+
+  static const PageInfo<ArticleReadingRouteArgs> page =
+      PageInfo<ArticleReadingRouteArgs>(name);
+}
+
+class ArticleReadingRouteArgs {
+  const ArticleReadingRouteArgs({
+    this.key,
+    required this.mainImg,
+    required this.title,
+    required this.langCode,
+    required this.content,
+    required this.appRepository,
+  });
+
+  final Key? key;
+
+  final String mainImg;
+
+  final String title;
+
+  final String langCode;
+
+  final String content;
+
+  final AppRepository appRepository;
+
+  @override
+  String toString() {
+    return 'ArticleReadingRouteArgs{key: $key, mainImg: $mainImg, title: $title, langCode: $langCode, content: $content, appRepository: $appRepository}';
+  }
 }
 
 /// generated route for

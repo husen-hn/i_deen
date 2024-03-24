@@ -6,7 +6,6 @@
 //
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/articles/articles_repository.dart';

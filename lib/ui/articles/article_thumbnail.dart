@@ -6,6 +6,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:serat/services/helper/serat_font.dart';
 
 class ArticleThumbnail extends StatelessWidget {
@@ -68,32 +69,27 @@ class ArticleThumbnail extends StatelessWidget {
                       },
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: const Color(0xFF240F4F),
-                        fontFamily: SeratFont.bTitr.name,
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Html(data: title, style: {
+                      "*": Style(
+                          maxLines: 2,
+                          textOverflow: TextOverflow.ellipsis,
+                          fontFamily: SeratFont.bTitr.name,
+                          fontSize: FontSize.large,
+                          fontWeight: FontWeight.bold),
+                    })),
                 Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: HtmlWidget(description)
-                    // Text(
-                    //   description,
-                    //   maxLines: 3,
-                    //   overflow: TextOverflow.ellipsis,
-                    //   style: TextStyle(
-                    //     color: const Color(0xFF240F4F),
-                    //     fontFamily: SeratFont.bZar.name,
-                    //     fontSize: 18,
-                    //   ),
-                    // ),
-                    )
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    child: Html(data: description, style: {
+                      "*": Style(
+                        maxLines: 3,
+                        textOverflow: TextOverflow.ellipsis,
+                        color: const Color(0xFF240F4F),
+                        fontFamily: SeratFont.bZar.name,
+                        fontSize: FontSize.large,
+                      ),
+                    }))
               ],
             ),
           ),

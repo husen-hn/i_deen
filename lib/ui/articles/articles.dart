@@ -5,10 +5,12 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/articles/articles_cubit.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/articles/articles_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
@@ -90,7 +92,16 @@ class _ArticlesViewState extends State<ArticlesView> {
                         img: r[index].yoastHeadJson?.ogImage.first.url ?? '',
                         title: r[index].title?.rendered ?? '',
                         description: r[index].excerpt?.rendered ?? '',
-                        onTap: () {})));
+                        onTap: () {
+                          context.router.push(ArticleReadingRoute(
+                            mainImg:
+                                r[index].yoastHeadJson?.ogImage.first.url ?? '',
+                            title: r[index].title?.rendered ?? '',
+                            langCode: langCode,
+                            content: r[index].content?.rendered ?? '',
+                            appRepository: widget.appRepository,
+                          ));
+                        })));
           } else {
             return const ArticlesShimmer();
           }

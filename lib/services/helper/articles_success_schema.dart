@@ -628,7 +628,7 @@ class PotentialAction {
   });
 
   final String? type;
-  final dynamic? target;
+  final dynamic target;
   final String? queryInput;
 
   factory PotentialAction.fromJson(Map<String, dynamic> json) {
