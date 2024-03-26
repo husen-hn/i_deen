@@ -7,6 +7,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:serat/serat_router.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
 import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/services/helper/serat_icon.dart';
@@ -51,6 +52,7 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
               )
             ],
           ),
+          const Expanded(child: SizedBox()),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,6 +73,25 @@ class ReadingAppbar extends StatelessWidget implements PreferredSizeWidget {
               //       fontSize: 12),
               // )
             ],
+          ),
+          PopupMenuButton<String>(
+            color: Colors.white,
+            iconColor: const Color.fromRGBO(135, 137, 163, 1),
+            onSelected: (_) {
+              context.router.push(const SettingsRoute());
+            },
+            itemBuilder: (BuildContext context) {
+              return {'تنظیمات'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(
+                    choice,
+                    style: TextStyle(
+                        fontFamily: SeratFont.bZar.name, fontSize: 16),
+                  ),
+                );
+              }).toList();
+            },
           )
         ],
       ),
