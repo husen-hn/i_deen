@@ -87,7 +87,10 @@ class BookmarkView extends StatelessWidget {
                                   TextSpan(text: 'for_save'.tr(context)),
                                   WidgetSpan(
                                       child: Image.asset(
-                                          'assets/icons/bookmark_icon.png')),
+                                    'assets/icons/bookmark_icon.png',
+                                    width: 20,
+                                    color: Colors.grey,
+                                  )),
                                   TextSpan(text: 'for_tuch'.tr(context)),
                                 ]))
                       ],
