@@ -5,8 +5,6 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,9 +66,10 @@ class QuranReadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Random().nextInt(5) == 0) {
-      context.read<AdCubit>().getRewardedAd();
-    }
+    // get rewarded ad on quran reading opening
+    // if (Random().nextInt(5) == 0) {
+    //   context.read<AdCubit>().getRewardedAd();
+    // }
 
     context.read<QuranCubit>().getPageData(
         pageNumber: pageNumber ??
