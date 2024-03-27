@@ -30,6 +30,17 @@ class SeratDrawer extends StatelessWidget {
             child: Image.asset(SeratIcon.appIconShadow.name),
           ),
           ListTile(
+            leading: const Icon(Icons.settings_outlined),
+            title: const Text(
+              'تنظیمات',
+              style: TextStyle(fontFamily: 'BZar'),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              context.router.push(const SettingsRoute());
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text(
               'درباره ما',
@@ -41,14 +52,13 @@ class SeratDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
+            leading: const Icon(Icons.feedback_outlined),
             title: const Text(
-              'تنظیمات',
+              'پیشنهادات و انتقادات',
               style: TextStyle(fontFamily: 'BZar'),
             ),
             onTap: () {
-              Navigator.pop(context);
-              context.router.push(const SettingsRoute());
+              launchUrl(Uri.parse('mailto:hosseinspell@gmail.com'));
             },
           ),
           Expanded(
