@@ -122,9 +122,8 @@ class BookmarkReadingView extends StatelessWidget {
                                       context.read<AppCubit>().totalPagesCount;
                                 }
 
-                                context
-                                    .read<BookmarkCubit>()
-                                    .getPageData(pageNumber: previousPage);
+                                context.read<BookmarkCubit>().getPageData(
+                                    pageNumber: previousPage, scrollUp: true);
                               }),
                           const SizedBox(width: 10),
                           FloatingActionButton.extended(
@@ -154,9 +153,8 @@ class BookmarkReadingView extends StatelessWidget {
                                   nextPage = 1;
                                 }
 
-                                context
-                                    .read<BookmarkCubit>()
-                                    .getPageData(pageNumber: nextPage);
+                                context.read<BookmarkCubit>().getPageData(
+                                    pageNumber: nextPage, scrollUp: true);
                               }),
                         ],
                       )

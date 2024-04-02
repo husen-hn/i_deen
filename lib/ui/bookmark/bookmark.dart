@@ -5,8 +5,6 @@
 //  Developed by 2023 Hossein HassanNejad.
 //
 
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +12,7 @@ import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
-import 'package:serat/services/helper/ad_type.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/ui/ad/ad.dart';
 import 'package:serat/ui/bookmark/bookmark_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
@@ -104,13 +100,13 @@ class BookmarkView extends StatelessWidget {
                         return Column(
                           children: [
                             // displat Ads on every 10 item and use random to display dynamic ads and not display on initial of list
-                            index % 4 == 0 &&
-                                    index != 0 &&
-                                    Random().nextInt(2) != 0
-                                ? Ad(
-                                    appRepository: appRepository,
-                                    adType: AdType.nativeAd)
-                                : Container(),
+                            // index % 4 == 0 &&
+                            //         index != 0 &&
+                            //         Random().nextInt(2) != 0
+                            //     ? Ad(
+                            //         appRepository: appRepository,
+                            //         adType: AdType.nativeAd)
+                            //     : Container(),
                             VerseItemExpansion(
                               surahName: state.verses![index].surahArabicName,
                               surahNumber: state.verses![index].surahNumber,
