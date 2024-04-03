@@ -11,7 +11,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart' as f_html;
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/fpdart.dart' as fp;
 import 'package:serat/controller/ad/ad_cubit.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
@@ -53,7 +53,7 @@ class ArticleReading extends StatelessWidget {
   }
 }
 
-class ArticleReadingView extends StatelessWidget {
+class ArticleReadingView extends StatefulWidget {
   final String mainImg;
   final String title;
   final String langCode;
@@ -68,17 +68,33 @@ class ArticleReadingView extends StatelessWidget {
       required this.appRepository});
 
   @override
-  Widget build(BuildContext context) {
+  State<ArticleReadingView> createState() => _ArticleReadingViewState();
+}
+
+class _ArticleReadingViewState extends State<ArticleReadingView> {
+  @override
+  void initState() {
+    super.initState();
+
     // get rewarded ad on article reading opening
     if (Random().nextInt(3) == 0) {
       context.read<AdCubit>().getRewardedAd();
     }
+  }
 
-    List sContent = content.split('<img');
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List sContent = widget.content.split('<img');
 
     return Scaffold(
         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
-        appBar: SeratAppbarDetail(title: title),
+        appBar: SeratAppbarDetail(title: widget.title),
         body: Center(
             child: SingleChildScrollView(
           padding:
@@ -91,7 +107,7 @@ class ArticleReadingView extends StatelessWidget {
                     Radius.circular(10),
                   ),
                   child: Image.network(
-                    mainImg,
+                    widget.mainImg,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -111,7 +127,7 @@ class ArticleReadingView extends StatelessWidget {
                         ? SizedBox(
                             height: MediaQuery.of(context).size.width,
                             child: Ad(
-                                appRepository: appRepository,
+                                appRepository: widget.appRepository,
                                 adType: AdType.nativeAd),
                           )
                         : Container(),
@@ -139,11 +155,5 @@ class ArticleReadingView extends StatelessWidget {
             ],
           ),
         )));
-  }
-
-  Future<void> _launchUrl(url) async {
-    if (!await launchUrl(Uri.parse(url))) {
-      throw Exception('Could not launch $url');
-    }
   }
 }
