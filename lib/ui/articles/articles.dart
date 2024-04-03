@@ -14,7 +14,6 @@ import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/articles/articles_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
-import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/ui/articles/article_thumbnail.dart';
 import 'package:serat/ui/articles/articles_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
@@ -43,24 +42,13 @@ class Articles extends StatelessWidget {
   }
 }
 
-class ArticlesView extends StatefulWidget {
+class ArticlesView extends StatelessWidget {
   final AppRepository appRepository;
   final ArticlesRepository articlesRepository;
   const ArticlesView(
       {required this.appRepository,
       required this.articlesRepository,
       super.key});
-
-  @override
-  State<ArticlesView> createState() => _ArticlesViewState();
-}
-
-class _ArticlesViewState extends State<ArticlesView> {
-  @override
-  void initState() {
-    context.read<ArticlesCubit>().getArticles(1);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,39 +58,78 @@ class _ArticlesViewState extends State<ArticlesView> {
         backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
         appBar: SeratAppbar(langCode: langCode, title: 'articles'.tr(context)),
         drawer: SeratDrawer(),
-        body: SafeArea(child: BlocBuilder<ArticlesCubit, ArticlesState>(
-            builder: (context, state) {
-          if (state.status == ArticlesStatus.done) {
-            return state.response!.match(
-                (l) => Center(
-                      child: Text(
-                        'مشکلی رخ داده است.',
-                        style: TextStyle(
-                            color: const Color(0xFF240F4F),
-                            fontFamily: SeratFont.bTitr.name,
-                            fontSize: 21,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                (r) => ListView.builder(
+        body: SafeArea(
+            child: BlocConsumer<ArticlesCubit, ArticlesState>(
+                listener: (context, state) {
+          if (state.status == ArticlesStatus.loading) {
+            // return state.isFirstPage ?? false
+            //     ? const ArticlesShimmer()
+            //     : Container();
+          }
+        }, builder: (context, state) {
+          if (state.status == ArticlesStatus.init) {
+            context.read<ArticlesCubit>().getArticles(1);
+            context
+                .read<ArticlesCubit>()
+                .scrollController
+                .addListener(context.read<ArticlesCubit>().scrollListener);
+            return const ArticlesShimmer();
+          } else if (state.status == ArticlesStatus.done) {
+            return ListView(
+              controller: context.read<ArticlesCubit>().scrollController,
+              children: [
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     padding:
                         const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    itemCount: r.length,
+                    shrinkWrap: true,
+                    itemCount: state.response?.length ?? 0,
                     itemBuilder: (context, index) => ArticleThumbnail(
-                        img: r[index].yoastHeadJson?.ogImage.first.url ?? '',
-                        title: r[index].title?.rendered ?? '',
-                        description: r[index].excerpt?.rendered ?? '',
+                        img: state.response?[index].yoastHeadJson?.ogImage.first
+                                .url ??
+                            '',
+                        title: state.response?[index].title?.rendered ?? '',
+                        description:
+                            state.response?[index].excerpt?.rendered ?? '',
                         onTap: () {
                           context.router.push(ArticleReadingRoute(
-                            mainImg:
-                                r[index].yoastHeadJson?.ogImage.first.url ?? '',
-                            title: r[index].title?.rendered ?? '',
+                            mainImg: state.response?[index].yoastHeadJson
+                                    ?.ogImage.first.url ??
+                                '',
+                            title: state.response?[index].title?.rendered ?? '',
                             langCode: langCode,
-                            content: r[index].content?.rendered ?? '',
-                            appRepository: widget.appRepository,
+                            content:
+                                state.response?[index].content?.rendered ?? '',
+                            appRepository: appRepository,
                           ));
-                        })));
-          } else {
+                        })),
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: CircularProgressIndicator(
+                      color: Color.fromRGBO(103, 44, 188, 1),
+                    ),
+                  ),
+                )
+              ],
+            );
+          }
+          // else if (state.status == ArticlesStatus.error) {
+          // get error on first page display fullscreen error
+          //   if (state.isFirstPage ?? false) {
+          //     return Center(
+          //       child: Text(
+          //         'مشکلی رخ داده است.',
+          //         style: TextStyle(
+          //             color: const Color(0xFF240F4F),
+          //             fontFamily: SeratFont.bTitr.name,
+          //             fontSize: 21,
+          //             fontWeight: FontWeight.bold),
+          //       ),
+          //     );
+          //   } else {}
+          // }
+          else {
             return const ArticlesShimmer();
           }
         }))

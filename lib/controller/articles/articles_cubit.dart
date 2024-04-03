@@ -6,6 +6,7 @@
 //
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/articles/articles_repository.dart';
@@ -18,20 +19,49 @@ class ArticlesCubit extends Cubit<ArticlesState> {
   AppRepository appRepository;
   ArticlesRepository articlesRepository;
   ArticlesCubit({required this.appRepository, required this.articlesRepository})
-      : super(const ArticlesState().copyWith());
+      : super(const ArticlesState().copyWith(
+          status: () => ArticlesStatus.init,
+        ));
 
-  int articlesPage = 1;
+  int totalArticlesPage = 100;
+  int currentArticlesPage = 1;
+  bool isLoading = false;
+  List<ArticlesSuccessSchema> articles = [];
 
   getArticles(int page) async {
-    emit(state.copyWith(
-      status: () => ArticlesStatus.loading,
-    ));
+    isLoading = true;
+
+    // not display fullscreen loading on every page changes, just display it on first time
+    if (currentArticlesPage == 1) {
+      emit(state.copyWith(
+        status: () => ArticlesStatus.loading,
+      ));
+    }
 
     Either<ArticlesFailSchema, List<ArticlesSuccessSchema>> res =
         await articlesRepository.getArticlesData(page: page);
 
-    emit(
-        state.copyWith(status: () => ArticlesStatus.done, response: () => res));
+    res.match(
+        (l) => emit(state.copyWith(
+            status: () => ArticlesStatus.error,
+            isFirstPage: () => currentArticlesPage == 1)), (r) {
+      articles.addAll(r);
+      emit(state.copyWith(
+          status: () => ArticlesStatus.done, response: () => articles));
+    });
+
+    isLoading = false;
+  }
+
+  ScrollController scrollController = ScrollController();
+  void scrollListener() {
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange) {
+      if (!isLoading && currentArticlesPage < totalArticlesPage) {
+        currentArticlesPage++;
+        getArticles(currentArticlesPage);
+      }
+    }
   }
 
   //////////////////////////////
