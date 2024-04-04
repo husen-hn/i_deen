@@ -19,7 +19,7 @@ dependencies:
   flutter_bloc: ^8.1.3
   auto_route: ^7.8.4
   dio: ^5.4.1
-  quran: ^1.2.3
+  quran: ^1.2.5
   shared_preferences: ^2.2.2
   fpdart: ^1.1.0
   flutter_inappwebview: ^5.8.0
@@ -35,7 +35,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.7
 
@@ -59,6 +59,9 @@ flutter:
     - family: AmiriQuran
       fonts:
         - asset: fonts/amiri-quran/AmiriQuran-Regular.ttf
+    - family: ArabQuranIslamic
+      fonts:
+        - asset: fonts/arab_quran_islamic/ArabQuranIslamic.ttf
   assets:
     - tr/original/source.json
     - tr/fa/makarem/source.json

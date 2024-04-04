@@ -94,8 +94,9 @@ class FinishView extends StatelessWidget {
                                     children: state
                                         .pageData!.surahs[index].verses
                                         .map<InlineSpan>((verse) => TextSpan(
-                                              style: const TextStyle(
-                                                  fontFamily: 'AmiriQuran',
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      SeratFont.amiriQuran.name,
                                                   fontSize: 26,
                                                   color: Colors.black,
                                                   height: 3),
