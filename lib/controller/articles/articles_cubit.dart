@@ -23,6 +23,16 @@ class ArticlesCubit extends Cubit<ArticlesState> {
           status: () => ArticlesStatus.init,
         ));
 
+  checkConnection() async {
+    bool isNetworkActive = await appRepository.isNetworkActive();
+    bool isVpnActive = await appRepository.isVpnActive();
+
+    emit(state.copyWith(
+        status: () => ArticlesStatus.checkConnection,
+        networkConnection: () => isNetworkActive,
+        vpnConnection: () => isVpnActive));
+  }
+
   int totalArticlesPage = 100;
   int currentArticlesPage = 1;
   bool isLoading = false;
