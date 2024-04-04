@@ -145,8 +145,8 @@ class FinishView extends StatelessWidget {
                         onPressed: null,
                         label: Text(
                           "صفحه ${state.pageData!.pageNumber}",
-                          style: const TextStyle(
-                              fontFamily: 'BTitr',
+                          style: TextStyle(
+                              fontFamily: SeratFont.bTitr.name,
                               fontSize: 16,
                               color: Colors.white),
                         )),

@@ -60,8 +60,8 @@ class Verses extends StatelessWidget {
                         ),
                         Text(
                             "${context.read<QuranCubit>().getVerseCount(index + 1)} ${'ayah'.tr(context)}",
-                            style: const TextStyle(
-                                fontFamily: 'BZar',
+                            style: TextStyle(
+                                fontFamily: SeratFont.bZar.name,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500))
                       ],

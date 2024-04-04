@@ -15,6 +15,7 @@ import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/widgets/page_reading.dart';
 import 'package:serat/widgets/page_reading_shimmer.dart';
 import 'package:serat/widgets/reading_appbar.dart';
@@ -131,8 +132,8 @@ class BookmarkReadingView extends StatelessWidget {
                               onPressed: null,
                               label: Text(
                                 "${'page'.tr(context)} ${state.pageData?.pageNumber}",
-                                style: const TextStyle(
-                                    fontFamily: 'BTitr',
+                                style: TextStyle(
+                                    fontFamily: SeratFont.bTitr.name,
                                     fontSize: 16,
                                     color: Colors.white),
                               )),

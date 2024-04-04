@@ -123,14 +123,14 @@ class AboutUs extends StatelessWidget {
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: () => _launchUrl('https://t.me/lxhusen'),
-                  child: const Directionality(
+                  child: Directionality(
                     textDirection: TextDirection.ltr,
                     child: Text(
                       "@lxhusen",
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
-                        fontFamily: 'BZar',
+                        fontFamily: SeratFont.bZar.name,
                         fontSize: 16,
                         color: Colors.blue,
                       ),

@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serat/controller/app/app_cubit.dart';
 import 'package:serat/controller/quran/quran_cubit.dart';
 import 'package:serat/services/app/app_repository.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/ui/quran/tabs/juz.dart';
 import 'package:serat/ui/quran/tabs/page.dart' as pg;
 import 'package:serat/ui/quran/tabs/surah.dart';
@@ -85,10 +86,10 @@ class QuranView extends StatelessWidget {
                         unselectedLabelColor: const Color(0xFF8789A3),
                         isScrollable: true,
                         indicatorWeight: 3,
-                        labelStyle: const TextStyle(
+                        labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            fontFamily: 'BTitr'),
+                            fontFamily: SeratFont.bTitr.name),
                         tabAlignment: TabAlignment.center,
                         tabs: [
                           TabItem(title: 'surah'.tr(context)),

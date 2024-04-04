@@ -13,6 +13,7 @@ import 'package:serat/controller/bookmark/bookmark_cubit.dart';
 import 'package:serat/serat_router.dart';
 import 'package:serat/services/app/app_repository.dart';
 import 'package:serat/services/helper/l10n/app_local.dart';
+import 'package:serat/services/helper/serat_font.dart';
 import 'package:serat/ui/bookmark/bookmark_shimmer.dart';
 import 'package:serat/widgets/serat_appbar.dart';
 import 'package:serat/widgets/serat_drawer.dart';
@@ -66,7 +67,7 @@ class BookmarkView extends StatelessWidget {
                           'empty'.tr(context),
                           style: TextStyle(
                               fontSize: 28,
-                              fontFamily: 'BTitr',
+                              fontFamily: SeratFont.bTitr.name,
                               color: Colors.grey[600]),
                         ),
                         const SizedBox(
@@ -75,8 +76,8 @@ class BookmarkView extends StatelessWidget {
                         RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
-                                style: const TextStyle(
-                                    fontFamily: 'BZar',
+                                style: TextStyle(
+                                    fontFamily: SeratFont.bZar.name,
                                     fontSize: 20,
                                     color: Colors.grey),
                                 children: [
