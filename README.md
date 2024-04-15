@@ -1,16 +1,19 @@
-# i_deen
+## Serat 🕮
+Flutter application of reciting the Quran and finishing the Quran along with articles on the topic of prayer.
 
-A new Flutter project.
+[<img src="preview/dad.webp" alt="Direct apk download"  height="51.5">](https://github.com/husen-hn/i_deen/releases/latest)
 
-## Getting Started
+*ui designed by [Tanvir Ahassan](https://www.figma.com/community/file/966921639679380402/quran-app-concept-free)*
 
-This project is a starting point for a Flutter application.
+## Previews ⛶
 
-A few resources to get you started if this is your first Flutter project:
+<img src="preview/sc1.webp" alt="screenshots"  height="300" width="160"> <img src="preview/sc2.webp" alt="screenshots"  height="300" width="160"> <img src="preview/sc3.webp" alt="screenshots"  height="300" width="160"> <img src="preview/sc4.webp" alt="screenshots"  height="300" width="160">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Contribute ༜
+The development of this application has been completely stopped.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License ©
+```
+Copyright © 2024 Hossein HassanNejad 
+Licensed under the MIT.
+```
