@@ -12,9 +12,7 @@ import 'package:serat/services/helper/serat_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SeratDrawer extends StatelessWidget {
-  SeratDrawer({super.key});
-
-  final Uri _url = Uri.parse('https://www.namaz.ir/azrbaijan-gharbi/');
+  const SeratDrawer({super.key});
 
   @override
   Drawer build(BuildContext context) {
@@ -60,26 +58,9 @@ class SeratDrawer extends StatelessWidget {
             onTap: () {
               launchUrl(Uri.parse('mailto:hosseinspell@gmail.com'));
             },
-          ),
-          Expanded(
-              child: Container(
-            height: 200,
-          )),
-          InkWell(
-              onTap: () => _launchUrl(),
-              child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                  width: 100,
-                  child: Image.asset(SeratIcon.namazLogoAg.name))),
+          )
         ],
       ),
     );
-  }
-
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
   }
 }

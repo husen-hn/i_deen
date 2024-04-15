@@ -88,33 +88,6 @@ class AboutUs extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "اسپانسر:",
-                  textAlign: TextAlign.right,
-                  style:
-                      TextStyle(fontFamily: SeratFont.bZar.name, fontSize: 18),
-                ),
-                const SizedBox(width: 10),
-                InkWell(
-                  onTap: () =>
-                      _launchUrl('https://www.namaz.ir/azrbaijan-gharbi'),
-                  child: Text(
-                    "ستاد اقامه نماز آذربایجان غربی",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontFamily: SeratFont.bZar.name,
-                      fontSize: 18,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
                   "راه های ارتباطی:",
                   textAlign: TextAlign.right,
                   style:
